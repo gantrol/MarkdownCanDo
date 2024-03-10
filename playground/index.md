@@ -8,7 +8,7 @@ id="playground-md-editor"
 
 <script setup>
 import VditorComponent from "/component/MarkdownEditorV.vue";
-import text from './playground_example.md?raw';
+import text from '../guide/index.md?raw';
 
 </script>
 
