@@ -25,7 +25,9 @@ timeline
 ```
 ````
 
-[//]: # (TODO：汇总成“小抄”)
+官方甚至推出了[官方 Plugin](https://www.mermaidchart.com/blog/posts/mermaid-chart-chatgpt-plugin-combines-generative-ai-and-smart-diagramming)
+
+[//]: # (TODO：GPTs)
 
 ## 优化排版
 
