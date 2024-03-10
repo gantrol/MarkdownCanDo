@@ -7,7 +7,6 @@
 - [Markdown: Syntax](https://daringfireball.net/projects/markdown/syntax)：由 [Daring Fireball](http://daringfireball.net/) 创建，提供了基本的语法和格式化指南。
 - [Writing on GitHub](https://docs.github.com/en/get-started/writing-on-github)：GitHub指南，如何在GitHub上使用Markdown，包括GitHub特有扩展。
 - [Typora Support](https://support.typora.io/)：Typora是一款优雅好用的桌面端 Markdown 编辑器，它的支持页面有详尽的 Markdown 指引。
-- [mermaid.js](https://mermaid.js.org/intro/)：一个JavaScript库，用于生成流程图、序列图、甘特图等。官网提供了详细文档，也能[在线体验](https://mermaid.live/)
 
 ### Math
 
@@ -17,6 +16,11 @@
 ### 拓展
 
 - [Vitepress Markdown](https://vitepress.dev/zh/guide/markdown): 本站采用的静态网站生成器，支持了一些 Markdown 拓展。
+- [mermaid.js](https://mermaid.js.org/intro/)：一个JavaScript库，用于生成流程图、序列图、甘特图等。官网提供了详细文档，也能[在线体验](https://mermaid.live/)
+- [Joshua's Docs - Notes on Markdown-it and Building a Plugin](https://docs.joshuatz.com/cheatsheets/node-and-npm/markdown-it/)：Markdown-it 插件开发官网
+- [List of markdown presentation tools](https://gist.github.com/johnloy/27dd124ad40e210e91c70dd1c24ac8c8)：热心网友收集，能用Markdown写演示文稿的工具，小心评论区有广告。
+- [Shiki](https://shiki.style/languages)：代码框语法高亮
+- [一些 Markdonw It 插件聚合](https://mdit-plugins.github.io/)
 
 ## 技术栈
 
@@ -29,18 +33,26 @@
 - [Vditor](https://github.com/Vanessa219/vditor): 一个现代的Markdown编辑器，支持所见即所得(WYSIWYG)、即时渲染（IR）和分屏预览（SV）模式。
 - [StackEdit](https://stackedit.io/): 一个基于浏览器的Markdown编辑器，支持实时协作和云同步。
 
-### Markdown 周边功能
-
-- [Joshua's Docs - Notes on Markdown-it and Building a Plugin](https://docs.joshuatz.com/cheatsheets/node-and-npm/markdown-it/)：Markdown-it 插件开发官网
-- [List of markdown presentation tools](https://gist.github.com/johnloy/27dd124ad40e210e91c70dd1c24ac8c8)：热心网友收集，能用Markdown写演示文稿的工具，小心评论区有广告。
-- [Shiki](https://shiki.style/languages)：代码框语法高亮
-- [一些 Markdonw It 插件聚合](https://mdit-plugins.github.io/)
-
 ## 其他
+
+### 简历
+
+- https://github.com/elipapa/markdown-cv
+- https://github.com/CyC2018/Markdown-Resume
 
 ### emoji
 
 - 封装成一个 js 对象: https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.mjs
+
+### ASCII 画
+
+[Powerful ASCII art editor designed for the Mac.](https://monodraw.helftone.com/)
+
+### badge（徽章）
+
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+
+https://github.com/Ileriayo/markdown-badges
 
 ### 软件、插件
 

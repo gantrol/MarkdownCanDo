@@ -7,7 +7,6 @@ Many references were consulted in the construction of this site, here are some w
 - [Markdown: Syntax](https://daringfireball.net/projects/markdown/syntax): Created by [Daring Fireball](http://daringfireball.net/), it provides basic syntax and formatting guidelines.
 - [Writing on GitHub](https://docs.github.com/en/get-started/writing-on-github): A GitHub guide on how to use Markdown on GitHub, including GitHub-specific extensions.
 - [Typora Support](https://support.typora.io/): Typora is an elegant and user-friendly desktop Markdown editor. Its support page offers detailed Markdown guides.
-- [mermaid.js](https://mermaid.js.org/intro/): A JavaScript library for generating flowcharts, sequence diagrams, Gantt charts, and more. The official site offers detailed documentation and an [online experience](https://mermaid.live/).
 
 ### Math
 
@@ -17,6 +16,11 @@ Many references were consulted in the construction of this site, here are some w
 ### Extensions
 
 - [Vitepress Markdown](https://vitepress.dev/guide/markdown): The static site generator used by this site, supports some Markdown extensions.
+- [mermaid.js](https://mermaid.js.org/intro/): A JavaScript library for generating flowcharts, sequence diagrams, Gantt charts, and more. The official site offers detailed documentation and an [online experience](https://mermaid.live/).
+- [Joshua's Docs - Notes on Markdown-it and Building a Plugin](https://docs.joshuatz.com/cheatsheets/node-and-npm/markdown-it/): Official website for Markdown-it plugin development.
+- [List of markdown presentation tools](https://gist.github.com/johnloy/27dd124ad40e210e91c70dd1c24ac8c8): A collection by a helpful netizen of tools for creating presentations with Markdown, watch out for ads in the comments.
+- [Shiki](https://shiki.style/languages): Syntax highlighting for code blocks.
+- [A collection of Markdown It plugins](https://mdit-plugins.github.io/).
 
 ## Technology Stack
 
@@ -29,18 +33,27 @@ Many references were consulted in the construction of this site, here are some w
 - [Vditor](https://github.com/Vanessa219/vditor): A modern Markdown editor that supports What You See Is What You Get (WYSIWYG), Instant Rendering (IR), and Split View (SV) modes.
 - [StackEdit](https://stackedit.io/): A browser-based Markdown editor that supports real-time collaboration and cloud synchronization.
 
-### Markdown Peripheral Features
-
-- [Joshua's Docs - Notes on Markdown-it and Building a Plugin](https://docs.joshuatz.com/cheatsheets/node-and-npm/markdown-it/): Official website for Markdown-it plugin development.
-- [List of markdown presentation tools](https://gist.github.com/johnloy/27dd124ad40e210e91c70dd1c24ac8c8): A collection by a helpful netizen of tools for creating presentations with Markdown, watch out for ads in the comments.
-- [Shiki](https://shiki.style/languages): Syntax highlighting for code blocks.
-- [A collection of Markdown It plugins](https://mdit-plugins.github.io/).
-
 ## Others
+
+### CV / Resume
+
+- https://github.com/elipapa/markdown-cv
+- https://github.com/CyC2018/Markdown-Resume
 
 ### emoji
 
 - Packaged into a js object: https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.mjs
+
+### ASCII art
+
+[Powerful ASCII art editor designed for the Mac.](https://monodraw.helftone.com/)
+
+### badge
+
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+
+https://github.com/Ileriayo/markdown-badges
+
 
 ### Software, Plugins
 
