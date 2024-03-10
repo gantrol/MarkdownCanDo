@@ -56,9 +56,9 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/zh/guide/'
         },
         {
-            text: '手册',
-            link: '/zh/reference/',
-            activeMatch: '/zh/reference/'
+            text: '演练场',
+            link: '/zh/playground/',
+            activeMatch: '/zh/playground/'
         }
     ]
 }

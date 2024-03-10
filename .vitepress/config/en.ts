@@ -35,9 +35,9 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/guide/'
         },
         {
-            text: 'Reference',
-            link: '/reference/',
-            activeMatch: '/reference/'
+            text: 'Playground',
+            link: '/playground/',
+            activeMatch: '/playground/'
         }
     ]
 }
