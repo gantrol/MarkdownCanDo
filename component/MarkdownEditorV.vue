@@ -7,33 +7,38 @@ import {onMounted} from 'vue';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
 
+
 const props = defineProps({
   id: {
     type: String,
     require: true,
   },
-  mode: {
-    type: "wysiwyg" | "sv" | "ir",
-    require: false,
-  },
+
   text: {
     type: String,
     require: false,
   },
-  height: {
-    type: Number,
-    require: false,
+  /**
+   *
+   * mode "wysiwyg" | "sv" | "ir"
+   *
+   * theme
+   *
+   *
+   */
+  options: {
+    type: Object,
+    required: false,
   },
 });
 
 onMounted(() => {
   // TODO: options
   const mdEditorV = new Vditor(props.id, {
-    mode: props.mode || "sv",
-    theme: "classic",
-    height: props.height || 0.8 * window.innerHeight || 600,
+    height: 0.8 * window.innerHeight,
     toolbar,
     preview,
+    ...props.options,
     after() {
       mdEditorV.setValue(props.text || "");
     }
