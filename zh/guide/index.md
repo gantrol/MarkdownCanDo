@@ -80,5 +80,9 @@ Markdown 最终会渲染为 HTML，而 CSS 可以修改 HTML 元素的排布。�
 
 可以看看[参考资料](/zh/reference-resource)
 
+或者问问 ChatGPT？
+
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+
 [^1]: 觉得难吗？其实不用记各类图表的语法，站长以前靠查手册，现在主要看 ChatGPT
 
