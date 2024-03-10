@@ -28,8 +28,8 @@ export const shared = defineConfig({
     },
 
     head: [
-        ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-mini.svg' }],
-        // ['link', { rel: 'icon', type: 'image/png', href: '/logo-mini.png' }],
+        // ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-mini.svg' }],
+        ['link', { rel: 'icon', type: 'image/png', href: '/logo-mini.png' }],
         ['meta', { name: 'theme-color', content: '#5f67ee' }],
         ['meta', { property: 'og:type', content: 'website' }],
         ['meta', { property: 'og:locale', content: 'en' }],
@@ -49,7 +49,7 @@ export const shared = defineConfig({
     ],
 
     themeConfig: {
-        logo: { src: '/logo-mini.svg', width: 24, height: 24 },
+        logo: { src: '/logo-mini.png', width: 24, height: 24 },
 
         socialLinks: [
             { icon: 'github', link: 'https://github.com/gantrol/markdown-can-do' }
