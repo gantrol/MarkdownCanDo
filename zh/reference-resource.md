@@ -52,7 +52,11 @@
 
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 
-https://github.com/Ileriayo/markdown-badges
+不仅有静态的，还能动，比如一键部署到vercel
+
+[//]: # (TODO: 等项目开源后放一个)
+
+有人收集了badges：https://github.com/Ileriayo/markdown-badges
 
 ### 软件、插件
 

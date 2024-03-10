@@ -52,6 +52,8 @@ Many references were consulted in the construction of this site, here are some w
 
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 
+[//]: # (TODO: vercel)
+
 https://github.com/Ileriayo/markdown-badges
 
 
