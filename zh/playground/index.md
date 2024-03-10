@@ -1,5 +1,6 @@
 ---
 layout: page
+footer: false
 ---
 
 <VditorComponent id="playground-md-editor" :text="text" :options="options"/>
@@ -9,7 +10,8 @@ import VditorComponent from "/component/MarkdownEditorV.vue";
 import text from '../guide/index.md?raw';
 
 const options = {
-    mode: "wysiwyg"
+    mode: "ir",
+    height: 0.91 * window.innerHeight
 }
 ;
 

@@ -1,5 +1,6 @@
 ---
 layout: page
+footer: false
 ---
 
 <VditorComponent id="playground-md-editor" :text="text" :options="options"/>
@@ -10,8 +11,9 @@ import text from '../guide/index.md?raw';
 
 // TODO: quick fix i18n, should be auto config by URL path?
 const options = {
-    mode: "wysiwyg",
+    mode: "ir",
     lang: "en_US",
+    height: 0.9 * window.innerHeight
 };
     
 </script>

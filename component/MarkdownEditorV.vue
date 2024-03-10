@@ -35,6 +35,7 @@ const props = defineProps({
 onMounted(() => {
   // TODO: options
   const mdEditorV = new Vditor(props.id, {
+    mode: "ir",
     height: 0.8 * window.innerHeight,
     toolbar,
     preview,
@@ -53,14 +54,13 @@ const toolbar = [
   'italic',
   'strike',
   'link',
-  '|',
   'list',
   'ordered-list',
   'check',
   'outdent',
   'indent',
-  '|',
   'quote',
+  'edit-mode',
   // 'upload', TODO: upload
   {
     name: 'more',
@@ -70,13 +70,9 @@ const toolbar = [
       'inline-code',
       'insert-before',
       'insert-after',
-      '|',
       'table',
-      '|',
       'undo',
       'redo',
-      '|',
-      'edit-mode',
       // 'content-theme',
       'preview',
       // 'code-theme',
