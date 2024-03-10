@@ -18,7 +18,7 @@ const options = {
 
 <style setup>
 #playground-md-editor {
-  max-width: 80vw;
+  max-width: 95vw;
   margin: auto;
 }
 </style>

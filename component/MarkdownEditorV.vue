@@ -46,8 +46,8 @@ onMounted(() => {
 });
 
 // ref: https://github.com/Vanessa219/vditor/blob/master/demo/index.js#L56
+// TODO: mobile
 const toolbar = [
-  'emoji',
   'headings',
   'bold',
   'italic',
@@ -61,26 +61,26 @@ const toolbar = [
   'indent',
   '|',
   'quote',
-  'line',
-  'code',
-  'inline-code',
-  'insert-before',
-  'insert-after',
-  '|',
   // 'upload', TODO: upload
-  'table',
-  '|',
-  'undo',
-  'redo',
-  '|',
-  'edit-mode',
-  // 'content-theme',
-  'preview',
-  // 'code-theme',
-  'export',
   {
     name: 'more',
     toolbar: [
+      'line',
+      'code',
+      'inline-code',
+      'insert-before',
+      'insert-after',
+      '|',
+      'table',
+      '|',
+      'undo',
+      'redo',
+      '|',
+      'edit-mode',
+      // 'content-theme',
+      'preview',
+      // 'code-theme',
+      'export',
       'fullscreen',
       'both',
     ],
