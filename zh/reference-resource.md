@@ -31,7 +31,10 @@
 
 ### Markdown 周边功能
 
+- [Joshua's Docs - Notes on Markdown-it and Building a Plugin](https://docs.joshuatz.com/cheatsheets/node-and-npm/markdown-it/)：Markdown-it 插件开发官网
 - [List of markdown presentation tools](https://gist.github.com/johnloy/27dd124ad40e210e91c70dd1c24ac8c8)：热心网友收集，能用Markdown写演示文稿的工具，小心评论区有广告。
+- [Shiki](https://shiki.style/languages)：代码框语法高亮
+- [一些 Markdonw It 插件聚合](https://mdit-plugins.github.io/)
 
 ## 其他
 
