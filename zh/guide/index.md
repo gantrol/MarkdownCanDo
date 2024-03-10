@@ -1,8 +1,6 @@
 # Markdown 能做
 
-Markdown 让排版更轻松。[在线编辑链接](/zh/playground/)，[网页链接](/zh/guide/) 。
-
-[[toc]]
+Markdown 让排版更轻松。[在线演练场](/zh/playground/)能自由操作，也会有更多功能，[网页链接](/zh/guide/) 为静态文本。
 
 ## 具体能做什么？
 
@@ -36,7 +34,7 @@ timeline
 
 ```mermaid
 flowchart LR
-A(("`**问题**`")) --> B(朋友)
+A(("问题")) --> B(朋友)
 A --> ChatGPT(ChatGPT)
 B --> sum((汇总))
 ChatGPT --> sum

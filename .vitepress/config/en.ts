@@ -4,7 +4,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 export const en = defineConfig({
     lang: 'en-US',
     title: "MarkdownCanDo",
-    description: "A website shows Markdown get thing done.",
+    description: "Markdown can do it! Get rid of the annoying Word and HTML formatting — easy to use, efficient, plain text, multifunctional, AI-friendly",
 
     themeConfig: {
         nav: nav(),
@@ -15,7 +15,7 @@ export const en = defineConfig({
         },
 
         editLink: {
-            pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+            pattern: 'https://github.com/gantrol/markdown-can-do/edit/main/:path',
             text: 'Edit this page on GitHub'
         },
 
@@ -31,12 +31,12 @@ function nav(): DefaultTheme.NavItem[] {
     return [
         {
             text: 'Guide',
-            link: '/guide/what-is-vitepress',
+            link: '/guide/',
             activeMatch: '/guide/'
         },
         {
             text: 'Reference',
-            link: '/reference/site-config',
+            link: '/reference/',
             activeMatch: '/reference/'
         }
     ]
@@ -48,41 +48,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             text: 'Introduction',
             collapsed: false,
             items: [
+                { text: 'What Markdown can do', link: '/' },
+                { text: 'Why use Markdown?', link: 'why' },
                 { text: 'What is Markdown?', link: 'what-is-markdown' },
-                { text: 'Getting Started', link: 'getting-started' },
             ]
         },
-        {
-            text: 'Writing',
-            collapsed: false,
-            items: [
-                { text: 'Markdown Extensions', link: 'markdown' },
-                { text: 'Asset Handling', link: 'asset-handling' },
-            ]
-        },
-        {
-            text: 'Customization',
-            collapsed: false,
-            items: [
-                { text: 'Using a Custom Theme', link: 'custom-theme' },
-                {
-                    text: 'Extending the Default Theme',
-                    link: 'extending-default-theme'
-                },
-                { text: 'Build-Time Data Loading', link: 'data-loading' },
-                { text: 'SSR Compatibility', link: 'ssr-compat' },
-                { text: 'Connecting to a CMS', link: 'cms' }
-            ]
-        },
-        {
-            text: 'Experimental',
-            collapsed: false,
-            items: [
-                { text: 'MPA Mode', link: 'mpa-mode' },
-                { text: 'Sitemap Generation', link: 'sitemap-generation' }
-            ]
-        },
-        { text: 'Config & API Reference', base: '/reference/', link: 'site-config' }
+        { text: 'Reference Materials', base: '/', link: 'reference-resource' },
     ]
 }
 

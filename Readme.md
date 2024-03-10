@@ -1,5 +1,7 @@
 # What Markdown Can Do
 
+[//]: # (TODO: badge)
+
 A website shows what markdown can do, with the objective of creating a website for Markdown akin to what https://vuejs.org is for Vue.
 
 - English: https://markdowncando.com
