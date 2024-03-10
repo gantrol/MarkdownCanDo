@@ -7,6 +7,11 @@ settings:
 overrides:
   '@vitejs/plugin-vue': 5.0.0-beta.1
 
+dependencies:
+  vditor:
+    specifier: ^3.10.1
+    version: 3.10.1
+
 devDependencies:
   '@types/markdown-it':
     specifier: ^12.2.3
@@ -922,6 +927,10 @@ packages:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
     dev: true
 
+  /diff-match-patch@1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
+    dev: false
+
   /dom-serializer@1.4.1:
     resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
     dependencies:
@@ -1319,6 +1328,12 @@ packages:
     resolution: {integrity: sha512-jOWVmzVceKlVVdwjNSenT4PbGghU0SBIizAev8ofZVgivk/TVHXSbNL8LP6M3spZvkR9/QolkyJavGSX5Cs0UA==}
     engines: {node: '>=10'}
     dev: true
+
+  /vditor@3.10.1:
+    resolution: {integrity: sha512-bUXBGjVubnLr0jZ/GKuKEC+fxfITD+Apkg/K9FCZtqX8bMAaA3+Q2THJoQ1cFWibcJ5QUxgCfQGKSrdiMVAiIw==}
+    dependencies:
+      diff-match-patch: 1.0.5
+    dev: false
 
   /vite@5.1.5(@types/node@20.11.25)(terser@5.29.1):
     resolution: {integrity: sha512-BdN1xh0Of/oQafhU+FvopafUp6WaYenLU/NFoL5WyJL++GxkNfieKzBhM24H3HVsPQrlAqB7iJYTHabzaRed5Q==}
