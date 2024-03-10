@@ -102,5 +102,9 @@ const preview = {
 .vditor-reset ol {
   list-style: number;
 }
+/* Don't know why again */
+a {
+  color: #47caff;
+}
 
 </style>
