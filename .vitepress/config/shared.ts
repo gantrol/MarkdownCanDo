@@ -29,6 +29,16 @@ export const shared = defineConfig({
         ['meta', { property: 'og:title', content: 'Markdown Can Do' }],
         ['meta', { property: 'og:site_name', content: 'MarkdownCanDo' }],
         ['meta', { property: 'og:url', content: 'https://markdowncando.com/' }],
+        // ga4
+        [
+            'script',
+            { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX' }
+        ],
+        [
+            'script',
+            {},
+            "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-XXXXXXXXXX');"
+        ]
     ],
 
     themeConfig: {
