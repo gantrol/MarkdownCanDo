@@ -12,3 +12,12 @@ A website shows what markdown can do, with the objective of creating a website f
 ## About Translation
 
 Note: Pure Machine Translation in Português and English, Chinese version will be updated first.
+
+## TODO
+
+- [ ] Add information about pandoc
+- [ ] tutorial pages like https://vuejs.org/tutorial
+- [ ] examples pages like https://vuejs.org/examples
+- [ ] add i18n / theme config to Markdown Editor (Vditor)
+- [ ] a more lightweight Markdown Editor
+- [ ] What about https://markmap.js.org/repl ?
