@@ -62,5 +62,14 @@ export const shared = defineConfig({
             }
         },
 
+    },
+
+    // quick fix: https://github.com/mermaid-js/mermaid/issues/4320
+    vite: {
+        optimizeDeps: {
+            include: [
+                'mermaid'
+            ]
+        }
     }
 })
