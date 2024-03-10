@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: Why Markdown
-      link: /why
+      link: /why/
     - theme: alt
       text: Playground
-      link: /playground
+      link: /playground/
 
 features:
   - title: Tutorial
