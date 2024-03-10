@@ -66,13 +66,13 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: '简介',
+            text: '指南',
             collapsed: false,
             items: [
-                { text: '指南', link: 'index' },
+                { text: 'Markdown 能做', link: '/' },
                 { text: '为何用 Markdown？', link: 'why' },
                 { text: '什么是 Markdown？', link: 'what-is-markdown' },
-                { text: '快速开始', link: 'getting-started' },
+                // { text: '快速开始', link: 'getting-started' },
             ]
         },
         { text: '外部参考', base: '/', link: 'zh/reference-resource' }

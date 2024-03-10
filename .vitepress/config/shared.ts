@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 import { search as zhSearch } from './zh'
 import { search as ptSearch } from './pt'
+import markdown_it_footnote from 'markdown-it-footnote'
+import markdown_it_task_list from 'markdown-it-task-checkbox'
 
 export const shared = defineConfig({
     title: 'MarkdownCanDo',
@@ -11,10 +13,15 @@ export const shared = defineConfig({
 
     markdown: {
         math: true,
+        config: (md) => {
+            md.use(markdown_it_footnote)
+            md.use(markdown_it_task_list)
+            // md.use()
+        }
     },
 
     sitemap: {
-        hostname: 'https://markdowncando.dev',
+        hostname: 'https://markdowncando.com',
         transformItems(items) {
             return items.filter((item) => !item.url.includes('migration'))
         }
