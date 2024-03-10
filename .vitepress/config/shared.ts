@@ -39,12 +39,12 @@ export const shared = defineConfig({
         // ga4
         [
             'script',
-            { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX' }
+            { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-RX6RPWRSWJ' }
         ],
         [
             'script',
             {},
-            "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-XXXXXXXXXX');"
+            "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-RX6RPWRSWJ');"
         ]
     ],
 
