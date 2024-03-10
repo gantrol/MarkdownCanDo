@@ -75,7 +75,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 // { text: '快速开始', link: 'getting-started' },
             ]
         },
-        { text: '外部参考', base: '/', link: 'zh/reference-resource' }
+        { text: '参考资料', base: '/', link: 'zh/reference-resource' }
     ]
 }
 
