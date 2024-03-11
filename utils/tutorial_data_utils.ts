@@ -1,7 +1,7 @@
 // first version of this file copy from: https://github.com/vuejs/docs/blob/main/src/tutorial/tutorial.data.ts
 // @ts-ignore
 import {createMarkdownRenderer} from "vitepress";
-import {readExamples} from "./examples.data";
+import {readExamples} from "./examples_data_utils";
 
 export default async (src_path: string) => {
     const md = await createMarkdownRenderer(process.cwd(), undefined, '/')
