@@ -41,7 +41,7 @@ import {
   VTIconChevronRight,
   VTLink
 } from '@vue/theme'
-import {onHashChange} from "../examples/utils";
+import {onHashChange} from "../../utils/utils";
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps

@@ -1,7 +1,9 @@
 // first version of this file copy from: https://github.com/vuejs/docs/blob/main/src/examples
 
 
+// @ts-ignore
 import fs from 'fs'
+// @ts-ignore
 import path from 'path'
 import { ExampleData } from './utils'
 
@@ -33,6 +35,7 @@ function readExample(dir: string): ExampleData {
     const fullPath = path.join(dir, filename)
     if (fs.statSync(fullPath).isDirectory()) {
       if (filename === '_hint') {
+        // @ts-ignore
         files[filename] = readExample(fullPath)
       } else {
         files[filename] = readComponentDir(fullPath)

@@ -1,27 +1,15 @@
 // first version of this file copy from: https://github.com/vuejs/docs/blob/main/src/tutorial/tutorial.data.ts
 // @ts-ignore
 import path from 'path'
-import { createMarkdownRenderer } from 'vitepress'
-import { readExamples, ExampleData } from '../examples/examples.data'
+import { ExampleData } from '../../utils/utils'
+import tutorial_data_utils from '../../utils/tutorial_data_utils'
 
 export declare const data: Record<string, ExampleData>
 
 export default {
     watch: './src/**',
     async load() {
-        const md = await createMarkdownRenderer(process.cwd(), undefined, '/')
-        const files = readExamples(path.resolve(__dirname, './src'))
-        for (const step in files) {
-            const stepFiles = files[step]
-            const desc = stepFiles['description.md'] as string
-            if (desc) {
-                stepFiles['description.md'] = md.render(desc)
-            }
-            const hint_desc = stepFiles['_hint']?.['description.md'] as string
-            if (hint_desc) {
-                stepFiles['_hint']['description.md'] = md.render(hint_desc)
-            }
-        }
-        return files
+        const src_path = path.resolve(__dirname, './src')
+        return tutorial_data_utils(src_path)
     }
 }
