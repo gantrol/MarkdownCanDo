@@ -1,12 +1,8 @@
 # What Markdown Can Do
 
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/readme-zh.md) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
-
-A website dedicated to showcasing the capabilities of Markdown, aimed at creating a resource similar to how https://vuejs.org serves Vue enthusiasts. It's built primarily with Vitepress and Vditor.
-
-You can click the button above if you want to deploy it yourself on Vercel.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+A website dedicated to showcasing the capabilities of Markdown, aimed at creating a resource similar to https://vuejs.org for Vue Programmers. 
 
 ![icon](public/logo-mini.png)
 
@@ -19,6 +15,10 @@ Please note: The translations into Portuguese and English are done purely by mac
 - Português: todo
 - ...
 
+## Tech Stack
+
+It's built primarily with Vitepress and Vditor.
+
 ## TODO
 
 - [ ] examples pages like https://vuejs.org/examples
@@ -28,3 +28,4 @@ Please note: The translations into Portuguese and English are done purely by mac
 - [ ] Add information about pandoc
 - [ ] a more lightweight Markdown Editor
 - [ ] What about https://markmap.js.org/repl ?
+
