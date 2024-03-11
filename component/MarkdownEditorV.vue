@@ -40,6 +40,8 @@ onMounted(() => {
   mdEditorV = new editorV(props.id, {
     mode: "ir",
     height: 0.8 * window.innerHeight,
+    toolbar,
+    preview,
     theme: darkMode.value ? "dark": "classic",
     ...props.options,
     after() {
@@ -71,6 +73,54 @@ watch(darkMode, (isDarkTheme) => {
   changeBasedOnTheme(isDarkTheme);
 }, { immediate: true });
 
+// ref: https://github.com/Vanessa219/vditor/blob/master/demo/index.js#L56
+// TODO: mobile
+const toolbar = [
+  'headings',
+  'bold',
+  'italic',
+  'strike',
+  'link',
+  'list',
+  'ordered-list',
+  'check',
+  'outdent',
+  'indent',
+  'quote',
+  'edit-mode',
+  // 'upload', TODO: upload
+  {
+    name: 'more',
+    toolbar: [
+      'line',
+      'code',
+      'inline-code',
+      'insert-before',
+      'insert-after',
+      'table',
+      'undo',
+      'redo',
+      // 'content-theme',
+      'preview',
+      // 'code-theme',
+      'export',
+      'fullscreen',
+      'both',
+    ],
+  }]
+
+const preview = {
+  markdown: {
+    toc: true,
+    mark: true,
+    footnotes: true,
+    autoSpace: true,
+  },
+  math: {
+    engine: 'KaTeX',
+    inlineDigit: true,
+  },
+}
 </script>
 
 <style>
