@@ -14,7 +14,7 @@
       <div class="vt-doc" v-html="currentDescription"></div>
       <div class="hint" v-if="data[currentStep]?._hint">
         <button id="show-result" @click="toggleResult">
-          {{ showingHint ? '重置' : '看看答案' }}
+          {{ showingHint ? '我不看了' : '看看答案' }}
         </button>
       </div>
       <footer>
@@ -46,16 +46,23 @@ import {onHashChange} from "../examples/utils";
 const instruction = ref<HTMLElement>()
 // Mark: Steps
 const currentStep = ref('step-1');
-const currentText = ref("");
 
 const currentDescription = computed(() => {
   return data[currentStep.value]?.['description.md'] || 'No description available.';
 });
 
+// TODO: refract App, template.md, description.md into constant
 const currentCode = computed(() => {
-  const result = data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
-  currentText.value = result
-  return result;
+  if (showingHint.value) {
+    const hint = data[currentStep.value]._hint
+    const result = hint?.["App"]?.['template.md'];
+    if (result) {
+      return result
+    }
+  }
+
+  return data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
+
 });
 
 
@@ -97,7 +104,8 @@ function updateExample(scroll = false) {
     location.replace(`${location}/#${hash}`)
   }
   currentStep.value = hash
-  currentText.value = showingHint.value ? data[hash]._hint! : data[hash];
+  let tmp = showingHint.value ? data[hash]._hint! : data[hash];
+  debugger
   // TODO: update hint
   // TODO: update currentCode
 
