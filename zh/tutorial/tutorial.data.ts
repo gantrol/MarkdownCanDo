@@ -17,6 +17,10 @@ export default {
             if (desc) {
                 stepFiles['description.md'] = md.render(desc)
             }
+            const hint_desc = stepFiles['_hint']?.['description.md'] as string
+            if (hint_desc) {
+                stepFiles['_hint']['description.md'] = md.render(hint_desc)
+            }
         }
         return files
     }

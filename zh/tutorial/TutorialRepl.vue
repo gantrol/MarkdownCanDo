@@ -47,11 +47,19 @@ const instruction = ref<HTMLElement>()
 // Mark: Steps
 const currentStep = ref('step-1');
 
+// TODO: refract App, template.md, description.md into constant
 const currentDescription = computed(() => {
+  if (showingHint.value) {
+    const hint = data[currentStep.value]._hint
+    const result = hint?.['description.md'];
+
+    if (result) {
+      return result
+    }
+  }
   return data[currentStep.value]?.['description.md'] || 'No description available.';
 });
 
-// TODO: refract App, template.md, description.md into constant
 const currentCode = computed(() => {
   if (showingHint.value) {
     const hint = data[currentStep.value]._hint
@@ -62,7 +70,6 @@ const currentCode = computed(() => {
   }
 
   return data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
-
 });
 
 
@@ -104,11 +111,6 @@ function updateExample(scroll = false) {
     location.replace(`${location}/#${hash}`)
   }
   currentStep.value = hash
-  let tmp = showingHint.value ? data[hash]._hint! : data[hash];
-  debugger
-  // TODO: update hint
-  // TODO: update currentCode
-
 
   if (scroll) {
     nextTick(() => {
