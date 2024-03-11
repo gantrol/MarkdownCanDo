@@ -73,6 +73,14 @@ watch(darkMode, (isDarkTheme) => {
   changeBasedOnTheme(isDarkTheme);
 }, { immediate: true });
 
+watch(() => props.text, (newText) => {
+  if (!mdEditorV) {
+    return;
+  }
+
+  mdEditorV.setValue(newText);
+}, { immediate: true })
+
 // ref: https://github.com/Vanessa219/vditor/blob/master/demo/index.js#L56
 // TODO: mobile
 const toolbar = [

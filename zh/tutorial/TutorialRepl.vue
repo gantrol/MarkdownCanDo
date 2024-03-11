@@ -13,9 +13,9 @@
       </VTFlyout>
       <div class="vt-doc" v-html="currentDescription"></div>
       <div class="hint" v-if="data[currentStep]?._hint">
-<!--        <button @click="toggleResult">-->
-<!--          {{ showingHint ? 'Reset' : 'Show me!' }}-->
-<!--        </button>-->
+        <button @click="toggleResult">
+          {{ showingHint ? 'Reset' : 'Show me!' }}
+        </button>
       </div>
       <footer>
         <a v-if="prevStep" :href="`#${prevStep}`"
@@ -41,6 +41,7 @@ import {
   VTIconChevronRight,
   VTLink
 } from '@vue/theme'
+import {onHashChange} from "../examples/utils";
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
@@ -85,16 +86,19 @@ const allSteps = keys.map((key, i) => {
 // Mark: Hint
 const showingHint = ref(false)
 
+
 function updateExample(scroll = false) {
   let hash = location.hash.slice(1)
   if (!data.hasOwnProperty(hash)) {
     hash = 'step-1'
-    location.replace(`/tutorial/#${hash}`)
+    // TODO: 处理多语言
+    location.replace(`${location}/#${hash}`)
   }
   currentStep.value = hash
 
   const content = showingHint.value ? data[hash]._hint! : data[hash]
-
+  // TODO: update hint
+  // TODO: update currentCode
 
   if (scroll) {
     nextTick(() => {
@@ -112,19 +116,17 @@ const editorOptions = ref({
   }
 });
 
-function navigateToStep(step) {
-  if (step) {
-    currentStep.value = step;
-    window.location.hash = step;
-  }
+function toggleResult() {
+  showingHint.value = !showingHint.value
+  updateExample()
 }
 
-window.addEventListener('hashchange', () => {
-  const hash = window.location.hash.slice(1);
-  if (data.hasOwnProperty(hash)) {
-    currentStep.value = hash;
-  }
-});
+onHashChange(() => {
+  showingHint.value = false
+  updateExample(true)
+})
+
+updateExample()
 
 </script>
 
@@ -135,7 +137,7 @@ window.addEventListener('hashchange', () => {
   max-width: 1440px;
   margin: 0 auto;
   --height: calc(
-      100vh - var(--vt-nav-height)
+      100vh - var(--vt-nav-height) - var(--vt-banner-height, 0px)
   );
 }
 
@@ -147,7 +149,7 @@ window.addEventListener('hashchange', () => {
   width: 45%;
   height: var(--height);
   padding: 0 32px 24px;
-  border-right: 1px solid;
+  border-right: 1px solid var(--vt-c-divider-light);
   font-size: 15px;
   overflow-y: auto;
   position: relative;
@@ -165,14 +167,23 @@ window.addEventListener('hashchange', () => {
   right: 20px;
 }
 
+.vt-menu-link.active {
+  font-weight: 500;
+  color: var(--vt-c-brand);
+}
 
 footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid;
+  border-top: 1px solid var(--vt-c-divider);
   margin-top: 1.5em;
   padding-top: 1em;
+}
+
+footer a {
+  font-weight: 500;
+  color: var(--vt-c-brand);
 }
 
 .next-step {
@@ -204,11 +215,18 @@ footer {
 }
 
 button {
-
+  background-color: var(--vt-c-brand);
+  color: var(--vt-c-bg);
   padding: 4px 12px 3px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
+}
+
+@media (min-width: 1377px) {
+  .vue-repl {
+    border-right: 1px solid var(--vt-c-divider-light);
+  }
 }
 
 @media (min-width: 1441px) {
@@ -228,9 +246,15 @@ button {
   .instruction {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--vt-c-divider-light);
     height: 30vh;
     padding: 0 24px 24px;
+  }
+  .vue-repl {
+    width: 100%;
+    height: calc(
+        70vh - var(--vt-nav-height) - var(--vt-banner-height, 0px)
+    );
   }
   :deep(.wide) {
     display: none;
@@ -240,4 +264,3 @@ button {
   }
 }
 </style>
-
