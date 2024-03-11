@@ -13,8 +13,8 @@
       </VTFlyout>
       <div class="vt-doc" v-html="currentDescription"></div>
       <div class="hint" v-if="data[currentStep]?._hint">
-        <button @click="toggleResult">
-          {{ showingHint ? 'Reset' : 'Show me!' }}
+        <button id="show-result" @click="toggleResult">
+          {{ showingHint ? '重置' : '看看答案' }}
         </button>
       </div>
       <footer>
@@ -33,8 +33,8 @@
 
 <script setup lang="ts">
 import {ref, computed, nextTick} from 'vue';
-import MarkdownEditorV from '../../component/MarkdownEditorV.vue'; // Ensure correct path
-import { data } from './tutorial.data'; // Your tutorial steps data
+import MarkdownEditorV from '../../component/MarkdownEditorV.vue';
+import { data } from './tutorial.data';
 import {
   VTFlyout,
   VTIconChevronLeft,
@@ -46,14 +46,16 @@ import {onHashChange} from "../examples/utils";
 const instruction = ref<HTMLElement>()
 // Mark: Steps
 const currentStep = ref('step-1');
-
+const currentText = ref("");
 
 const currentDescription = computed(() => {
   return data[currentStep.value]?.['description.md'] || 'No description available.';
 });
 
 const currentCode = computed(() => {
-  return data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
+  const result = data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
+  currentText.value = result
+  return result;
 });
 
 
@@ -95,10 +97,10 @@ function updateExample(scroll = false) {
     location.replace(`${location}/#${hash}`)
   }
   currentStep.value = hash
-
-  const content = showingHint.value ? data[hash]._hint! : data[hash]
+  currentText.value = showingHint.value ? data[hash]._hint! : data[hash];
   // TODO: update hint
   // TODO: update currentCode
+
 
   if (scroll) {
     nextTick(() => {
@@ -109,7 +111,8 @@ function updateExample(scroll = false) {
 
 
 const editorOptions = ref({
-  // Your Vditor options here
+  height: window.innerHeight - document.getElementsByClassName("VPNavBar")?.[0]?.clientHeight,
+  width: window.innerWidth * 0.6,
   mode: "sv",
   preview: {
     delay: 100,
@@ -136,29 +139,16 @@ updateExample()
   display: flex;
   max-width: 1440px;
   margin: 0 auto;
-  --height: calc(
-      100vh - var(--vt-nav-height) - var(--vt-banner-height, 0px)
-  );
-}
-
-.preference-switch {
-  position: relative;
 }
 
 .instruction {
   width: 45%;
-  height: var(--height);
   padding: 0 32px 24px;
   border-right: 1px solid var(--vt-c-divider-light);
   font-size: 15px;
   overflow-y: auto;
   position: relative;
   --vt-nav-height: 40px;
-}
-
-.vue-repl {
-  width: 55%;
-  height: var(--height);
 }
 
 .vt-flyout {
@@ -214,7 +204,7 @@ footer a {
   padding-top: 1em;
 }
 
-button {
+#show-result {
   background-color: var(--vt-c-brand);
   color: var(--vt-c-bg);
   padding: 4px 12px 3px;

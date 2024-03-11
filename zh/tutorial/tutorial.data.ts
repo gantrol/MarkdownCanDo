@@ -1,4 +1,5 @@
 // first version of this file copy from: https://github.com/vuejs/docs/blob/main/src/tutorial/tutorial.data.ts
+// @ts-ignore
 import path from 'path'
 import { createMarkdownRenderer } from 'vitepress'
 import { readExamples, ExampleData } from '../examples/examples.data'
