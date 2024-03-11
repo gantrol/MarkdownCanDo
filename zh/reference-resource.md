@@ -56,6 +56,10 @@
 
 [//]: # (TODO: 等项目开源后放一个)
 
+这个网站可以生成badges，https://shields.io/badges ，比如：
+
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/readme-zh.md)
+
 有人收集了badges：https://github.com/Ileriayo/markdown-badges
 
 ### 软件、插件
