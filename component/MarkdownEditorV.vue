@@ -55,11 +55,11 @@ function toggleDarkMode() {
 
 function changeBasedOnTheme(isDarkTheme) {
   if (isDarkTheme === true) {
-    mdEditorV.setTheme('dark', 'dark', 'native', 'https://cdn.jsdelivr.net/npm/vditor/dist/css/content-theme');
+    mdEditorV.setTheme('dark', 'dark', 'native');
     outlineElement && outlineElement.classList.add('dark')
   } else {
     outlineElement && outlineElement.classList.remove('dark')
-    mdEditorV.setTheme('classic', 'light', 'github', 'https://cdn.jsdelivr.net/npm/vditor/dist/css/content-theme');
+    mdEditorV.setTheme('classic', 'light', 'github');
   }
 }
 
