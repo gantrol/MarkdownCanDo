@@ -22,8 +22,8 @@ const props = defineProps({
   },
 });
 
-const darkMode = ref(false); 
-
+const darkMode = ref(false);
+const outlineElement = document.getElementById('outline')
 let mdEditorV;
 
 onMounted(() => {
@@ -34,7 +34,7 @@ onMounted(() => {
 
   
   themeToggleButton.addEventListener('click', () => {
-    darkMode.value = !darkMode.value; 
+    darkMode.value = !darkMode.value;
   });
 
   mdEditorV = new editorV(props.id, {
@@ -44,40 +44,31 @@ onMounted(() => {
     ...props.options,
     after() {
       mdEditorV.setValue(props.text || "");
+      changeBasedOnTheme(darkMode.value);
     }
   });
-
-  if (darkMode.value) {
-    importDarkThemeCSS();
-  }
 });
 
-
-function importDarkThemeCSS() {
-  import('vditor/dist/css/content-theme/dark.css').then(() => {
-    console.log('Dark theme CSS loaded');
-    if (mdEditorV) mdEditorV.setTheme('dark', 'dark');
-  }).catch(err => {
-    console.error('Failed to load dark theme CSS', err);
-  });
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
 }
 
+function changeBasedOnTheme(isDarkTheme) {
+  if (isDarkTheme === true) {
+    mdEditorV.setTheme('dark', 'dark', 'native', 'https://cdn.jsdelivr.net/npm/vditor/dist/css/content-theme');
+    outlineElement && outlineElement.classList.add('dark')
+  } else {
+    outlineElement && outlineElement.classList.remove('dark')
+    mdEditorV.setTheme('classic', 'light', 'github', 'https://cdn.jsdelivr.net/npm/vditor/dist/css/content-theme');
+  }
+}
 
-watch(darkMode, (newValue) => {
+watch(darkMode, (isDarkTheme) => {
   if (!mdEditorV) {
     return;
   }
 
-  if (newValue === true) {
-    importDarkThemeCSS();
-  } else {
-    mdEditorV.setTheme('classic', 'classic');
-
-    const darkThemeStyle = document.querySelector('style[data-vite-dev-id*="content-theme/dark.css"]');
-    if (darkThemeStyle) {
-      darkThemeStyle.remove();
-    }
-  }
+  changeBasedOnTheme(isDarkTheme);
 }, { immediate: true });
 
 </script>
