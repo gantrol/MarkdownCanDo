@@ -3,98 +3,82 @@
 </template>
 
 <script setup>
-import {onMounted} from 'vue';
-import Vditor from 'vditor';
+import {onMounted, ref, watch} from 'vue';
+import editorV from 'vditor';
 import 'vditor/dist/index.css';
-
 
 const props = defineProps({
   id: {
     type: String,
     require: true,
   },
-
   text: {
     type: String,
     require: false,
   },
-  /**
-   *
-   * mode "wysiwyg" | "sv" | "ir"
-   *
-   * theme
-   *
-   *
-   */
   options: {
     type: Object,
     required: false,
   },
 });
 
+const darkMode = ref(false); 
+
+let mdEditorV;
+
 onMounted(() => {
-  // TODO: options
-  const mdEditorV = new Vditor(props.id, {
+  const themeToggleButton = document.querySelector("div.VPNavBarAppearance.appearance > button");
+
+  
+  darkMode.value = themeToggleButton.getAttribute("aria-checked") === "true";
+
+  
+  themeToggleButton.addEventListener('click', () => {
+    darkMode.value = !darkMode.value; 
+  });
+
+  mdEditorV = new editorV(props.id, {
     mode: "ir",
     height: 0.8 * window.innerHeight,
-    toolbar,
-    preview,
+    theme: darkMode.value ? "dark": "classic",
     ...props.options,
     after() {
       mdEditorV.setValue(props.text || "");
     }
   });
+
+  if (darkMode.value) {
+    importDarkThemeCSS();
+  }
 });
 
-// ref: https://github.com/Vanessa219/vditor/blob/master/demo/index.js#L56
-// TODO: mobile
-const toolbar = [
-  'headings',
-  'bold',
-  'italic',
-  'strike',
-  'link',
-  'list',
-  'ordered-list',
-  'check',
-  'outdent',
-  'indent',
-  'quote',
-  'edit-mode',
-  // 'upload', TODO: upload
-  {
-    name: 'more',
-    toolbar: [
-      'line',
-      'code',
-      'inline-code',
-      'insert-before',
-      'insert-after',
-      'table',
-      'undo',
-      'redo',
-      // 'content-theme',
-      'preview',
-      // 'code-theme',
-      'export',
-      'fullscreen',
-      'both',
-    ],
-  }]
 
-const preview = {
-  markdown: {
-    toc: true,
-    mark: true,
-    footnotes: true,
-    autoSpace: true,
-  },
-  math: {
-    engine: 'KaTeX',
-    inlineDigit: true,
-  },
+function importDarkThemeCSS() {
+  import('vditor/dist/css/content-theme/dark.css').then(() => {
+    console.log('Dark theme CSS loaded');
+    if (mdEditorV) mdEditorV.setTheme('dark', 'dark');
+  }).catch(err => {
+    console.error('Failed to load dark theme CSS', err);
+  });
 }
 
+
+watch(darkMode, (newValue) => {
+  if (!mdEditorV) {
+    return;
+  }
+
+  if (newValue === true) {
+    importDarkThemeCSS();
+  } else {
+    mdEditorV.setTheme('classic', 'classic');
+
+    const darkThemeStyle = document.querySelector('style[data-vite-dev-id*="content-theme/dark.css"]');
+    if (darkThemeStyle) {
+      darkThemeStyle.remove();
+    }
+  }
+}, { immediate: true });
 
 </script>
 
