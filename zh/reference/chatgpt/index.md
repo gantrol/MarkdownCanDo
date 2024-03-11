@@ -35,12 +35,10 @@ timeline
 
 [//]: # (TODO: GPTs )
 
-如果你喜欢用一些社交平台，那可能会发现用户喜欢用表情，可以用这个
-
-[//]: # (TODO: GPTs 给文章添加合适的emoji)
+如果你喜欢用一些社交平台，那可能会发现用户喜欢用表情，可以用这个GPTs为自己的文字加上合适的Emoji[鹦鹉GPT：🦜🦜🦜鹦鹉复读机，但是会带上表情🦜🦜🦜](https://chat.openai.com/g/g-yqvA1CiDz-parrotgpt)
 
 ### Prompt 平替
 
-当然，如果你没有 ChatGPT 的会员，**可以用 Prompt 替代一下**。推荐的 AI 可以参考[这个链接](https://www.gantrol.com/AI/TOP1.html)
+当然，如果你没有 ChatGPT 的会员，可以用 Prompt 工程替代一下。推荐的 AI 可以参考[这个链接](https://www.gantrol.com/AI/TOP1.html)
 
 [//]: # (TODO: 对应的Prompt，从文件直接导入，折叠)

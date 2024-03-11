@@ -35,7 +35,9 @@ Feed GPTs with well-written standards, such as [Ruan Yifeng's "Chinese Technical
 
 [//]: # (TODO: GPTs)
 
-If you like using social platforms, you might find that users like using emojis, which can be added to articles appropriately.
+If you like using social platforms, you might find that users like using emojis, which can be added to articles appropriately by this GPTs: 
+
+[ParrotGPT🦜  🦜🦜🦜: repeat your input, but add some emoji🦜🦜🦜](https://chat.openai.com/g/g-yqvA1CiDz-parrotgpt)
 
 [//]: # (TODO: GPTs to add suitable emojis to articles)
 
