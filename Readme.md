@@ -15,8 +15,8 @@ Note: Pure Machine Translation in Português and English, Chinese version will b
 
 ## TODO
 
-- [ ] Add information about pandoc
 - [ ] tutorial pages like https://vuejs.org/tutorial
 - [ ] examples pages like https://vuejs.org/examples
+- [ ] Add information about pandoc
 - [ ] a more lightweight Markdown Editor
 - [ ] What about https://markmap.js.org/repl ?

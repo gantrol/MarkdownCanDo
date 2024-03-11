@@ -51,6 +51,11 @@ export const zh = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
+            text: '教程',
+            link: '/zh/tutorial/',
+            activeMatch: '/zh/tutorial/'
+        },
+        {
             text: '指南',
             link: '/zh/guide/',
             activeMatch: '/zh/guide/'

@@ -17,7 +17,7 @@ features:
   - icon: 📚
     title: 教程
     details: 一步步教会你用 Markdown
-    link: '/zh/guide/'
+    link: '/zh/tutorial/'
     linkText: '点击查看'
     target: '_self'
   - icon: 🛠️
