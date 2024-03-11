@@ -10,7 +10,15 @@
 
 还能加上属性，如 [我的博客](https://www.gantrol.com "标题")  `[我的博客](https://www.gantrol.com "标题")`
 
-**如果一篇文档多次用到一个链接怎么办呢**？比如，[我的博客][ABC]、[我博客][ABC]、[博客][ABC]
+**如果一篇文档多次用到一个链接怎么办呢**？
+
+你可以先定义一个链接代号，格式是`[代号]: 链接`，如：
+
+[why]: /zh/guide/why "为何 Markdown？"
+
+然后用`[文本][代号]`格式创建链接，[为什么要用Markdown][why]。
+
+再如，[我的博客][ABC]、[我博客][ABC]、[博客][ABC]
 
 [ABC]: https://www.gantrol.com
 
