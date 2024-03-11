@@ -72,6 +72,10 @@ Markdown 最终会渲染为 HTML，而 CSS 可以修改 HTML 元素的排布。�
 
 ### 建站
 
+比如点击这个按钮，就在vercel部署这个网站。
+
+[![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+
 有很多基于 Markdown 的建站方式，个人调研后发现主要是 Vitepress 跟 MDX 两种，它们都拓展了 Markdown，都能插入代码组件。Vitepress 主要支持 Vue 组件，MDX 主要支持 React 组件
 
 出于性能、维护稳定性考虑，本站使用 Vitepress 构建，站长为此连夜学 Vue（~~一个小时~~）。

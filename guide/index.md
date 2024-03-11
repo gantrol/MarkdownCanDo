@@ -72,6 +72,10 @@ Markdown ultimately renders as HTML, and CSS can modify the layout of HTML eleme
 
 ### Building a Website
 
+You can deploy this site by clicking this button:
+
+[![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+
 There are many ways to build websites based on Markdown. Personal research has mainly identified Vitepress and MDX as two options, both extending Markdown and allowing for code component insertion. Vitepress primarily supports Vue components, while MDX mainly supports React components.
 
 Considering performance and maintenance stability, this site is built with Vitepress, and the site owner learned Vue overnight (~~in one hour~~).
