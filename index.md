@@ -17,7 +17,7 @@ features:
   - icon: 📚
     title: Tutorials
     details: "Step by step, teach you how to use Markdown"
-    link: '/guide/'
+    link: '/tutorial/'
     linkText: 'Click to View'
     target: '_self'
   - icon: 🛠️
