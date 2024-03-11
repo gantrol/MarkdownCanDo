@@ -138,8 +138,8 @@ const preview = {
   list-style: number;
 }
 /* Don't know why again */
-a {
-  color: #47caff;
+.vditor-preview a {
+  color: #47caff!important;
 }
 
 </style>
