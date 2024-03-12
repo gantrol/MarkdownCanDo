@@ -25,7 +25,7 @@ It's built primarily with Vitepress and Vditor.
 - [ ] fix mobile page of tutorial
 - [ ] store playground data in local storage?
 - [ ] image upload (maybe locally?)
+- [ ] Introduce on Obsidian and Typora
 - [ ] Add information about pandoc
 - [ ] a more lightweight Markdown Editor
 - [ ] What about https://markmap.js.org/repl ?
-
