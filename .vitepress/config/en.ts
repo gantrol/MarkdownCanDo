@@ -28,6 +28,11 @@ export const en = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
+            text: 'Tutorial',
+            link: '/tutorial/',
+            activeMatch: '/tutorial/'
+        },
+        {
             text: 'Guide',
             link: '/guide/',
             activeMatch: '/guide/'
