@@ -2,6 +2,8 @@
 
 Markdown makes formatting easier. [Playground link](/playground/), [Webpage link](/guide/).
 
+> Playground won't save your change.
+
 ## What Specifically Can It Do?
 
 - [x] Implement a simple to-do list
@@ -79,7 +81,7 @@ Markdown ultimately renders as HTML, and CSS can modify the layout of HTML eleme
 
 You can deploy this site by clicking this button:
 
-[![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Deploy With Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 There are many ways to build websites based on Markdown. Personal research has mainly identified Vitepress and MDX as two options, both extending Markdown and allowing for code component insertion. Vitepress primarily supports Vue components, while MDX mainly supports React components.
 
