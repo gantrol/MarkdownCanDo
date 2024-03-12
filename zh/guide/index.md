@@ -12,7 +12,7 @@ Markdown 让排版更轻松。[在线演练场](/zh/playground/)能自由操作�
 - [x] 复制粘贴 Markdown 到公众号
 - [ ] ~~去码头整点薯条~~
 
-## Markdown Can Do More
+## 能做更多
 
 - [x] 各类图表，如流程图、思维导图、甘特图、时间线等。觉得麻烦？试试[让 ChatGPT 来做](/zh/reference/chatgpt/)。[^1]
 - [ ] PPT
@@ -83,7 +83,7 @@ Markdown 最终会渲染为 HTML，而 CSS 可以修改 HTML 元素的排布。�
 
 出于性能、维护稳定性考虑，本站使用 Vitepress 构建，站长为此连夜学 Vue（~~一个小时~~）。
 
-## 还想要更多？
+## 还想更多？
 
 可以看看[参考资料](/zh/reference-resource)
 
