@@ -68,7 +68,7 @@ onMounted(() => {
   mdEditorV = new editorV(props.id, {
     mode: isLargeWindow() ? "sv": "ir",
     height: 0.8 * window.innerHeight,
-    weight: isLargeWindow() ? 0.6 * window.innerWidth : window.innerWidth,
+    width: isLargeWindow() ? 0.75 * window.innerWidth : window.innerWidth,
     toolbar,
     preview,
     theme: darkMode.value ? "dark": "classic",
@@ -129,6 +129,7 @@ const toolbar = [
   'outdent',
   'indent',
   'quote',
+  'preview',
   'edit-mode',
   // 'upload', TODO: upload
   {
@@ -142,9 +143,8 @@ const toolbar = [
       'table',
       'undo',
       'redo',
-      // 'content-theme',
-      'preview',
-      // 'code-theme',
+      'content-theme',
+      'code-theme',
       'export',
       'fullscreen',
       'both',
