@@ -152,10 +152,10 @@ const toolbar = [
 
 const preview = {
   markdown: {
-    // toc: true,
-    // mark: true,
-    // footnotes: true,
-    // autoSpace: true,
+    toc: true,
+    mark: true,
+    footnotes: true,
+    autoSpace: true,
   },
   delay: 200,
   math: {
