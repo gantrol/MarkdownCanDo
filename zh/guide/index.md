@@ -48,13 +48,18 @@ accu -->|时间久| Wealth
 ```
 ### 五线谱
 
+> ChatGPT 写的，可能有错
+
 ```abc
 X:1
 T:Ode to Joy
+C:Ludwig van Beethoven
 M:4/4
 L:1/4
 K:C
-E E F G | G F E D |
+"G"G3/2A/2 G E G | "D7"F3/2E/2 F D F | "G"G3G G A | B3/2A/2 G E G |
+"D7"F3/2E/2 F E D | "G"G3G G A | B3/2A/2 G E G | "D7"F3/2E/2 F D F | "G"G3z ||
+
 ```
 
 ## More Things If you are a programmer

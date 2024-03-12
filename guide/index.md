@@ -45,13 +45,18 @@ accu -->|Over a long time| Wealth
 ```
 ### Music Score
 
+> Write by ChatGPT, maybe wrong.
+
 ```abc
 X:1
 T:Ode to Joy
+C:Ludwig van Beethoven
 M:4/4
 L:1/4
 K:C
-E E F G | G F E D |
+"G"G3/2A/2 G E G | "D7"F3/2E/2 F D F | "G"G3G G A | B3/2A/2 G E G |
+"D7"F3/2E/2 F E D | "G"G3G G A | B3/2A/2 G E G | "D7"F3/2E/2 F D F | "G"G3z ||
+
 ```
 
 ## More Things If You Are a Programmer
