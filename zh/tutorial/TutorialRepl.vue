@@ -20,10 +20,10 @@
       <footer>
         <a v-if="prevStep" :href="`#${prevStep}`"
         ><VTIconChevronLeft class="vt-link-icon" style="margin: 0" />
-          Prev</a
+          上一篇</a
         >
         <a class="next-step" v-if="nextStep" :href="`#${nextStep}`"
-        >Next <VTIconChevronRight class="vt-link-icon"
+        >下一篇 <VTIconChevronRight class="vt-link-icon"
         /></a>
       </footer>
     </article>
@@ -122,8 +122,6 @@ function updateExample(scroll = false) {
 
 const editorOptions = ref({
   height: window.innerHeight - document.getElementsByClassName("VPNavBar")?.[0]?.clientHeight,
-  width: window.innerWidth * 0.6,
-  mode: "sv",
   preview: {
     delay: 100,
   }

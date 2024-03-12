@@ -122,8 +122,6 @@ function updateExample(scroll = false) {
 
 const editorOptions = ref({
   height: window.innerHeight - document.getElementsByClassName("VPNavBar")?.[0]?.clientHeight,
-  width: window.innerWidth * 0.6,
-  mode: "sv",
   preview: {
     delay: 100,
   }

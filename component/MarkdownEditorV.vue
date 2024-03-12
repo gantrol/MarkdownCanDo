@@ -3,9 +3,10 @@
 </template>
 
 <script setup>
-import {onMounted, ref, watch} from 'vue';
+import {onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import editorV from 'vditor';
 import 'vditor/dist/index.css';
+import {isLargeWindow} from "../utils/screen_utils";
 
 const props = defineProps({
   id: {
@@ -18,28 +19,55 @@ const props = defineProps({
   },
   options: {
     type: Object,
+    default: {},
     required: false,
   },
 });
 
 const darkMode = ref(false);
-const outlineElement = document.getElementById('outline')
+let outlineElement;
+let themeToggleButton;
 let mdEditorV;
 
-onMounted(() => {
-  const themeToggleButton = document.querySelector("div.VPNavBarAppearance.appearance > button");
+const  changeDarkMode = () => {
+    darkMode.value = !darkMode.value;
+}
 
-  
+const isLargeWindowHandler = (isLarge) => {
+  if (!mdEditorV) {
+    return;
+  }
+
+  debugger;
+  if (!props.options?.mode) {
+    if (isLarge) {
+      // mdEditorV.setDisplayMode("sv");
+    } else {
+      // mdEditorV.setDisplayMode("ir");
+    }
+  }
+  if (!props.options?.width) {
+    if (isLarge) {
+      // mdEditorV.setWidth(window.innerWidth);
+    } else {
+      // mdEditorV.setWidth(0.6 * window.innerWidth);
+    }
+  }
+
+}
+
+onMounted(() => {
+  // TODO: 移动端夜间模式不对
+  // TODO: 夜间模式第一次切换成light，编辑器不会切换主题
+  themeToggleButton = document.querySelector("div.VPNavBarAppearance.appearance > button");
+  outlineElement = document.getElementById('outline');
   darkMode.value = themeToggleButton.getAttribute("aria-checked") === "true";
 
-  
-  themeToggleButton.addEventListener('click', () => {
-    darkMode.value = !darkMode.value;
-  });
 
   mdEditorV = new editorV(props.id, {
-    mode: "ir",
+    mode: isLargeWindow() ? "sv": "ir",
     height: 0.8 * window.innerHeight,
+    weight: isLargeWindow() ? 0.6 * window.innerWidth : window.innerWidth,
     toolbar,
     preview,
     theme: darkMode.value ? "dark": "classic",
@@ -49,11 +77,16 @@ onMounted(() => {
       changeBasedOnTheme(darkMode.value);
     }
   });
+  themeToggleButton.addEventListener('click', changeDarkMode);
+
+  window.addEventListener('resize', isLargeWindowHandler);
 });
 
-function toggleDarkMode() {
-  darkMode.value = !darkMode.value;
-}
+
+onBeforeUnmount(() => {
+  themeToggleButton.removeEventListener('click', changeDarkMode);
+  window.removeEventListener('resize', isLargeWindowHandler);
+})
 
 function changeBasedOnTheme(isDarkTheme) {
   if (isDarkTheme === true) {
