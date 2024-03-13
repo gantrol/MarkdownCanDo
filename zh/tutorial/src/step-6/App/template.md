@@ -1,4 +1,4 @@
-# 在 Markdown 中插入图片
+# Markdown 图片练习
 
 试试在 Markdown 插入本站图标，远程链接：https://www.markdowncando.com/logo-mini.png
 
