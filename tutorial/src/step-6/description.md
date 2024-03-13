@@ -1,43 +1,35 @@
-# Tables
+# Markdown insert Images
 
-Markdown uses vertical bars `|` and hyphens `-` to create tables. Vertical bars separate each column, while hyphens separate the header from the body. For example:
-
-```
-| Header1 | Header2 | Header3 |
-| --- | --- | --- |
-| Cell1 | Cell2 | Cell3 |
-| Cell4 | Cell5 | Cell6 |
-```
-
-This creates the following table:
-
-| Header1 | Header2 | Header3 |
-| ------- | ------- | ------- |
-| Cell1   | Cell2   | Cell3   |
-| Cell4   | Cell5   | Cell6   |
-
-You can also adjust the alignment of a column:
-
-| Name  |  Price | Quantity  |
-| :---- | -----: | :-------: |
-| Item1 | Price1 | Quantity1 |
-| Item2 | Price2 | Quantity2 |
+The way to insert images is very similar to [links](#step-3), except you need to add an exclamation mark `!` in front. The syntax for inserting images is as follows:
 
 ```
-| Name   | Price | Quantity |
-|:------|------:|:-------:|
-| Item1 | Price1 | Quantity1 |
-| Item2 | Price2 | Quantity2 |
+![Alt text for screen readers](/path/to/image/on/local/absolute/path.jpg)
+
+![Alt text for screen readers](../path/to/image/on/local/relative/path.jpg)
+
+![Loading remote images](URL "Optional title")
 ```
 
----
+![Alt text can also be displayed when the image does not load](/path/to/cat.jpg)
 
-Do you remember the table from the [Text Formatting](#step2) answer description? Try creating this table in the editor yourself.
+This is the website icon:
 
-| Feature        | Markdown Syntax  |
-| -------------- | ---------------- |
-| Bold           | `**Text**`       |
-| Italic         | `_Text_`         |
-| Strikethrough  | `~~Text~~`       |
-| Bold Italic    | `**_Text_**`     |
-| All Formatting | `**_~~Text~~_**` |
+![Example of a successfully loaded image](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Icon")
+
+## Combining Links and Images
+
+Below is the link to the Chinese documentation of this project, which is also an image.
+
+[![English documentation](https://img.shields.io/badge/English-Readme-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
+
+Analyzing its structure, it places an image inside a link, and then uses the format `[Image](link address)` to add the link.
+
+```
+Image:
+![English documentation](https://img.shields.io/badge/English-Readme-blue?style=for-the-badge)
+
+Link:
+[Image](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
+```
+
+[//]: # (TODO: After uploading implementation, you can use drag and drop to insert images from image files or web browsers. Try inserting the following image:)

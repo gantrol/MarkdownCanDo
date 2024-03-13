@@ -1,4 +1,4 @@
-# Learning to Create Tables
+# Learning to Create Tables in Markdown
 
 | Product | Price | Quantity | Note |
 |---------|------:|:-------:|:----|
