@@ -63,6 +63,7 @@ export const shared = defineConfig({
         },
 
     },
+    srcExclude: ['**/tutorial/src/**/*.md'],
 
     // quick fix: https://github.com/mermaid-js/mermaid/issues/4320
     vite: {
