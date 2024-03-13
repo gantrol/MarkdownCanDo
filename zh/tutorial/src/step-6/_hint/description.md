@@ -1,4 +1,4 @@
-# 图片
+# Markdown 图片
 
 图片的插入方式和[链接](#step-3)很相似,只是前面需要额外加一个英文感叹号`!`。插入图片的语法如下:
 
@@ -22,7 +22,17 @@
 
 [![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
 
-分析它的结构，是在链接中放了一个图片`![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)`，然后用`[图片](链接地址)`的格式添加链接。
+分析它的结构，是在链接中放了一个图片，然后用`[图片](链接地址)`的格式添加链接。
+
+```
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+
+图片:
+![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)
+
+链接：
+[图片](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+```
 
 [//]: # (TODO: 上传实现之后，你可以使用拖放来从图片文件或网页浏览器插入图片。尝试插入下面这张图片:)
 ---
