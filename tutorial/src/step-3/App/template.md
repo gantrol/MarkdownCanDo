@@ -1,4 +1,4 @@
-# Links
+# Markdown Links
 
 You can access external links, such as [my blog](https://www.gantrol.com)
 

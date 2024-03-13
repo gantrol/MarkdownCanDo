@@ -1,4 +1,4 @@
-# Horizontal Rule
+# Markdown Horizontal Rule
 
 To create a horizontal rule, you can use three asterisks, hyphens, or underscores in a row.
 

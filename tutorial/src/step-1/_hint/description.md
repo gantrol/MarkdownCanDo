@@ -1,4 +1,4 @@
-# Headings in Markdown
+# The beginning of Markdown syntax: Headings
 
 In Markdown, headings start with `# ` followed by a space, and then the text, making that piece of text a level 1 heading.
 

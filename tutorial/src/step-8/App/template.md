@@ -1,4 +1,4 @@
-# Horizontal Rule
+# Markdown Horizontal Rule
 
 Try creating a horizontal rule with three `*`
 
