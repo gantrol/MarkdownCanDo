@@ -1,6 +1,6 @@
 # How to Use Quotes
 
-> I never said that —— [tombkeeper](https://weibo.com/tombkeeper)
+> I never said that —— [Paul Graham](https://paulgraham.com/wids.html)
 
 If you want to quote multiple paragraphs, you need to add `> ` before each paragraph.
 
