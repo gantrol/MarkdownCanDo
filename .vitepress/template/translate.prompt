@@ -7,3 +7,19 @@
 ````
 
 注意用四个````来保证不被内容的代码行破坏格式
+
+## Step-n Template
+
+文件与解释：
+
+- _hint/App/template.md: 用户点击看答案后，小考题的答案
+- _hint/description.md：用户点击看答案后，更新了一些介绍
+- App/template.md：用户可交互的 Markdown 文本，有一些小考题
+- description.md：一段介绍
+
+注意
+
+- App/template.md问题有引导性
+
+- _hint/App/template.md的回答与App/template.md一一对应
+- `_hint/description.md`会给出额外解释
