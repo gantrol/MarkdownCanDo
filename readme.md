@@ -22,7 +22,6 @@ It's built primarily with Vitepress and Vditor.
 ## TODO
 
 - [ ] examples pages like https://vuejs.org/examples
-- [ ] fix mobile page of tutorial
 - [ ] store playground data in local storage?
 - [ ] image upload (maybe locally?)
 - [ ] Introduce on Obsidian and Typora
