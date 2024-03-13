@@ -67,8 +67,8 @@ onMounted(() => {
 
   mdEditorV = new editorV(props.id, {
     mode: isLargeWindow() ? "sv": "ir",
-    height: 0.8 * window.innerHeight,
-    width: isLargeWindow() ? 0.75 * window.innerWidth : window.innerWidth,
+    height: 0.92 * window.innerHeight,
+    width: isLargeWindow() ? 0.75 * window.innerWidth : 0.98 * window.innerWidth,
     toolbar,
     preview,
     theme: darkMode.value ? "dark": "classic",
