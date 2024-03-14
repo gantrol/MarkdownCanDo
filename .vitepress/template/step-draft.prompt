@@ -2,8 +2,6 @@
 
 
 
-In Vditor, inputting ‘>’ followed by your quote contents will generate a quote block. Vditor will insert a proper ‘>’ or line break for you. Nested block quotes (a block quote inside another block quote) by adding additional levels of ‘>’.
-
 ## Step-n Template
 
 文件与解释：
