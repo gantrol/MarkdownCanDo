@@ -9,8 +9,8 @@ export const zh = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },
-            '/zh/reference/': { base: '/zh/reference/', items: sidebarReference() }
+            '/zh/guide/': { base: '/zh/guide/', items: sidebarGuideAndReference() },
+            '/zh/reference/': { base: '/zh/reference/', items: sidebarGuideAndReference() }
         },
 
         editLink: {
@@ -64,6 +64,21 @@ function nav(): DefaultTheme.NavItem[] {
             text: '演练场',
             link: '/zh/playground/',
             activeMatch: '/zh/playground/'
+        }
+    ]
+}
+
+function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
+    return [
+        {
+            text: "指南",
+            base: '/zh/guide/',
+            items: sidebarGuide(),
+        },
+        {
+            text: "教程",
+            base: '/zh/reference/',
+            items: sidebarReference(),
         }
     ]
 }
