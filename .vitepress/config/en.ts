@@ -34,8 +34,8 @@ function nav(): DefaultTheme.NavItem[] {
         },
         {
             text: 'CheatSheet',
-            link: '/reference/cheatsheet',
-            activeMatch: '/reference/cheatsheet'
+            link: '/reference/cheatsheet/',
+            activeMatch: '/reference/cheatsheet/'
         },
         {
             text: 'Playground',
@@ -76,7 +76,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
-        { text: 'CheatSheet', link: 'cheatsheet' },
+        { text: 'CheatSheet', link: 'cheatsheet/' },
         { text: 'Reference Materials', link: 'reference-resource' },
     ]
 }
