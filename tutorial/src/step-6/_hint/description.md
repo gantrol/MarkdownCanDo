@@ -16,7 +16,7 @@ This is the website icon:
 
 ![Example of a successfully loaded image](https://www.markdowncando.com/logo-mini.png "Website Icon")
 
-## Combining Links and Images
+## Combining Links and Images (badge)
 
 Below is the link to the Chinese documentation of this project, which is also an image.
 

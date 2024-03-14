@@ -1,4 +1,4 @@
-# How to Use Quotes in Markdown
+# How to Use Quotes in Markdown (Blockquotes)
 
 If you've replied to emails by quoting the original text, the format is similar to Markdown quotes. It can be used to highlight the quoted content or add comments, effectively distinguishing the original text from comments or explanations, making the article structure clearer.
 

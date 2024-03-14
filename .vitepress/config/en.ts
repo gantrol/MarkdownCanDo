@@ -10,8 +10,8 @@ export const en = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/guide/': { base: '/guide/', items: sidebarGuide() },
-            '/reference/': { base: '/reference/', items: sidebarReference() }
+            '/guide/': { base: '/guide/', items: sidebarGuideAndReference() },
+            '/reference/': { base: '/reference/', items: sidebarGuideAndReference() }
         },
 
         editLink: {
@@ -33,14 +33,29 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/tutorial/'
         },
         {
-            text: 'Guide',
-            link: '/guide/',
-            activeMatch: '/guide/'
+            text: 'CheatSheet',
+            link: '/reference/cheatsheet',
+            activeMatch: '/reference/cheatsheet'
         },
         {
             text: 'Playground',
             link: '/playground/',
             activeMatch: '/playground/'
+        }
+    ]
+}
+
+function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
+    return [
+        {
+            text: "Guide",
+            base: '/guide/',
+            items: sidebarGuide(),
+        },
+        {
+            text: "Reference",
+            base: '/reference/',
+            items: sidebarReference(),
         }
     ]
 }
@@ -56,39 +71,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'What is Markdown?', link: 'what-is-markdown' },
             ]
         },
-        { text: 'Reference Materials', base: '/', link: 'reference-resource' },
     ]
 }
 
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
-        {
-            text: 'Reference',
-            items: [
-                { text: 'Site Config', link: 'site-config' },
-                { text: 'Frontmatter Config', link: 'frontmatter-config' },
-                { text: 'Runtime API', link: 'runtime-api' },
-                { text: 'CLI', link: 'cli' },
-                {
-                    text: 'Default Theme',
-                    base: '/reference/default-theme-',
-                    items: [
-                        { text: 'Overview', link: 'config' },
-                        { text: 'Nav', link: 'nav' },
-                        { text: 'Sidebar', link: 'sidebar' },
-                        { text: 'Home Page', link: 'home-page' },
-                        { text: 'Footer', link: 'footer' },
-                        { text: 'Layout', link: 'layout' },
-                        { text: 'Badge', link: 'badge' },
-                        { text: 'Team Page', link: 'team-page' },
-                        { text: 'Prev / Next Links', link: 'prev-next-links' },
-                        { text: 'Edit Link', link: 'edit-link' },
-                        { text: 'Last Updated Timestamp', link: 'last-updated' },
-                        { text: 'Search', link: 'search' },
-                        { text: 'Carbon Ads', link: 'carbon-ads' }
-                    ]
-                }
-            ]
-        }
+        { text: 'CheatSheet', link: 'cheatsheet' },
+        { text: 'Reference Materials', link: 'reference-resource' },
     ]
 }
