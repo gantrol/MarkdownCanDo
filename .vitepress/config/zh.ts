@@ -56,6 +56,11 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/zh/tutorial/'
         },
         {
+            text: '小抄',
+            link: '/zh/reference/cheatsheet',
+            activeMatch: '/zh/reference/cheatsheet'
+        },
+        {
             text: '指南',
             link: '/zh/guide/',
             activeMatch: '/zh/guide/'
@@ -76,7 +81,7 @@ function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
             items: sidebarGuide(),
         },
         {
-            text: "教程",
+            text: "参考",
             base: '/zh/reference/',
             items: sidebarReference(),
         }
@@ -86,7 +91,7 @@ function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: '指南',
+            text: '介绍',
             collapsed: false,
             items: [
                 { text: 'Markdown 能做', link: '/' },
@@ -95,23 +100,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 // { text: '快速开始', link: 'getting-started' },
             ]
         },
-        { text: '参考资料', base: '/', link: 'zh/reference-resource' }
     ]
 }
 
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
-        {
-            text: '手册',
-            items: [
-                { text: '术语表', link: 'glossary' },
-                { text: '常用命令', link: 'common' },
-                { text: '链接', link: 'link' },
-                { text: '页脚', link: 'footer' },
-                { text: '布局', link: 'layout' },
-                { text: '徽章', link: 'badge' },
-            ]
-        }
+        { text: '小抄', link: 'cheatsheet' },
+        { text: '参考资料', link: 'reference-resource' },
+        // { text: '术语表', link: 'glossary' },
     ]
 }
 
