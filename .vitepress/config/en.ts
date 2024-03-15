@@ -28,9 +28,30 @@ export const en = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Tutorial',
-            link: '/tutorial/',
-            activeMatch: '/tutorial/'
+            text: 'Home',
+            link: '/',
+            activeMatch: '/',
+        },
+        {
+            text: 'Docs',
+            // activeMatch: '/tutorial/',
+            items: [
+                {
+                    text: 'Tutorial',
+                    link: '/tutorial/',
+                    activeMatch: '/tutorial/',
+                },
+                {
+                    text: 'Guide',
+                    link: '/guide/',
+                    activeMatch: '/guide/',
+                },
+                {
+                    text: 'Reference',
+                    link: '/reference/reference-resource',
+                    activeMatch: '/reference/reference-resource',
+                },
+            ]
         },
         {
             text: 'CheatSheet',
