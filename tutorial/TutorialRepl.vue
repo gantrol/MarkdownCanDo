@@ -151,6 +151,7 @@ updateExample()
 
 .instruction {
   width: 45%;
+  height: 92vh;
   padding: 0 32px 24px;
   border-right: 1px solid var(--vt-c-divider-light);
   font-size: 15px;
