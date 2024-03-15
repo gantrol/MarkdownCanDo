@@ -56,7 +56,7 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/zh/tutorial/'
         },
         {
-            text: '小抄',
+            text: '备忘',
             link: '/zh/reference/cheatsheet/',
             activeMatch: '/zh/reference/cheatsheet/'
         },
@@ -105,7 +105,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
-        { text: '小抄', link: 'cheatsheet/' },
+        { text: '备忘', link: 'cheatsheet/' },
         { text: '参考资料', link: 'reference-resource' },
         // { text: '术语表', link: 'glossary' },
     ]

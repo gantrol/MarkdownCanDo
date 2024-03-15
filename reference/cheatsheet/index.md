@@ -70,17 +70,31 @@ _You **can** combine them_
 ### Lists
 
 #### Ordered List
+
+1. -
+2. -
+    1. -
+    2. -
+
 ```
 1. 
 2. 
-3. 
+   1. 
+   2. 
 ```
 
 #### Unordered List
+
+- 1
+- 2
+    - 3
+    - 4
+
 ```
 - 
 - 
-- 
+  - 
+  -
 ```
 
 ### Links
@@ -95,13 +109,25 @@ _You **can** combine them_
 ```
 
 ### Images
+
+![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+
 ```
 ![Markdown Can Do Logo](https://www.markdowncando.com/ "MarkdownCanDo Logo")
 ```
 
-### Blockquotes
+### Block Quote
+
+> Block Quote
+>
+> > Nested Block Quote
+> >
+
 ```
-> Blockquote
+> Block Quote
+> 
+> > Nested Block Quote
+> > 
 ```
 
 ### Tables
@@ -165,6 +191,18 @@ Certainly! I'll add a column to the table that includes the name of each charact
 
 This table provides a quick reference for escaping special characters in Markdown, along with the names of the characters.
 
+### Footnote
+
+This paragraph uses a footnote[^1].
+
+[^1]: This line will appear at the end of the article
+
+```
+This paragraph uses a footnote[^1].
+
+[^1]: This line will appear at the end of the article
+```
+
 ## Combine
 
 ### Readme Badge
@@ -178,6 +216,8 @@ This table provides a quick reference for escaping special characters in Markdow
 ```
 [![alt](https://img.shields.io/badge/left-right-blue?style=for-the-badge)](readme link)
 ```
+
+Other configures refer [shield](https://shields.io).
 
 ### Vercel Deploy Badge
 

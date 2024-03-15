@@ -70,38 +70,65 @@ _你 **可以** 组合它们_
 ### 列表
 
 #### 有序列表
+
+1. -
+2. -
+    1. -
+    2. -
+
 ```
 1. 
 2. 
-3. 
+   1. 
+   2. 
 ```
 
 #### 无序列表
+
+
+- 1
+- 2
+    - 3
+    - 4
+
 ```
 - 
 - 
-- 
+  - 
+  -
 ```
 
 ### 链接
 ```
-[Markdown 能做到](https://www.markdowncando.com/)
+[Markdown 能做](https://www.markdowncando.com/zh/)
 ```
 
 ```
-[Markdown 能做到][MDCD]
+[Markdown 能做][MDCD]
 
-[MDCD]:https://www.markdowncando.com/
+[MDCD]:https://www.markdowncando.com/zh/
 ```
 
 ### 图像
+
+![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+
 ```
-![Markdown 能做到的 Logo](https://www.markdowncando.com/ "MarkdownCanDo Logo")
+![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
 ```
 
-### 引用
+### 段引用
+
+> 段引用
+> 
+> > 嵌套段引用
+> > 
+
 ```
-> 引用
+> 段引用
+> 
+> > 嵌套段引用
+> > 
 ```
 
 ### 表格
@@ -163,19 +190,33 @@ _你 **可以** 组合它们_
 
 这个表格提供了在 Markdown 中转义特殊字符的快速参考，以及这些字符的名称。
 
+### 脚注
+
+这一段用了一个脚注[^1]。
+
+[^1]: 这一行会出现在文章结尾
+
+```
+这一段用了一个脚注[^1]。
+
+[^1]: 这一行会出现在文章结尾
+```
+
 ## 组合
 
 ### 自述文件徽章
 
-[![英文文档](https://img.shields.io/badge/English-Readme-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
 
 ```
-[![英文文档](https://img.shields.io/badge/English-Readme-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
 ```
 
 ```
 [![alt](https://img.shields.io/badge/left-right-blue?style=for-the-badge)](readme 链接)
 ```
+
+其他配置参考 [shield](https://shields.io)
 
 ### Vercel 部署徽章
 
