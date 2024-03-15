@@ -51,20 +51,36 @@ export const zh = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: '教程',
-            link: '/zh/tutorial/',
-            activeMatch: '/zh/tutorial/'
+            text: '主页',
+            link: '/',
+            activeMatch: '/',
+        },
+        {
+            text: '文档',
+            items: [
+                {
+                    text: '教程',
+                    link: '/zh/tutorial/',
+                    activeMatch: '/zh/tutorial/'
+                },
+                {
+                    text: '指南',
+                    link: '/zh/guide/',
+                    activeMatch: '/zh/guide/'
+                },
+                {
+                    text: '参考',
+                    link: '/reference/reference-resource',
+                    activeMatch: '/reference/reference-resource',
+                },
+            ]
         },
         {
             text: '备忘',
             link: '/zh/reference/cheatsheet/',
             activeMatch: '/zh/reference/cheatsheet/'
         },
-        {
-            text: '指南',
-            link: '/zh/guide/',
-            activeMatch: '/zh/guide/'
-        },
+
         {
             text: '演练场',
             link: '/zh/playground/',
