@@ -98,6 +98,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
         { text: 'CheatSheet', link: 'cheatsheet/' },
-        { text: 'Reference Materials', link: 'reference-resource' },
+        { text: 'Reference Materials', link: 'resource' },
     ]
 }
