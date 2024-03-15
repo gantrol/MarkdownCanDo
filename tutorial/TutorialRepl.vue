@@ -45,7 +45,7 @@ import {onHashChange} from "../utils/utils";
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
-const currentStep = ref('step-1');
+const currentStep = ref('');
 
 // TODO: refract App, template.md, description.md into constant
 const currentDescription = computed(() => {
@@ -105,7 +105,7 @@ const showingHint = ref(false)
 
 function updateExample(scroll = false) {
   let hash = location.hash.slice(1)
-  if (!data.hasOwnProperty(hash)) {
+  if (!data.hasOwnProperty(hash) && location.pathname.includes('tutorial')) {
     hash = 'step-1'
     // TODO: 处理多语言
     location.replace(`${location}/#${hash}`)
