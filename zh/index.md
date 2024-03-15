@@ -29,7 +29,7 @@ features:
   - icon: 🔍
     title: 更多
     details: 探索 Markdown 的更多功能，包括有用的外链资源，请根据需要选择使用
-    link: '/zh/reference/reference-resource'
+    link: '/zh/reference/resource'
     linkText: '探索更多'
     target: '_self'
 ---

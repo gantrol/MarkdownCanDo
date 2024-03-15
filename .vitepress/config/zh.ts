@@ -70,8 +70,8 @@ function nav(): DefaultTheme.NavItem[] {
                 },
                 {
                     text: '参考',
-                    link: '/reference/reference-resource',
-                    activeMatch: '/reference/reference-resource',
+                    link: '/reference/resource',
+                    activeMatch: '/reference/resource',
                 },
             ]
         },
@@ -122,7 +122,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
         { text: '备忘', link: 'cheatsheet/' },
-        { text: '参考资料', link: 'reference-resource' },
+        { text: '参考资料', link: 'resource' },
         // { text: '术语表', link: 'glossary' },
     ]
 }

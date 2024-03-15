@@ -90,7 +90,7 @@ Markdown 最终会渲染为 HTML，而 CSS 可以修改 HTML 元素的排布。�
 
 ## 还想更多？
 
-可以看看[参考资料](/zh/reference/reference-resource)
+可以看看[参考资料](/zh/reference/resource)
 
 或者问问 ChatGPT？
 

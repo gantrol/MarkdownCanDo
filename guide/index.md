@@ -89,7 +89,7 @@ Considering performance and maintenance stability, this site is built with Vitep
 
 ## Want More?
 
-You might want to check out the [reference materials](/reference/reference-resource) or ask ChatGPT？
+You might want to check out the [reference materials](/reference/resource) or ask ChatGPT？
 
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 
