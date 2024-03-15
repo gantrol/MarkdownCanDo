@@ -29,7 +29,7 @@ features:
   - icon: 🔍
     title: More
     details: "Explore more features of Markdown, including useful external links. Please choose as needed."
-    link: '/reference/reference-resource'
+    link: '/reference/resource'
     linkText: 'Discover More'
     target: '_self'
 ---

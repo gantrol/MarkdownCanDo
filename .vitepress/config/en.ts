@@ -48,8 +48,8 @@ function nav(): DefaultTheme.NavItem[] {
                 },
                 {
                     text: 'Reference',
-                    link: '/reference/reference-resource',
-                    activeMatch: '/reference/reference-resource',
+                    link: '/reference/resource',
+                    activeMatch: '/reference/resource',
                 },
             ]
         },
