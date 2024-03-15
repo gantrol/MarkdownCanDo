@@ -108,7 +108,7 @@ function updateExample(scroll = false) {
   if (!data.hasOwnProperty(hash) && location.pathname.includes('tutorial')) {
     hash = 'step-1'
     // TODO: 处理多语言
-    location.replace(`${location}/#${hash}`)
+    location.replace(`${location}#${hash}`)
   }
   currentStep.value = hash
 
