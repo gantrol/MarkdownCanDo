@@ -12,6 +12,7 @@ export const shared = defineConfig({
     metaChunk: true,
 
     markdown: {
+        theme: { light: 'github-light', dark: 'github-dark' } ,
         math: true,
         config: (md) => {
             md.use(markdown_it_footnote)
