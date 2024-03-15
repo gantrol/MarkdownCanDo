@@ -106,7 +106,7 @@ const showingHint = ref(false)
 function updateExample(scroll = false) {
   let hash = location.hash.slice(1)
   if (!data.hasOwnProperty(hash)) {
-    hash = 'step-1'
+    hash = 'step-2'
     // TODO: 处理多语言
     location.replace(`${location}/#${hash}`)
   }
@@ -136,8 +136,6 @@ onHashChange(() => {
   showingHint.value = false
   updateExample(true)
 })
-
-updateExample()
 
 </script>
 
@@ -248,12 +246,6 @@ footer a {
     border-bottom: 1px solid var(--vt-c-divider-light);
     height: 30vh;
     padding: 0 24px 24px;
-  }
-  .vue-repl {
-    width: 100%;
-    height: calc(
-        70vh - var(--vt-nav-height) - var(--vt-banner-height, 0px)
-    );
   }
   :deep(.wide) {
     display: none;
