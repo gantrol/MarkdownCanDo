@@ -1,4 +1,4 @@
-# Markdown Inline Code and Code Blocks
+# Markdown Code
 
 ## Inline Code
 

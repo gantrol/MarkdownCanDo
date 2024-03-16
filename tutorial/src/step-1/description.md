@@ -1,4 +1,4 @@
-# The beginning of Markdown syntax: Headings
+# Markdown Headings
 
 In this tutorial, you will learn base Markdown syntax.
 
