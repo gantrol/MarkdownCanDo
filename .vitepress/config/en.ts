@@ -11,7 +11,8 @@ export const en = defineConfig({
 
         sidebar: {
             '/guide/': { base: '/guide/', items: sidebarGuideAndReference() },
-            '/reference/': { base: '/reference/', items: sidebarGuideAndReference() }
+            '/reference/': { base: '/reference/', items: sidebarGuideAndReference() },
+            '/showcase/': { base: '/showcase/', items: sidebarShowcase() },
         },
 
         editLink: {
@@ -99,5 +100,11 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
         { text: 'CheatSheet', link: 'cheatsheet/' },
         { text: 'Reference Materials', link: 'resource' },
+    ]
+}
+function sidebarShowcase(): DefaultTheme.SidebarItem[] {
+    return [
+        { text: 'Claude gantt timeline', link: '#mermaid-timeline-claude' },
+        // { text: '', link: '' },
     ]
 }

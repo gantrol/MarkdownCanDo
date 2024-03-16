@@ -2,6 +2,7 @@
 import {onMounted, onUnmounted, ref, watchEffect} from "vue";
 import {onHashChange} from "../utils/utils.js";
 import MarkdownEditorV from './MarkdownEditorV.vue';
+import {isLargeWindow} from "../utils/screen_utils";
 
 const props = defineProps({
   data: {
@@ -27,7 +28,6 @@ function updateExample() {
     hash = 'mermaid-timeline-claude'
     location.hash = `#${hash}`
   }
-  debugger;
   currentCode = data[hash]['App']['template.md']
 }
 
@@ -49,6 +49,7 @@ onMounted(() => {
 
 const editorOptions = ref({
   height: window.innerHeight - document.getElementsByClassName("VPNavBar")?.[0]?.clientHeight,
+  width: isLargeWindow() ? 0.55 * window.innerWidth : 0.88 * window.innerWidth,
   preview: {
     delay: 100,
   }
@@ -60,7 +61,3 @@ const editorOptions = ref({
     <MarkdownEditorV :id="'markdown-editor'" :text="currentCode" :options="editorOptions" />
   </div>
 </template>
-
-<style scoped>
-
-</style>
