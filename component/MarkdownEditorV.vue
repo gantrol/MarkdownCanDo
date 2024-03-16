@@ -39,7 +39,6 @@ const isLargeWindowHandler = (isLarge) => {
     return;
   }
 
-  debugger;
   if (!props.options?.mode) {
     if (isLarge) {
       // mdEditorV.setDisplayMode("sv");
