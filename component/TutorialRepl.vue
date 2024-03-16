@@ -1,4 +1,3 @@
-
 <template>
   <section class="tutorial">
     <article class="instruction" ref="instruction">
@@ -14,16 +13,16 @@
       <div class="vt-doc" v-html="currentDescription"></div>
       <div class="hint" v-if="data[currentStep]?.[HINT_DIR]">
         <button id="show-result" @click="toggleResult">
-          {{ showingHint ? 'Reset' : 'Hint' }}
+          {{ showHintText }}
         </button>
       </div>
       <footer>
         <a v-if="prevStep" :href="`#${prevStep}`"
         ><VTIconChevronLeft class="vt-link-icon" style="margin: 0" />
-          Prev</a
+          {{ props.previousButtonText }}</a
         >
         <a class="next-step" v-if="nextStep" :href="`#${nextStep}`"
-        >Next <VTIconChevronRight class="vt-link-icon"
+        >{{ props.nextButtonText }} <VTIconChevronRight class="vt-link-icon"
         /></a>
       </footer>
     </article>
@@ -32,16 +31,40 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, nextTick} from 'vue';
+import {ref, computed, nextTick, watch} from 'vue';
 import MarkdownEditorV from './MarkdownEditorV.vue';
-import { data } from '../tutorial/tutorial.data';
-import {
-  VTFlyout,
-  VTIconChevronLeft,
-  VTIconChevronRight,
-  VTLink
-} from '@vue/theme'
 import {onHashChange} from "../utils/utils";
+import VTIconChevronLeft from "./icons/VTIconChevronLeft.vue";
+import VTIconChevronRight from "./icons/VTIconChevronRight.vue";
+import VTLink from "./VTLink.vue";
+import VTFlyout from "./VTFlyout.vue";
+
+const props = defineProps({
+  data: {
+    type: Object,
+    default: {}
+  },
+  hintText: {
+    required: true,
+  },
+  resetText: {
+    required: true,
+  },
+  previousButtonText: {
+    required: true,
+  },
+  nextButtonText: {
+    required: true,
+  },
+  EMPTY_CODE_PLACEHOLDER: {
+    default: '// No example code available.'
+  },
+  noDescriptionAvailable: {
+    default: 'No description available.'
+  }
+})
+
+const data = props.data;
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
@@ -51,6 +74,7 @@ const descriptionFile = 'description.md';
 const TEMPLATE_FILE = 'template.md';
 const APP_DIR = "App";
 const HINT_DIR = "_hint";
+
 const currentDescription = computed(() => {
   if (showingHint.value) {
     const hint = data[currentStep.value][HINT_DIR]
@@ -60,7 +84,7 @@ const currentDescription = computed(() => {
       return result
     }
   }
-  return data[currentStep.value]?.[descriptionFile] || 'No description available.';
+  return data[currentStep.value]?.[descriptionFile] || props.noDescriptionAvailable;
 });
 
 
@@ -73,7 +97,7 @@ const currentCode = computed(() => {
     }
   }
 
-  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_FILE] || '// No example code available.';
+  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_FILE] || props.EMPTY_CODE_PLACEHOLDER;
 });
 
 
@@ -105,6 +129,10 @@ const allSteps = keys.map((key, i) => {
 
 // Mark: Hint
 const showingHint = ref(false)
+let showHintText = props.hintText;
+watch(showingHint, (isReset) => {
+  showHintText = isReset ? props.resetText : props.hintText
+})
 
 
 function updateExample(scroll = false) {
@@ -252,12 +280,6 @@ footer a {
     border-bottom: 1px solid var(--vt-c-divider-light);
     height: 30vh;
     padding: 0 24px 24px;
-  }
-  .vue-repl {
-    width: 100%;
-    height: calc(
-        70vh - var(--vt-nav-height) - var(--vt-banner-height, 0px)
-    );
   }
   :deep(.wide) {
     display: none;

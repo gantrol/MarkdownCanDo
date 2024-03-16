@@ -14,17 +14,24 @@ published: true
 <script>
 import { defineAsyncComponent } from 'vue';
 import ReplLoading from '@theme/components/ReplLoading.vue';
+import { data } from './tutorial.data';
 
 export default {
   components: {
     TutorialRepl: defineAsyncComponent({
-      loader: () => import('./TutorialRepl.vue'),
+      loader: () => import('../../component/TutorialRepl.vue'),
       loadingComponent: ReplLoading
     })
+  },
+  data () {
+    return {
+      data
+    };
   }
 }
 </script>
 
 <ClientOnly>
-  <TutorialRepl hintText="看看答案" resetText="我不看了" previousButtonText="上一篇" nextButtonText="下一篇"/>
+    <TutorialRepl :data="data" hintText="看看答案" resetText="我不看了" previousButtonText="上一篇" nextButtonText="下一篇"/>
+
 </ClientOnly>

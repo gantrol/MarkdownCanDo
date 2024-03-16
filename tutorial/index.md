@@ -13,6 +13,7 @@ published: true
 <script>
 import { defineAsyncComponent } from 'vue';
 import ReplLoading from '@theme/components/ReplLoading.vue';
+import { data } from './tutorial.data';
 
 export default {
   components: {
@@ -20,10 +21,15 @@ export default {
       loader: () => import('../component/TutorialRepl.vue'),
       loadingComponent: ReplLoading
     })
+  },
+  data () {
+    return {
+      data
+    };
   }
 }
 </script>
 
 <ClientOnly>
-  <TutorialRepl />
+    <TutorialRepl :data="data" hintText="Show me!" resetText="Reset" previousButtonText="Prev" nextButtonText="Next"/>
 </ClientOnly>
