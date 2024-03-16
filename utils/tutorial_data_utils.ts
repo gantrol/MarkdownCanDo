@@ -5,6 +5,11 @@ import {readExamples} from "./examples_data_utils";
 import markdown_it_footnote from "markdown-it-footnote";
 import markdown_it_task_list from "markdown-it-task-checkbox";
 
+export const DESC_MD = 'description.md';
+export const TEMPLATE_MD = 'template.md';
+export const HINT_DIR = '_hint';
+export const APP_DIR = "App";
+
 export default async (src_path: string) => {
     const md = await createMarkdownRenderer(process.cwd(), {
         theme: 'github-dark' ,
@@ -17,13 +22,13 @@ export default async (src_path: string) => {
     const files = readExamples(src_path)
     for (const step in files) {
         const stepFiles = files[step]
-        const desc = stepFiles['description.md'] as string
+        const desc = stepFiles[DESC_MD] as string
         if (desc) {
-            stepFiles['description.md'] = md.render(desc)
+            stepFiles[DESC_MD] = md.render(desc)
         }
-        const hint_desc = stepFiles['_hint']?.['description.md'] as string
+        const hint_desc = stepFiles[HINT_DIR]?.[DESC_MD] as string
         if (hint_desc) {
-            stepFiles['_hint']['description.md'] = md.render(hint_desc)
+            stepFiles[HINT_DIR][DESC_MD] = md.render(hint_desc)
         }
     }
     return files
