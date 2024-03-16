@@ -138,6 +138,7 @@ watch(showingHint, (isReset) => {
 
 function updateExample(scroll = false) {
   let hash = location.hash.slice(1)
+  // TODO: remove dirty fix for vitepress 1.0.0-rc.45
   if (!data.hasOwnProperty(hash) && location.pathname.includes('tutorial')) {
     hash = 'step-1'
     // TODO: 处理多语言

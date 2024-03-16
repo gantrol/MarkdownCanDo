@@ -52,6 +52,11 @@ function nav(): DefaultTheme.NavItem[] {
                     link: '/reference/resource',
                     activeMatch: '/reference/resource',
                 },
+                {
+                    text: 'Examples',
+                    link: '/showcase/',
+                    activeMatch: '^/showcase',
+                },
             ]
         },
         {
@@ -104,7 +109,8 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 }
 function sidebarShowcase(): DefaultTheme.SidebarItem[] {
     return [
-        { text: 'Claude gantt timeline', link: '#mermaid-timeline-claude' },
+        { text: 'Claude Gantt Timeline', link: '#mermaid-timeline-claude' },
+        { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
         // { text: '', link: '' },
     ]
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref, watchEffect} from "vue";
+import {computed, ref, watchEffect} from "vue";
 import {onHashChange} from "../utils/utils.js";
 import MarkdownEditorV from './MarkdownEditorV.vue';
 import {isLargeWindow} from "../utils/screen_utils";
@@ -12,7 +12,8 @@ const props = defineProps({
 })
 
 const data = props.data;
-let currentCode = '';
+const currentHash = ref(location.hash.slice(1))
+let currentCode = computed(() => data[currentHash.value]?.['App']['template.md']);
 
 watchEffect(updateExample, {
   onTrigger(e) {
@@ -23,31 +24,16 @@ watchEffect(updateExample, {
 onHashChange(updateExample)
 
 function updateExample() {
-  let hash = location.hash.slice(1)
-  if (!data.hasOwnProperty(hash)) {
-    hash = 'mermaid-timeline-claude'
-    location.hash = `#${hash}`
+  currentHash.value = location.hash.slice(1);
+  // TODO: remove dirty fix for vitepress 1.0.0-rc.45
+  if (!data.hasOwnProperty(currentHash.value) && location.pathname.includes('showcase')) {
+    currentHash.value = 'mermaid-timeline-claude'
+    location.hash = `#${currentHash.value}`
   }
-  currentCode = data[hash]['App']['template.md']
 }
 
-const heightProvider = ref<HTMLDivElement>();
-onMounted(() => {
-  const set = () => {
-    heightProvider.value!.style.setProperty(
-        '--vh',
-        window.innerHeight + 'px'
-    )
-  }
-  set()
-  window.addEventListener('resize', set)
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', set)
-  })
-})
-
 const editorOptions = ref({
+  mode: "ir",
   height: window.innerHeight - document.getElementsByClassName("VPNavBar")?.[0]?.clientHeight,
   width: isLargeWindow() ? 0.55 * window.innerWidth : 0.88 * window.innerWidth,
   preview: {
