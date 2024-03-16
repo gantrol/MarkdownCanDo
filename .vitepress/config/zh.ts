@@ -53,7 +53,7 @@ function nav(): DefaultTheme.NavItem[] {
         {
             text: '主页',
             link: '/',
-            activeMatch: '/',
+            activeMatch: '^/$',
         },
         {
             text: '文档',
