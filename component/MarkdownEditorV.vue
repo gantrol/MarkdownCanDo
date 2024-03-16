@@ -29,7 +29,7 @@ let outlineElement;
 let themeToggleButton;
 let mdEditorV;
 
-const  changeDarkMode = () => {
+const changeDarkMode = () => {
     darkMode.value = !darkMode.value;
 }
 
@@ -173,7 +173,8 @@ const preview = {
 }
 /* Don't know why again */
 .vditor-preview a {
-  color: #47caff!important;
+  color: #31b8ee !important;
+  font-weight: bold;
 }
 
 </style>
