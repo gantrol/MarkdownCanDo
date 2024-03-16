@@ -1,0 +1,82 @@
+<script lang="ts" setup>
+import { MenuItem, MenuItemChild } from '../types/menu'
+import VTMenuLink from './VTMenuLink.vue'
+import VTMenuGroup from './VTMenuGroup.vue'
+
+defineProps<{
+  items?: (MenuItem | MenuItemChild)[]
+}>()
+</script>
+
+<template>
+  <div class="vt-menu">
+    <div v-if="items" class="vt-menu-items">
+      <template v-for="item in items" :key="item.text">
+        <VTMenuLink v-if="'link' in item" :item="item" />
+        <VTMenuGroup v-else :text="item.text" :items="item.items" />
+      </template>
+    </div>
+
+    <slot />
+  </div>
+</template>
+
+<style>
+  .vt-menu {
+    border-radius: 8px;
+    padding: 12px 0;
+    min-width: 192px;
+    border: 1px solid transparent;
+    background: var(--vt-c-bg);
+    box-shadow: var(--vt-shadow-3);
+    transition: background-color .5s;
+    overflow: auto;
+  }
+
+  .dark .vt-menu {
+    background: var(--vt-c-bg);
+    box-shadow: var(--vt-shadow-1);
+    border: 1px solid var(--vt-c-divider-light);
+  }
+
+  .vt-menu-items {
+    transition: border-color .5s;
+  }
+
+  .vt-menu .vt-menu-group {
+    padding: 0 0 12px;
+  }
+
+  .vt-menu .vt-menu-group + .vt-menu-group {
+    border-top: 1px solid var(--vt-c-divider-light);
+    padding: 11px 0 12px;
+  }
+
+  .vt-menu .vt-menu-group:last-child {
+    padding-bottom: 0;
+  }
+
+  .vt-menu .vt-menu-group + .vt-menu-item-item {
+    border-top: 1px solid var(--vt-c-divider-light);
+    padding: 11px 16px 0;
+  }
+
+  .vt-menu .vt-menu-item {
+    padding: 0 16px;
+    white-space: nowrap;
+  }
+
+  .vt-menu-label {
+    flex-grow: 1;
+    line-height: 28px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--vt-c-text-2);
+    transition: color .5s;
+  }
+
+  .vt-menu-action {
+    padding-left: 24px;
+  }
+
+</style>

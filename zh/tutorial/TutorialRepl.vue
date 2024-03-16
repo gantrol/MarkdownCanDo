@@ -34,13 +34,11 @@
 import {ref, computed, nextTick} from 'vue';
 import MarkdownEditorV from '../../component/MarkdownEditorV.vue';
 import { data } from './tutorial.data';
-import {
-  VTFlyout,
-} from '@vue/theme'
 import {onHashChange} from "../../utils/utils";
 import VTIconChevronLeft from "../../component/icons/VTIconChevronLeft.vue";
 import VTIconChevronRight from "../../component/icons/VTIconChevronRight.vue";
 import VTLink from "../../component/VTLink.vue";
+import VTFlyout from "../../component/VTFlyout.vue";
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps

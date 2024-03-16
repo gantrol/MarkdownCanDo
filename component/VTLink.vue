@@ -23,3 +23,16 @@ const isExternal = computed(() => props.href && /^[a-z]+:/i.test(props.href))
     <VTIconExternalLink v-if="isExternal && !noIcon" class="vt-link-icon" />
   </component>
 </template>
+
+<style>
+.vt-link-icon {
+  display: inline-block;
+  margin-top: -2px;
+  margin-left: 4px;
+  width: 11px;
+  height: 11px;
+  fill: var(--vt-c-text-3);
+  transition: fill 0.25s;
+}
+
+</style>

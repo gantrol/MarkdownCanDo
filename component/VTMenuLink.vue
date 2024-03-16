@@ -1,0 +1,30 @@
+<script lang="ts" setup>
+import VTLink from './VTLink.vue'
+import { MenuItemWithLink } from '../types/menu'
+
+defineProps<{ item: MenuItemWithLink }>()
+</script>
+
+<template>
+  <VTLink class="vt-menu-link" :href="item.link">
+    {{ item.text }}
+  </VTLink>
+</template>
+
+<style>
+.vt-menu-link {
+  display: block;
+  padding: 0 18px;
+  line-height: 28px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--vt-c-text-1);
+  white-space: nowrap;
+  transition: color .25s;
+}
+
+.vt-menu-link:hover {
+  color: var(--vt-c-brand);
+}
+
+</style>
