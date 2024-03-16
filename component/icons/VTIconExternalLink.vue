@@ -1,4 +1,4 @@
-<!--from https://github.com/vuejs/theme-->
+<!--copy from https://github.com/vuejs/theme-->
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"

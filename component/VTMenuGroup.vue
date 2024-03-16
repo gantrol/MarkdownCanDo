@@ -1,3 +1,4 @@
+<!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
 import { MenuItemChild } from './types/menu'
 import VTMenuLink from './VTMenuLink.vue'

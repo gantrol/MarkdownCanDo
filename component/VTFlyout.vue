@@ -1,3 +1,4 @@
+<!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { MenuItem, MenuItemChild } from './types/menu'

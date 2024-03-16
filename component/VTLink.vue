@@ -1,3 +1,4 @@
+<!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
 import { computed } from 'vue'
 import VTIconExternalLink from './icons/VTIconExternalLink.vue'

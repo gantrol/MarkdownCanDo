@@ -1,3 +1,4 @@
+<!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
 import VTLink from './VTLink.vue'
 import { MenuItemWithLink } from './types/menu'

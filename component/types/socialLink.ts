@@ -1,3 +1,4 @@
+// copy from https://github.com/vuejs/theme
 export interface SocialLink {
   icon: SocialLinkIcon
   link: string

@@ -1,3 +1,4 @@
+// copy from https://github.com/vuejs/theme
 export type MenuItem = MenuItemWithLink | MenuItemWithChildren
 
 export interface MenuItemWithLink {
