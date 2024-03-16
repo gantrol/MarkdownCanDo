@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { MenuItem, MenuItemChild } from '../types/menu'
-import { useFocusContainer } from '../composables/FocusContainer'
+import { MenuItem, MenuItemChild } from './types/menu'
+import { useFocusContainer } from './composables/FocusContainer'
 import VTIconChevronDown from './icons/VTIconChevronDown.vue'
 import VTIconMoreHorizontal from './icons/VTIconMoreHorizontal.vue'
 import VTMenu from './VTMenu.vue'
