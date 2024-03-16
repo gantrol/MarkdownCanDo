@@ -12,7 +12,7 @@
         >
       </VTFlyout>
       <div class="vt-doc" v-html="currentDescription"></div>
-      <div class="hint" v-if="data[currentStep]?._hint">
+      <div class="hint" v-if="data[currentStep]?.[HINT_DIR]">
         <button id="show-result" @click="toggleResult">
           {{ showingHint ? 'Reset' : 'Hint' }}
         </button>
@@ -47,29 +47,33 @@ const instruction = ref<HTMLElement>()
 // Mark: Steps
 const currentStep = ref('');
 
-// TODO: refract App, template.md, description.md into constant
+const descriptionFile = 'description.md';
+const TEMPLATE_FILE = 'template.md';
+const APP_DIR = "App";
+const HINT_DIR = "_hint";
 const currentDescription = computed(() => {
   if (showingHint.value) {
-    const hint = data[currentStep.value]._hint
-    const result = hint?.['description.md'];
+    const hint = data[currentStep.value][HINT_DIR]
+    const result = hint?.[descriptionFile];
 
     if (result) {
       return result
     }
   }
-  return data[currentStep.value]?.['description.md'] || 'No description available.';
+  return data[currentStep.value]?.[descriptionFile] || 'No description available.';
 });
+
 
 const currentCode = computed(() => {
   if (showingHint.value) {
-    const hint = data[currentStep.value]._hint
-    const result = hint?.["App"]?.['template.md'];
+    const hint = data[currentStep.value][HINT_DIR]
+    const result = hint?.[APP_DIR]?.[TEMPLATE_FILE];
     if (result) {
       return result
     }
   }
 
-  return data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
+  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_FILE] || '// No example code available.';
 });
 
 
@@ -92,7 +96,7 @@ const keys = Object.keys(data).sort((a, b) => {
 const totalSteps = keys.length;
 const titleRE = /<h1.*?>(.+?)<a class="header-anchor/
 const allSteps = keys.map((key, i) => {
-  const desc = data[key]['description.md'] as string
+  const desc = data[key][descriptionFile] as string
   return {
     text: `${i + 1}. ${desc.match(titleRE)![1]}`,
     link: `#${key}`
