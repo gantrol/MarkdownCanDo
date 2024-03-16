@@ -8,3 +8,5 @@ timeline
     section Version Update
         March 14, 2023 : GPT-4 released, available to ChatGPT Plus users
 ```
+
+More: [Timeline Diagram | Mermaid.js](https://mermaid.js.org/syntax/timeline.html)

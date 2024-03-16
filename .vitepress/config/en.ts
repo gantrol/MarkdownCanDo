@@ -111,6 +111,8 @@ function sidebarShowcase(): DefaultTheme.SidebarItem[] {
     return [
         { text: 'Claude Gantt Timeline', link: '#mermaid-timeline-claude' },
         { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
+        { text: 'Timeline of ChatGPT ', link: '#mermaid-timeline-chatgpt' },
+        { text: 'Mermaid Flowchart', link: '#mermaid-flowchart' },
         // { text: '', link: '' },
     ]
 }
