@@ -33,8 +33,8 @@
 
 <script setup lang="ts">
 import {ref, computed, nextTick} from 'vue';
-import MarkdownEditorV from '../component/MarkdownEditorV.vue';
-import { data } from './tutorial.data';
+import MarkdownEditorV from './MarkdownEditorV.vue';
+import { data } from '../tutorial/tutorial.data';
 import {
   VTFlyout,
   VTIconChevronLeft,
