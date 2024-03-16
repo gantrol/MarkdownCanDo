@@ -39,34 +39,34 @@ import VTIconChevronLeft from "../../component/icons/VTIconChevronLeft.vue";
 import VTIconChevronRight from "../../component/icons/VTIconChevronRight.vue";
 import VTLink from "../../component/VTLink.vue";
 import VTFlyout from "../../component/VTFlyout.vue";
-import {APP_DIR, DESC_MD, HINT_DIR, TEMPLATE_MD} from "../../utils/tutorial_data_utils";
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
 const currentStep = ref('');
 
+// TODO: refract App, template.md, description.md into constant
 const currentDescription = computed(() => {
   if (showingHint.value) {
     const hint = data[currentStep.value]._hint
-    const result = hint?.[DESC_MD];
+    const result = hint?.['description.md'];
 
     if (result) {
       return result
     }
   }
-  return data[currentStep.value]?.[DESC_MD] || 'No description available.';
+  return data[currentStep.value]?.['description.md'] || 'No description available.';
 });
 
 const currentCode = computed(() => {
   if (showingHint.value) {
-    const hint = data[currentStep.value][HINT_DIR]
-    const result = hint?.[APP_DIR]?.[TEMPLATE_MD];
+    const hint = data[currentStep.value]._hint
+    const result = hint?.["App"]?.['template.md'];
     if (result) {
       return result
     }
   }
 
-  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_MD] || '// No example code available.';
+  return data[currentStep.value]?.["App"]?.['template.md'] || '// No example code available.';
 });
 
 
@@ -89,7 +89,7 @@ const keys = Object.keys(data).sort((a, b) => {
 const totalSteps = keys.length;
 const titleRE = /<h1.*?>(.+?)<a class="header-anchor/
 const allSteps = keys.map((key, i) => {
-  const desc = data[key][DESC_MD] as string
+  const desc = data[key]['description.md'] as string
   return {
     text: `${i + 1}. ${desc.match(titleRE)![1]}`,
     link: `#${key}`
