@@ -23,8 +23,8 @@ Spot the difference:
 2. Orange
 3. Yellow
 4. Green
-5. Blue
-6. Indigo
+5. Indigo
+6. Blue
 7. Violet
 
 
