@@ -36,11 +36,11 @@ import MarkdownEditorV from '../../component/MarkdownEditorV.vue';
 import { data } from './tutorial.data';
 import {
   VTFlyout,
-  VTIconChevronLeft,
-  VTIconChevronRight,
   VTLink
 } from '@vue/theme'
 import {onHashChange} from "../../utils/utils";
+import VTIconChevronLeft from "../../component/VTIconChevronLeft.vue";
+import VTIconChevronRight from "../../component/VTIconChevronRight.vue";
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
