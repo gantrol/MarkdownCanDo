@@ -35,7 +35,6 @@
     }
   },
   "dependencies": {
-    "@vue/theme": "^2.2.5",
     "vditor": "^3.10.1"
   }
 }
