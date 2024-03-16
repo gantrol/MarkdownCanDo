@@ -13,16 +13,16 @@
       <div class="vt-doc" v-html="currentDescription"></div>
       <div class="hint" v-if="data[currentStep]?.[HINT_DIR]">
         <button id="show-result" @click="toggleResult">
-          {{ showingHint ? '我不看了' : '看看答案' }}
+          {{ showHintText }}
         </button>
       </div>
       <footer>
         <a v-if="prevStep" :href="`#${prevStep}`"
         ><VTIconChevronLeft class="vt-link-icon" style="margin: 0" />
-          上一篇</a
+          {{ props.previousButtonText }}</a
         >
         <a class="next-step" v-if="nextStep" :href="`#${nextStep}`"
-        >下一篇 <VTIconChevronRight class="vt-link-icon"
+        >{{ props.nextButtonText }} <VTIconChevronRight class="vt-link-icon"
         /></a>
       </footer>
     </article>
@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, nextTick} from 'vue';
+import {ref, computed, nextTick, watch} from 'vue';
 import MarkdownEditorV from '../../component/MarkdownEditorV.vue';
 import { data } from './tutorial.data';
 import {onHashChange} from "../../utils/utils";
@@ -39,6 +39,27 @@ import VTIconChevronLeft from "../../component/icons/VTIconChevronLeft.vue";
 import VTIconChevronRight from "../../component/icons/VTIconChevronRight.vue";
 import VTLink from "../../component/VTLink.vue";
 import VTFlyout from "../../component/VTFlyout.vue";
+
+const props = defineProps({
+  hintText: {
+    required: true,
+  },
+  resetText: {
+    required: true,
+  },
+  previousButtonText: {
+    required: true,
+  },
+  nextButtonText: {
+    required: true,
+  },
+  EMPTY_CODE_PLACEHOLDER: {
+    default: '// No example code available.'
+  },
+  noDescriptionAvailable: {
+    default: 'No description available.'
+  }
+})
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
@@ -48,6 +69,7 @@ const descriptionFile = 'description.md';
 const TEMPLATE_FILE = 'template.md';
 const APP_DIR = "App";
 const HINT_DIR = "_hint";
+
 const currentDescription = computed(() => {
   if (showingHint.value) {
     const hint = data[currentStep.value][HINT_DIR]
@@ -57,7 +79,7 @@ const currentDescription = computed(() => {
       return result
     }
   }
-  return data[currentStep.value]?.[descriptionFile] || 'No description available.';
+  return data[currentStep.value]?.[descriptionFile] || props.noDescriptionAvailable;
 });
 
 
@@ -70,7 +92,7 @@ const currentCode = computed(() => {
     }
   }
 
-  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_FILE] || '// No example code available.';
+  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_FILE] || props.EMPTY_CODE_PLACEHOLDER;
 });
 
 
@@ -102,6 +124,10 @@ const allSteps = keys.map((key, i) => {
 
 // Mark: Hint
 const showingHint = ref(false)
+let showHintText = props.hintText;
+watch(showingHint, (isReset) => {
+  showHintText = isReset ? props.resetText : props.hintText
+})
 
 
 function updateExample(scroll = false) {

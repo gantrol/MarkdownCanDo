@@ -26,5 +26,5 @@ export default {
 </script>
 
 <ClientOnly>
-  <TutorialRepl />
+  <TutorialRepl hintText="看看答案" resetText="我不看了" previousButtonText="上一篇" nextButtonText="下一篇"/>
 </ClientOnly>
