@@ -31,7 +31,7 @@ function nav(): DefaultTheme.NavItem[] {
         {
             text: 'Home',
             link: '/',
-            activeMatch: '/',
+            activeMatch: '^/$',
         },
         {
             text: 'Docs',
