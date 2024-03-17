@@ -135,6 +135,7 @@ function sidebarShowcase(): DefaultTheme.SidebarItem[] {
         { text: 'Mermaid 思维导图 ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
         { text: 'Mermaid 甘特图', link: '#mermaid-gantt-syntax' },
         { text: 'Mermaid 流程图', link: '#mermaid-flowchart' },
+        { text: 'Markdown 脚注', link: 'footnote' },
         // { text: '', link: '' },
     ]
 }

@@ -114,6 +114,7 @@ function sidebarShowcase(): DefaultTheme.SidebarItem[] {
         { text: 'Mermaid Mindmap ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
         { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
         { text: 'Mermaid Flowchart', link: '#mermaid-flowchart' },
+        { text: 'Markdown Footnote', link: 'footnote' },
         // { text: '', link: '' },
     ]
 }
