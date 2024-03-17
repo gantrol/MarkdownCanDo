@@ -35,7 +35,7 @@ function nav(): DefaultTheme.NavItem[] {
         },
         {
             text: 'Docs',
-            // activeMatch: '/tutorial/',
+            activeMatch: '/[tutorial|guide|showcase|reference]/',
             items: [
                 {
                     text: 'Tutorial',
@@ -109,9 +109,10 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 }
 function sidebarShowcase(): DefaultTheme.SidebarItem[] {
     return [
-        { text: 'Claude Gantt Timeline', link: '#mermaid-timeline-claude' },
-        { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
+        // { text: 'Claude Gantt Timeline', link: '#mermaid-timeline-claude' },
         { text: 'Timeline of ChatGPT ', link: '#mermaid-timeline-chatgpt' },
+        { text: 'Mermaid Mindmap ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
+        { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
         { text: 'Mermaid Flowchart', link: '#mermaid-flowchart' },
         // { text: '', link: '' },
     ]

@@ -10,7 +10,8 @@ export const zh = defineConfig({
 
         sidebar: {
             '/zh/guide/': { base: '/zh/guide/', items: sidebarGuideAndReference() },
-            '/zh/reference/': { base: '/zh/reference/', items: sidebarGuideAndReference() }
+            '/zh/reference/': { base: '/zh/reference/', items: sidebarGuideAndReference() },
+            '/zh/showcase/': { base: '/zh/showcase/', items: sidebarShowcase() },
         },
 
         editLink: {
@@ -57,6 +58,7 @@ function nav(): DefaultTheme.NavItem[] {
         },
         {
             text: '文档',
+            activeMatch: '/[tutorial|guide|showcase|reference]/',
             items: [
                 {
                     text: '教程',
@@ -124,6 +126,16 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
         { text: '备忘', link: 'cheatsheet/' },
         { text: '参考资料', link: 'resource' },
         // { text: '术语表', link: 'glossary' },
+    ]
+}
+
+function sidebarShowcase(): DefaultTheme.SidebarItem[] {
+    return [
+        { text: 'ChatGPT 时间线', link: '#mermaid-timeline-chatgpt' },
+        { text: 'Mermaid 思维导图 ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
+        { text: 'Mermaid 甘特图', link: '#mermaid-gantt-syntax' },
+        { text: 'Mermaid 流程图', link: '#mermaid-flowchart' },
+        // { text: '', link: '' },
     ]
 }
 

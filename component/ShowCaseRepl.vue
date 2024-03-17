@@ -27,7 +27,7 @@ function updateExample() {
   currentHash.value = location.hash.slice(1);
   // TODO: remove dirty fix for vitepress 1.0.0-rc.45
   if (!data.hasOwnProperty(currentHash.value) && location.pathname.includes('showcase')) {
-    currentHash.value = 'mermaid-timeline-claude'
+    currentHash.value = 'mermaid-timeline-chatgpt'
     location.hash = `#${currentHash.value}`
   }
 }
