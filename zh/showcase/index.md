@@ -14,7 +14,7 @@ import {data} from "./showcases.data";
 export default {
   components: {
     ShowCaseRepl: defineAsyncComponent({
-      loader: () => import('../../component/ShowCaseRepl.vue'),
+      loader: () => import('/component/ShowCaseRepl.vue'),
       loadingComponent: ReplLoading
     })
   },
