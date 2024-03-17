@@ -1,6 +1,6 @@
 # O que o Markdown Pode Fazer
 
-Markdown torna a formatação mais fácil. [Link do Playground](/playground/), [Link da página da web](/guide/).
+Markdown torna a formatação mais fácil. [Link do Playground](/pt/playground/), [Link da página da web](/pt/guide/).
 
 > Playground não salvará sua alteração.
 
