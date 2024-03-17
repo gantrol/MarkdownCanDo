@@ -7,6 +7,7 @@ import {onBeforeUnmount, onMounted, ref, watch} from 'vue';
 import editorV from 'vditor';
 import 'vditor/dist/index.css';
 import {isLargeWindow} from "../utils/screen_utils";
+import {getI18nForVditor} from "../utils/i18n";
 
 const props = defineProps({
   id: {
@@ -65,6 +66,7 @@ onMounted(() => {
 
 
   mdEditorV = new editorV(props.id, {
+    lang: getI18nForVditor(),
     mode: isLargeWindow() ? "sv": "ir",
     height: 0.92 * window.innerHeight,
     width: isLargeWindow() ? 0.75 * window.innerWidth : 0.98 * window.innerWidth,
