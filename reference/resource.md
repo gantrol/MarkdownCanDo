@@ -48,13 +48,19 @@ Many references were consulted in the construction of this site, here are some w
 
 [Powerful ASCII art editor designed for the Mac.](https://monodraw.helftone.com/)
 
-### badge
+### Badge
 
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
 
-[//]: # (TODO: vercel)
+Not only are there static badges, but there are also dynamic ones, such as one-click deployment to Vercel.
 
-https://github.com/Ileriayo/markdown-badges
+[![Deploy this site with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+
+This website can generate badges, https://shields.io/badges, for example:
+
+[![Chinese Documentation](https://img.shields.io/badge/Chinese-Read%20Me-blue?style=for-the-badge)](/readme-zh.md)
+
+Someone collected badges: https://github.com/Ileriayo/markdown-badges
 
 
 ### Software, Plugins

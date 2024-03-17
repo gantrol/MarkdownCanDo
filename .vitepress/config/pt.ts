@@ -103,7 +103,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             text: 'Introdução',
             collapsed: false,
             items: [
-                { text: 'O que o Markdown pode fazer', link: '/' },
+                { text: 'O que o Markdown pode fazer', link: 'index.html' },
                 { text: 'Por que usar Markdown?', link: 'why' },
                 { text: 'O que é Markdown?', link: 'what-is-markdown' },
             ]

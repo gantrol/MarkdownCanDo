@@ -54,7 +54,7 @@
 
 不仅有静态的，还能动，比如一键部署到vercel
 
-[//]: # (TODO: 等项目开源后放一个)
+
 
 这个网站可以生成badges，https://shields.io/badges ，比如：
 

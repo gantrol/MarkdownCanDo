@@ -81,9 +81,7 @@ Markdown acaba renderizando como HTML, e CSS pode modificar o layout dos element
 
 Você pode implantar este site clicando neste botão:
 
-[![Implantar Com Vercel](https://vercel.com/button
-
-)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Implantar Com Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 Existem muitas maneiras de construir sites baseados em Markdown. Pesquisas pessoais identificaram principalmente Vitepress e MDX como duas opções, ambas extendendo Markdown e permitindo a inserção de componentes de código. Vitepress suporta principalmente componentes Vue, enquanto MDX suporta principalmente componentes React.
 
