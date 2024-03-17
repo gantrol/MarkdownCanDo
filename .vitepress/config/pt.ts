@@ -3,14 +3,17 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 
 export const pt = defineConfig({
     lang: 'pt-BR',
-    description: '',
+    title: "MarkdownPodeFazer",
+    description: "Markdown pode fazer isso! Livre-se dos incômodos do Word e da formatação HTML — fácil de usar, eficiente, texto puro, multifuncional, amigável à IA",
+
 
     themeConfig: {
         nav: nav(),
 
         sidebar: {
-            // '/pt/guide/': { base: '/pt/guide/', items: sidebarGuide() },
-            // '/pt/reference/': { base: '/pt/reference/', items: sidebarReference() }
+            '/pt/guide/': { base: '/pt/guide/', items: sidebarGuideAndReference() },
+            '/pt/reference/': { base: '/pt/reference/', items: sidebarGuideAndReference() },
+            '/pt/showcase/': { base: '/pt/showcase/', items: sidebarShowcase() },
         },
 
         editLink: {
@@ -19,7 +22,6 @@ export const pt = defineConfig({
         },
 
         footer: {
-            message: 'Lançado sob licença MIT',
             copyright: `Direitos reservados © 2024-${new Date().getFullYear()} Gantrol Hwang`
         },
 
@@ -52,18 +54,97 @@ export const pt = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Guia',
-            link: '/pt/guide/what-is-',
-            activeMatch: '/pt/guide/'
+            text: 'Início',
+            link: '/pt/',
+            activeMatch: '^/$',
         },
         {
-            text: 'Referência',
-            link: '/pt/reference/site-config',
-            activeMatch: '/pt/reference/'
+            text: 'Documentação',
+            activeMatch: '/pt/[tutorial|guide|showcase|reference]/',
+            items: [
+                {
+                    text: 'Tutorial',
+                    link: '/pt/tutorial/',
+                    activeMatch: '/pt/tutorial/',
+                },
+                {
+                    text: 'Guia',
+                    link: '/pt/guide/',
+                    activeMatch: '/pt/guide/',
+                },
+                {
+                    text: 'Referência',
+                    link: '/pt/reference/resource',
+                    activeMatch: '/pt/reference/resource',
+                },
+                {
+                    text: 'Exemplos',
+                    link: '/pt/showcase/',
+                    activeMatch: '^/showcase',
+                },
+            ]
+        },
+        {
+            text: 'CheatSheet',
+            link: '/pt/reference/cheatsheet/',
+            activeMatch: '/pt/reference/cheatsheet/'
+        },
+        {
+            text: 'Playground',
+            link: '/pt/playground/',
+            activeMatch: '/pt/playground/'
         }
     ]
 }
 
+function sidebarGuide(): DefaultTheme.SidebarItem[] {
+    return [
+        {
+            text: 'Introdução',
+            collapsed: false,
+            items: [
+                { text: 'O que o Markdown pode fazer', link: '/' },
+                { text: 'Por que usar Markdown?', link: 'why' },
+                { text: 'O que é Markdown?', link: 'what-is-markdown' },
+            ]
+        },
+    ]
+}
+
+function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
+    return [
+        {
+            text: "Guia",
+            base: '/pt/guide/',
+            items: sidebarGuide(),
+        },
+        {
+            text: "Referência",
+            base: '/pt/reference/',
+            items: sidebarReference(),
+        }
+    ]
+}
+
+
+
+function sidebarReference(): DefaultTheme.SidebarItem[] {
+    return [
+        { text: 'CheatSheet', link: 'cheatsheet/' },
+        { text: 'Materiais de Referência', link: 'resource' },
+    ]
+}
+function sidebarShowcase(): DefaultTheme.SidebarItem[] {
+    return [
+        // { text: 'Linha do Tempo Claude Gantt', link: '#mermaid-timeline-claude' },
+        { text: 'Linha do Tempo do ChatGPT ', link: '#mermaid-timeline-chatgpt' },
+        { text: 'Mapa Mental Mermaid do ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
+        { text: 'Sintaxe Gantt Mermaid', link: '#mermaid-gantt-syntax' },
+        { text: 'Fluxograma Mermaid', link: '#mermaid-flowchart' },
+        { text: 'Nota de Rodapé Markdown', link: 'footnote' },
+        // { text: '', link: '' },
+    ]
+}
 export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
     pt: {
         placeholder: 'Pesquisar documentos',

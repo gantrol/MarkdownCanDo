@@ -12,7 +12,7 @@ export default withMermaid(
         locales: {
             root: { label: 'English', ...en },
             zh: { label: '简体中文', ...zh },
-            // pt: { label: 'Português', ...pt }
+            pt: { label: 'Português', ...pt },
         }
     })
 )

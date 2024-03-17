@@ -3,8 +3,7 @@ layout: home
 
 hero:
   name: "Markdown 能做！"
-  text: "摆脱烦人的 Word 和 HTML 排版"
-  tagline: 易用、高效、纯文本、多功能、AI 友好
+  tagline: 摆脱烦人的 Word 和 HTML 排版
   actions:
     - theme: brand
       text: 即刻体验
