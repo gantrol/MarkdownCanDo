@@ -19,7 +19,7 @@ import { data } from './tutorial.data';
 export default {
   components: {
     TutorialRepl: defineAsyncComponent({
-      loader: () => import('../../component/TutorialRepl.vue'),
+      loader: () => import('/component/TutorialRepl.vue'),
       loadingComponent: ReplLoading
     })
   },
