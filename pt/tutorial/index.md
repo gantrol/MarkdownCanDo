@@ -1,7 +1,7 @@
 ---
 layout: page
 page: true
-title: 教程
+title: Tutorial
 sidebar: false
 aside: false
 footer: false
