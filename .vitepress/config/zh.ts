@@ -115,7 +115,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 { text: 'Markdown 能做', link: '/' },
                 { text: '为何用 Markdown？', link: 'why' },
                 { text: '什么是 Markdown？', link: 'what-is-markdown' },
-                // { text: '快速开始', link: 'getting-started' },
             ]
         },
     ]
