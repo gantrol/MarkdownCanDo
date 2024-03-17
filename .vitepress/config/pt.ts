@@ -3,7 +3,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 
 export const pt = defineConfig({
     lang: 'pt-BR',
-    title: "MarkdownPodeFazer",
+    title: "MarkdownCanDo",
     description: "Markdown pode fazer isso! Livre-se dos incômodos do Word e da formatação HTML — fácil de usar, eficiente, texto puro, multifuncional, amigável à IA",
 
 
