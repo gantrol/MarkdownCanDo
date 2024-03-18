@@ -7,7 +7,7 @@
 [![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 
-![图标](../public/logo-mini.png)
+![图标](/public/logo-mini.png)
 
 ## 关于翻译
 
@@ -15,7 +15,7 @@
 
 - 英文: https://markdowncando.com
 - 中文: https://markdowncando.com/zh
-- 葡萄牙语: 待办
+- 葡萄牙语: https://markdowncando.com/pt
 - ...
 
 ## 关于技术栈

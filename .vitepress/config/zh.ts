@@ -53,12 +53,12 @@ function nav(): DefaultTheme.NavItem[] {
     return [
         {
             text: '主页',
-            link: '/',
-            activeMatch: '^/$',
+            link: '/zh/',
+            activeMatch: '^/zh/$',
         },
         {
             text: '文档',
-            activeMatch: '/[tutorial|guide|showcase|reference]/',
+            activeMatch: '/zh/[tutorial|guide|showcase|reference]/',
             items: [
                 {
                     text: '教程',
@@ -72,7 +72,7 @@ function nav(): DefaultTheme.NavItem[] {
                 },
                 {
                     text: '参考',
-                    link: '/reference/resource',
+                    link: '/zh/reference/resource',
                     activeMatch: '/reference/resource',
                 },
             ]
