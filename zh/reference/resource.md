@@ -58,7 +58,7 @@
 
 这个网站可以生成badges，https://shields.io/badges ，比如：
 
-[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/readme-zh.md)
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/zh/readme.md)
 
 有人收集了badges：https://github.com/Ileriayo/markdown-badges
 

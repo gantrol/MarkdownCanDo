@@ -58,7 +58,7 @@ Not only are there static badges, but there are also dynamic ones, such as one-c
 
 This website can generate badges, https://shields.io/badges, for example:
 
-[![Chinese Documentation](https://img.shields.io/badge/Chinese-Read%20Me-blue?style=for-the-badge)](/readme-zh.md)
+[![Chinese Documentation](https://img.shields.io/badge/Chinese-Read%20Me-blue?style=for-the-badge)](/zh/readme.md)
 
 Someone collected badges: https://github.com/Ileriayo/markdown-badges
 

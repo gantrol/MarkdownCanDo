@@ -20,18 +20,18 @@ Este é o ícone do site:
 
 A seguir, o link para a documentação em chinês deste projeto, que também é uma imagem.
 
-[![Documentação em chinês](https://img.shields.io/badge/中文-Ler-me-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+[![Documentação em chinês](https://img.shields.io/badge/中文-Ler-me-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/zh/readme.md)
 
 Analisando sua estrutura, ela coloca uma imagem dentro de um link, usando o formato `[imagem](endereço do link)`.
 
 ```
-[![Documentação em chinês](https://img.shields.io/badge/中文-Ler-me-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+[![Documentação em chinês](https://img.shields.io/badge/中文-Ler-me-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/zh/readme.md)
 
 Imagem:
 ![Documentação em chinês](https://img.shields.io/badge/中文-Ler-me-blue?style=for-the-badge)
 
 Link:
-[imagem](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+[imagem](https://github.com/gantrol/MarkdownCanDo/blob/main/zh/readme.md)
 ```
 
 [//]: # (TODO: Após o upload ser implementado, você poderá inserir imagens arrastando e soltando arquivos de imagem ou através do navegador. Tente inserir a imagem abaixo:)

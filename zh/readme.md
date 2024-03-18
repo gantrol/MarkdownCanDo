@@ -7,7 +7,7 @@
 [![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 
-![图标](public/logo-mini.png)
+![图标](../public/logo-mini.png)
 
 ## 关于翻译
 

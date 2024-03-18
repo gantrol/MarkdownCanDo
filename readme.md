@@ -1,6 +1,6 @@
 # What Markdown Can Do
 
-[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/readme-zh.md) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/zh/readme.md) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 A website dedicated to showcasing the capabilities of Markdown, aimed at creating a resource similar to https://vuejs.org for Vue Programmers. 
 

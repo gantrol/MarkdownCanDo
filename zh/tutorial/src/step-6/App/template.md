@@ -8,6 +8,6 @@
 
 如果你有兴趣，还可以研究一下这两个“徽章”（badge）。
 
-[![本网站渲染的读我文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/readme-zh.md)
+[![本网站渲染的读我文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/zh/readme.md)
 
 [![用Vecel部署本站](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)

@@ -20,18 +20,18 @@
 
 下面是本项目中文文档链接，同时也是一张图片。
 
-[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/zh/readme.md)
 
 分析它的结构，是在链接中放了一个图片，然后用`[图片](链接地址)`的格式添加链接。
 
 ```
-[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](https://github.com/gantrol/MarkdownCanDo/blob/main/zh/readme.md)
 
 图片:
 ![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)
 
 链接：
-[图片](https://github.com/gantrol/MarkdownCanDo/blob/main/readme-zh.md)
+[图片](https://github.com/gantrol/MarkdownCanDo/blob/main/zh/readme.md)
 ```
 
 [//]: # (TODO: 上传实现之后，你可以使用拖放来从图片文件或网页浏览器插入图片。尝试插入下面这张图片:)
