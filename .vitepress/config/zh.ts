@@ -75,6 +75,11 @@ function nav(): DefaultTheme.NavItem[] {
                     link: '/zh/reference/resource',
                     activeMatch: '/reference/resource',
                 },
+                {
+                    text: '样例',
+                    link: '/zh/showcase/',
+                    activeMatch: '^/zh/showcase',
+                },
             ]
         },
         {
