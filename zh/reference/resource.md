@@ -66,6 +66,6 @@
 ### 软件、插件
 
 - [Typora](https://typora.io/)：极其优雅的 Markdown 编辑器，收费。它的[文档](https://support.typora.io/)也不错
-- Email写作格式拓展
+- Email 写作格式 [Chrome 拓展](https://github.com/adam-p/markdown-here)
 
 [^1]: 本页部分内容由 ChatGPT 生成。
