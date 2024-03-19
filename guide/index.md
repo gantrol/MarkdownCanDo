@@ -14,7 +14,7 @@ Markdown makes formatting easier. [Playground link](/playground/), [Webpage link
 ## Markdown Can Do More
 
 - [x] Various charts, such as flowcharts, mind maps, Gantt charts, timelines, etc. Find it troublesome? Try [letting ChatGPT do it](/reference/chatgpt/).[^1]
-- [ ] PPT
+- [x] Presentation，e.g. [Slidev](https://sli.dev/)
 - [x] Music scores (generally not supported by Markdown applications)
 - [x] This website, see the [Website Building](#building-a-website) section
 - [ ] ~~Go to Mars~~

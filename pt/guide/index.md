@@ -14,7 +14,7 @@ Markdown torna a formatação mais fácil. [Link do Playground](/pt/playground/)
 ## Markdown Pode Fazer Mais
 
 - [x] Vários gráficos, como fluxogramas, mapas mentais, gráficos de Gantt, linhas do tempo, etc. Acha isso problemático? Tente [deixar o ChatGPT fazer isso](/reference/chatgpt/).[^1]
-- [ ] PPT
+- [x] PPT, [slidev](https://br.sli.dev/) 
 - [x] Partituras musicais (geralmente não suportadas por aplicativos Markdown)
 - [x] Este site, veja a seção [Construindo um Site](#construindo-um-site)
 - [ ] ~~Ir para Marte~~

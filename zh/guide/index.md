@@ -15,7 +15,7 @@ Markdown 让排版更轻松。[在线演练场](/zh/playground/)能自由操作�
 ## 能做更多
 
 - [x] 各类图表，如流程图、思维导图、甘特图、时间线等。觉得麻烦？试试[让 ChatGPT 来做](/zh/reference/chatgpt/)。[^1]
-- [ ] PPT
+- [x] 演示文稿，例如 [Slidev](https://cn.sli.dev/)
 - [x] 五线谱（一般 Markdown 应用不支持）
 - [x] 这个网站，详见[建站](#建站)一节
 - [ ] ~~上火星~~

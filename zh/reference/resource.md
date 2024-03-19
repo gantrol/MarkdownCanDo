@@ -19,6 +19,7 @@
 - [mermaid.js](https://mermaid.js.org/intro/)：一个JavaScript库，用于生成流程图、序列图、甘特图等。官网提供了详细文档，也能[在线体验](https://mermaid.live/)
 - [Joshua's Docs - Notes on Markdown-it and Building a Plugin](https://docs.joshuatz.com/cheatsheets/node-and-npm/markdown-it/)：Markdown-it 插件开发官网
 - [List of markdown presentation tools](https://gist.github.com/johnloy/27dd124ad40e210e91c70dd1c24ac8c8)：热心网友收集，能用Markdown写演示文稿的工具，小心评论区有广告。
+  - 比较推荐 [Slidev](https://cn.sli.dev/)
 - [Shiki](https://shiki.style/languages)：代码框语法高亮
 - [一些 Markdonw It 插件聚合](https://mdit-plugins.github.io/)
 
