@@ -45,9 +45,6 @@
 
 - 封装成一个 js 对象: https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.mjs
 
-### ASCII 画
-
-[Powerful ASCII art editor designed for the Mac.](https://monodraw.helftone.com/)
 
 ### badge（徽章）
 
@@ -67,5 +64,10 @@
 
 - [Typora](https://typora.io/)：极其优雅的 Markdown 编辑器，收费。它的[文档](https://support.typora.io/)也不错
 - Email 写作格式 [Chrome 拓展](https://github.com/adam-p/markdown-here)
+
+### Not Markdown
+
+- [The only framework that makes responsive email easy](https://mjml.io/try-it-live)
+- [Powerful ASCII art editor designed for the Mac.](https://monodraw.helftone.com/)
 
 [^1]: 本页部分内容由 ChatGPT 生成。
