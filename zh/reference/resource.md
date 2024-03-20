@@ -69,5 +69,6 @@
 
 - [The only framework that makes responsive email easy](https://mjml.io/try-it-live)
 - [Powerful ASCII art editor designed for the Mac.](https://monodraw.helftone.com/)
+- [Typst: the LaTeX killer](https://typst.app/)
 
 [^1]: 本页部分内容由 ChatGPT 生成。
