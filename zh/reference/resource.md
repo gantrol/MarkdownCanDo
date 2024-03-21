@@ -12,6 +12,9 @@
 
 - [MathJax basic tutorial and quick reference](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference)：Markdown 数学公式参考。
 - [Detexify](http://detexify.kirelabs.org/classify.html)：一个手写识别工具，帮助用户通过手写来查找LaTeX符号，非常适合不熟悉LaTeX语法的用户。
+- 数学公式转Markdown （OCR）
+  - 学而思九章大模型，微信小程序搜索“九章大模型”，识别图片后，会有数学公式
+  - [Mathpix在线识别](https://mathpix.com/)
 
 ### 拓展
 
@@ -22,6 +25,15 @@
   - 比较推荐 [Slidev](https://cn.sli.dev/)
 - [Shiki](https://shiki.style/languages)：代码框语法高亮
 - [一些 Markdonw It 插件聚合](https://mdit-plugins.github.io/)
+
+
+## 格式转化
+
+## HTML
+
+- GPTs，[Save Website to Markdown](https://chat.openai.com/g/g-qR9JEB2Mf-save-website-to-markdown-html-2-markdown)
+- [turndown](https://github.com/mixmark-io/turndown)：纯语义解析
+
 
 ## 技术栈
 
