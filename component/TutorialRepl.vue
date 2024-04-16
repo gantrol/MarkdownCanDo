@@ -69,7 +69,7 @@ const data = props.data;
 
 const instruction = ref<HTMLElement>()
 // Mark: Steps
-const currentStep = ref('');
+const currentStep = ref('step-1');
 
 const descriptionFile = 'description.md';
 const TEMPLATE_FILE = 'template.md';
@@ -102,16 +102,22 @@ const currentCode = computed(() => {
 });
 
 
-const currentStepIndex = computed(() => Object.keys(data).indexOf(currentStep.value) + 1);
+const currentStepIndex = computed(() => Number(currentStep.value.match(/\d+/)));
 
 const prevStep = computed(() => {
-  const currentIndex = Object.keys(data).indexOf(currentStep.value);
-  return currentIndex > 0 ? Object.keys(data)[currentIndex - 1] : null;
+  const match = currentStep.value.match(/\d+/)
+  const prev = match && `step-${+match[0] - 1}`
+  if (prev && data.hasOwnProperty(prev)) {
+    return prev
+  }
 });
 
 const nextStep = computed(() => {
-  const currentIndex = Object.keys(data).indexOf(currentStep.value);
-  return currentIndex < totalSteps - 1 ? Object.keys(data)[currentIndex + 1] : null;
+  const match = currentStep.value.match(/\d+/)
+  const next = match && `step-${+match[0] + 1}`
+  if (next && data.hasOwnProperty(next)) {
+    return next
+  }
 });
 
 const keys = Object.keys(data).sort((a, b) => {
@@ -145,6 +151,7 @@ function updateExample(scroll = false) {
     location.replace(`${location}#${hash}`)
   }
   currentStep.value = hash
+  debugger;
 
   if (scroll) {
     nextTick(() => {
