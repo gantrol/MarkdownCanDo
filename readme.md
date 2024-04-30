@@ -20,6 +20,7 @@ It's built primarily with Vitepress and Vditor.
 
 ## TODO
 
+- [ ] Markdown 2 website && website 2 markdown
 - [ ] store playground data in local storage?
 - [ ] image upload (maybe locally?)
 - [ ] Introduce on Obsidian and Typora
