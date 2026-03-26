@@ -13,11 +13,6 @@
 
 葡萄牙语和英语翻译纯机翻。中文版本将首先更新。
 
-- 英文: https://markdowncando.com
-- 中文: https://markdowncando.com/zh
-- 葡萄牙语: https://markdowncando.com/pt
-- ...
-
 ## 关于技术栈
 
 主要基于 Vitepress 和 Vditor 构建，同时，更新Readme的这个版本中，使用了[这个仓库](https://github.com/vuejs/docs/tree/main/src/tutorial)的部分代码。
