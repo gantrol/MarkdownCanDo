@@ -10,10 +10,6 @@ A website dedicated to showcasing the capabilities of Markdown, aimed at creatin
 
 > Please note: The translations into Portuguese and English are done purely by machine translation.
 
-- English: https://markdowncando.com
-- 中文: https://markdowncando.com/zh
-- Português: https://markdowncando.com/pt
-
 ## Tech Stack
 
 It's built primarily with Vitepress and Vditor.
