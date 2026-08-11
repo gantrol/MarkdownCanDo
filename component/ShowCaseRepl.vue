@@ -140,10 +140,10 @@ onBeforeUnmount(() => {
   font-weight: 650;
 }
 
-@supports (corner-shape: squircle) {
+@supports (corner-shape: superellipse(2)) {
   .showcase__nav,
   .showcase__nav a {
-    corner-shape: squircle;
+    corner-shape: var(--ui-corner-curve);
   }
 }
 

@@ -28,27 +28,27 @@ export const en = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Tutorial',
+            text: 'Playground',
+            link: '/',
+            activeMatch: '^/$',
+        },
+        {
+            text: 'Why Markdown',
+            link: '/guide/why',
+            activeMatch: '^/guide/why(?:/|$)',
+        },
+        {
+            text: 'Interactive tutorial',
             link: '/tutorial/',
             activeMatch: '^/tutorial(?:/|$)',
         },
         {
-            text: 'Guide',
-            link: '/guide/',
-            activeMatch: '^/guide(?:/|$)',
-        },
-        {
-            text: 'Playground',
+            text: 'Word-like editing',
             link: '/playground/',
             activeMatch: '^/playground(?:/|$)'
         },
         {
-            text: 'Examples',
-            link: '/showcase/',
-            activeMatch: '^/showcase(?:/|$)',
-        },
-        {
-            text: 'Reference',
+            text: 'Complete reference',
             link: '/reference/cheatsheet/',
             activeMatch: '^/reference(?:/|$)'
         }

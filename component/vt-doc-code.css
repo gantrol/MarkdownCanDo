@@ -94,6 +94,12 @@
   transition: color 0.5s;
 }
 
+/* Tutorial code blocks keep a dark surface in both themes, so they must use
+ * Shiki's dark token palette even when the surrounding page is light. */
+.vt-doc [class*='language-'] .vp-code span {
+  color: var(--shiki-dark, #a6accd);
+}
+
 .vt-doc [class*='language-'] code .highlighted {
   background-color: rgba(0, 0, 0, 0.3);
   transition: background-color 0.5s;

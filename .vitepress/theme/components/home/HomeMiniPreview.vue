@@ -44,16 +44,22 @@ async function renderPreview() {
     const code = element.querySelector('code')?.textContent ?? ''
     if (!canvas || !code) continue
 
+    element.dataset.state = 'loading'
     canvas.setAttribute('aria-label', labels.value.mermaid)
-    if (status) status.textContent = labels.value.mermaidLoading
+    if (status) {
+      status.removeAttribute('hidden')
+      status.textContent = labels.value.mermaidLoading
+    }
 
     try {
       const { svg } = await mermaid.render(`home-markdown-diagram-${++diagramId}`, code)
       if (version !== renderVersion) return
       canvas.innerHTML = sanitizeSvg(svg)
+      element.dataset.state = 'ready'
       status?.setAttribute('hidden', '')
     } catch (error) {
       canvas.replaceChildren()
+      element.dataset.state = 'error'
       if (status) status.textContent = labels.value.mermaidError
       console.warn('[MarkdownCanDo] Home Mermaid preview failed.', error)
     }

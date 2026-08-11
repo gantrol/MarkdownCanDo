@@ -4,7 +4,6 @@ import {
   Code,
   Columns2,
   Eye,
-  FileText,
   Heading2,
   Italic,
   Link2,
@@ -21,6 +20,7 @@ import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, r
 import EditorDocumentActions from './editor/EditorDocumentActions.vue'
 import EditorFormattingToolbar from './editor/EditorFormattingToolbar.vue'
 import EditorViewSwitcher from './editor/EditorViewSwitcher.vue'
+import EditorWysiwygIcon from './editor/EditorWysiwygIcon.vue'
 import type { EditorToolbarGroup, EditorViewItem, EditorViewMode } from './editor/types'
 import { editorMessages, getUiLocale, type UiLocale } from '../utils/i18n'
 import { renderMarkdown, sanitizeSvg } from '../utils/markdown'
@@ -126,7 +126,7 @@ const toolbarGroups = computed<EditorToolbarGroup[]>(() => [
 
 const viewItems = computed<EditorViewItem[]>(() => [
   { mode: 'edit' as const, label: messages.value.edit, icon: PencilLine },
-  { mode: 'wysiwyg' as const, label: messages.value.wysiwyg, icon: FileText },
+  { mode: 'wysiwyg' as const, label: messages.value.wysiwyg, icon: EditorWysiwygIcon },
   { mode: 'split' as const, label: messages.value.split, icon: Columns2 },
   { mode: 'preview' as const, label: messages.value.previewOnly, icon: Eye }
 ])
@@ -281,7 +281,12 @@ function setViewMode(mode: EditorViewMode) {
 
 function syncResponsiveMode(event: MediaQueryList | MediaQueryListEvent) {
   if (event.matches) {
-    if (viewMode.value === 'split') viewMode.value = 'edit'
+    if (!userSelectedMode) {
+      const preferred = preferredDesktopMode()
+      viewMode.value = preferred === 'split' ? 'edit' : preferred
+    } else if (viewMode.value === 'split') {
+      viewMode.value = 'edit'
+    }
     return
   }
   if (userSelectedMode) return
@@ -993,14 +998,14 @@ onBeforeUnmount(() => {
   }
 }
 
-@supports (corner-shape: squircle) {
+@supports (corner-shape: superellipse(2)) {
   .markdown-editor,
   .markdown-editor__view-switcher,
   .markdown-editor__view-button,
   .markdown-editor__tool,
   .markdown-editor__preview-content .md-preview-diagram,
   .markdown-editor__preview-content .md-preview-abc {
-    corner-shape: squircle;
+    corner-shape: var(--ui-corner-curve);
   }
 }
 </style>

@@ -161,6 +161,16 @@ export const editorMessages = {
 
 export const homeMessages = {
   'en-US': {
+    titleLine1: 'Markdown can do',
+    titleLine2: 'Playground',
+    sectionNavLabel: 'Explore MarkdownCanDo',
+    sections: [
+      { id: 'playground', icon: 'playground', label: 'Playground', link: '/' },
+      { id: 'why', icon: 'why', label: 'Why Markdown', link: '/guide/why' },
+      { id: 'tutorial', icon: 'tutorial', label: 'Interactive tutorial', link: '/tutorial/' },
+      { id: 'word', icon: 'word', label: 'Word-like editing', link: '/playground/' },
+      { id: 'reference', icon: 'reference', label: 'Complete reference', link: '/reference/cheatsheet/' }
+    ],
     demoLabel: 'Editable Markdown example',
     fileName: 'weekend.md',
     source: 'Source',
@@ -183,6 +193,16 @@ export const homeMessages = {
     ].join('\n')
   },
   'pt-BR': {
+    titleLine1: 'Markdown pode fazer',
+    titleLine2: 'Laboratório',
+    sectionNavLabel: 'Explorar o MarkdownCanDo',
+    sections: [
+      { id: 'playground', icon: 'playground', label: 'Laboratório', link: '/pt/' },
+      { id: 'why', icon: 'why', label: 'Por que usar', link: '/pt/guide/why' },
+      { id: 'tutorial', icon: 'tutorial', label: 'Tutorial interativo', link: '/pt/tutorial/' },
+      { id: 'word', icon: 'word', label: 'Edição como Word', link: '/pt/playground/' },
+      { id: 'reference', icon: 'reference', label: 'Referência completa', link: '/pt/reference/cheatsheet/' }
+    ],
     demoLabel: 'Exemplo editável de Markdown',
     fileName: 'fim-de-semana.md',
     source: 'Fonte',
@@ -205,6 +225,16 @@ export const homeMessages = {
     ].join('\n')
   },
   'zh-Hans': {
+    titleLine1: 'Markdown能做',
+    titleLine2: '演练场',
+    sectionNavLabel: '探索 MarkdownCanDo',
+    sections: [
+      { id: 'playground', icon: 'playground', label: '演练场', link: '/zh/' },
+      { id: 'why', icon: 'why', label: '为什么用', link: '/zh/guide/why' },
+      { id: 'tutorial', icon: 'tutorial', label: '交互教程', link: '/zh/tutorial/' },
+      { id: 'word', icon: 'word', label: 'Word般体验', link: '/zh/playground/' },
+      { id: 'reference', icon: 'reference', label: '参考齐全', link: '/zh/reference/cheatsheet/' }
+    ],
     demoLabel: '可编辑的 Markdown 示例',
     fileName: 'weekend.md',
     source: '源文',
@@ -304,18 +334,27 @@ export const tutorialMessages = {
   'en-US': {
     steps: 'Tutorial steps',
     instructions: 'Tutorial instructions',
+    mobilePanels: 'Tutorial views',
+    editorPanel: 'Hands-on editor',
+    resizeInstructions: 'Resize tutorial instructions',
     emptyCode: '<!-- No example available. -->',
     noDescription: 'No description available.'
   },
   'pt-BR': {
     steps: 'Etapas do tutorial',
     instructions: 'Instruções do tutorial',
+    mobilePanels: 'Visualizações do tutorial',
+    editorPanel: 'Editor prático',
+    resizeInstructions: 'Redimensionar instruções do tutorial',
     emptyCode: '<!-- Nenhum exemplo disponível. -->',
     noDescription: 'Nenhuma descrição disponível.'
   },
   'zh-Hans': {
     steps: '教程步骤',
     instructions: '教程说明',
+    mobilePanels: '教程视图',
+    editorPanel: '动手编辑',
+    resizeInstructions: '调整教程说明宽度',
     emptyCode: '<!-- 暂无示例内容。 -->',
     noDescription: '暂无说明。'
   }

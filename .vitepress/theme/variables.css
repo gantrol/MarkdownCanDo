@@ -104,6 +104,7 @@
     --ui-radius-control: 12px;
     --ui-radius-card: 20px;
     --ui-radius-window: 26px;
+    --ui-corner-curve: superellipse(2);
 
     --md-diagram-node: var(--grass-3);
     --md-diagram-node-border: var(--grass-8);

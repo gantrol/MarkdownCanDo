@@ -51,27 +51,27 @@ export const zh = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: '教程',
+            text: '演练场',
+            link: '/zh/',
+            activeMatch: '^/zh/?$'
+        },
+        {
+            text: '为什么用',
+            link: '/zh/guide/why',
+            activeMatch: '^/zh/guide/why(?:/|$)'
+        },
+        {
+            text: '交互教程',
             link: '/zh/tutorial/',
             activeMatch: '^/zh/tutorial(?:/|$)'
         },
         {
-            text: '指南',
-            link: '/zh/guide/',
-            activeMatch: '^/zh/guide(?:/|$)'
-        },
-        {
-            text: '演练场',
+            text: 'Word般体验',
             link: '/zh/playground/',
             activeMatch: '^/zh/playground(?:/|$)'
         },
         {
-            text: '示例',
-            link: '/zh/showcase/',
-            activeMatch: '^/zh/showcase(?:/|$)',
-        },
-        {
-            text: '参考',
+            text: '参考齐全',
             link: '/zh/reference/cheatsheet/',
             activeMatch: '^/zh/reference(?:/|$)'
         }

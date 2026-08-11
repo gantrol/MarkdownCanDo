@@ -53,27 +53,27 @@ export const pt = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Tutorial',
+            text: 'Laboratório',
+            link: '/pt/',
+            activeMatch: '^/pt/?$',
+        },
+        {
+            text: 'Por que usar',
+            link: '/pt/guide/why',
+            activeMatch: '^/pt/guide/why(?:/|$)',
+        },
+        {
+            text: 'Tutorial interativo',
             link: '/pt/tutorial/',
             activeMatch: '^/pt/tutorial(?:/|$)',
         },
         {
-            text: 'Guia',
-            link: '/pt/guide/',
-            activeMatch: '^/pt/guide(?:/|$)',
-        },
-        {
-            text: 'Playground',
+            text: 'Edição como Word',
             link: '/pt/playground/',
             activeMatch: '^/pt/playground(?:/|$)'
         },
         {
-            text: 'Exemplos',
-            link: '/pt/showcase/',
-            activeMatch: '^/pt/showcase(?:/|$)',
-        },
-        {
-            text: 'Referência',
+            text: 'Referência completa',
             link: '/pt/reference/cheatsheet/',
             activeMatch: '^/pt/reference(?:/|$)'
         }

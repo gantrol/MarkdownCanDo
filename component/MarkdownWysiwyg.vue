@@ -308,11 +308,11 @@ onBeforeUnmount(() => {
   background: var(--vp-c-bg-soft);
 }
 
-@supports (corner-shape: squircle) {
+@supports (corner-shape: superellipse(2)) {
   .markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-heading-button,
   .markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item,
   .markdown-wysiwyg .markdown-wysiwyg__diagram {
-    corner-shape: squircle;
+    corner-shape: var(--ui-corner-curve);
   }
 }
 

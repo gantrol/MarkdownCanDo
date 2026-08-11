@@ -138,6 +138,20 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-2);
 }
 
+.mermaid-diagram__status {
+  font-size: 0;
+}
+
+.mermaid-diagram__status::after {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--vp-c-border);
+  border-top-color: var(--vp-c-brand-3);
+  border-radius: 50%;
+  animation: mermaid-diagram-spin 700ms linear infinite;
+  content: '';
+}
+
 .mermaid-diagram__error {
   color: var(--vp-c-danger-1);
 }
@@ -159,6 +173,16 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .mermaid-diagram * {
     scroll-behavior: auto !important;
+  }
+
+  .mermaid-diagram__status::after {
+    animation: none;
+  }
+}
+
+@keyframes mermaid-diagram-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
