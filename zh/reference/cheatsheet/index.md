@@ -220,10 +220,10 @@ _你 **可以** 组合它们_
 
 ### Vercel 部署徽章
 
-[![使用 Vercel 部署此网站](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![使用 Vercel 部署此网站](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 ```
-[![使用 Vercel 部署此网站](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![使用 Vercel 部署此网站](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 ```
 
 ```

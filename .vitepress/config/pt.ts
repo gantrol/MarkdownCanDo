@@ -56,43 +56,43 @@ function nav(): DefaultTheme.NavItem[] {
         {
             text: 'Início',
             link: '/pt/',
-            activeMatch: '^/$',
+            activeMatch: '^/pt/$',
         },
         {
             text: 'Documentação',
-            activeMatch: '/pt/[tutorial|guide|showcase|reference]/',
+            activeMatch: '^/pt/(?:tutorial|guide|showcase|reference)(?:/|$)',
             items: [
                 {
                     text: 'Tutorial',
                     link: '/pt/tutorial/',
-                    activeMatch: '/pt/tutorial/',
+                    activeMatch: '^/pt/tutorial(?:/|$)',
                 },
                 {
                     text: 'Guia',
                     link: '/pt/guide/',
-                    activeMatch: '/pt/guide/',
+                    activeMatch: '^/pt/guide(?:/|$)',
                 },
                 {
                     text: 'Referência',
                     link: '/pt/reference/resource',
-                    activeMatch: '/pt/reference/resource',
+                    activeMatch: '^/pt/reference/(?:resource|chatgpt)(?:/|$)',
                 },
                 {
                     text: 'Exemplos',
                     link: '/pt/showcase/',
-                    activeMatch: '^/showcase',
+                    activeMatch: '^/pt/showcase(?:/|$)',
                 },
             ]
         },
         {
             text: 'CheatSheet',
             link: '/pt/reference/cheatsheet/',
-            activeMatch: '/pt/reference/cheatsheet/'
+            activeMatch: '^/pt/reference/cheatsheet(?:/|$)'
         },
         {
             text: 'Playground',
             link: '/pt/playground/',
-            activeMatch: '/pt/playground/'
+            activeMatch: '^/pt/playground(?:/|$)'
         }
     ]
 }
@@ -103,7 +103,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             text: 'Introdução',
             collapsed: false,
             items: [
-                { text: 'O que o Markdown pode fazer', link: 'index.html' },
+                { text: 'O que o Markdown pode fazer', link: '/pt/guide/' },
                 { text: 'Por que usar Markdown?', link: 'why' },
                 { text: 'O que é Markdown?', link: 'what-is-markdown' },
             ]
@@ -151,7 +151,8 @@ export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
         translations: {
             button: {
                 buttonText: 'Pesquisar',
-                buttonAriaLabel: 'Pesquisar'
+                // Deixe o texto visível e o atalho formarem o nome acessível.
+                buttonAriaLabel: ''
             },
             modal: {
                 searchBox: {

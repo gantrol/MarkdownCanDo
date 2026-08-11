@@ -1,7 +1,7 @@
 <!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { MenuItem, MenuItemChild } from './types/menu'
+import { computed, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import type { MenuItem, MenuItemChild } from './types/menu'
 import { useFocusContainer } from './composables/FocusContainer'
 import VTIconChevronDown from './icons/VTIconChevronDown.vue'
 import VTIconMoreHorizontal from './icons/VTIconMoreHorizontal.vue'
@@ -15,28 +15,62 @@ const props = defineProps<{
 
 const open = ref(false)
 const elRef = ref<HTMLElement>()
-const onBlur = () => { open.value = false }
+const buttonRef = ref<HTMLButtonElement>()
+const instanceId = getCurrentInstance()?.uid ?? 'default'
+const buttonId = `vt-flyout-button-${instanceId}`
+const menuId = `vt-flyout-menu-${instanceId}`
+const buttonLabel = computed(() => props.label || (!props.button ? 'Menu' : undefined))
+
+function close(returnFocus = false) {
+  if (!open.value) return
+  open.value = false
+  if (returnFocus) nextTick(() => buttonRef.value?.focus())
+}
+
+function toggle() {
+  open.value = !open.value
+}
+
+function onEscape(event: KeyboardEvent) {
+  if (!open.value) return
+  event.preventDefault()
+  event.stopPropagation()
+  close(true)
+}
+
+function onDocumentPointerDown(event: PointerEvent) {
+  if (open.value && !elRef.value?.contains(event.target as Node)) close()
+}
+
+function onMenuClick(event: MouseEvent) {
+  if (event.target instanceof Element && event.target.closest('a')) close()
+}
 
 useFocusContainer({
   elRef,
-  onBlur
+  onBlur: () => close()
 })
+
+onMounted(() => document.addEventListener('pointerdown', onDocumentPointerDown))
+onBeforeUnmount(() => document.removeEventListener('pointerdown', onDocumentPointerDown))
 </script>
 
 <template>
   <div
     class="vt-flyout"
+    :class="{ 'is-open': open }"
     ref="elRef"
-    @mouseenter="open = true"
-    @mouseleave="open = false"
+    @keydown.esc="onEscape"
   >
     <button
+      :id="buttonId"
+      ref="buttonRef"
       type="button"
       class="vt-flyout-button"
-      aria-haspopup="true"
+      :aria-controls="menuId"
       :aria-expanded="open"
-      :aria-label="label"
-      @click="open = !open"
+      :aria-label="buttonLabel"
+      @click="toggle"
     >
       <slot name="btn-slot">
         <span v-if="props.button" class="vt-flyout-button-text">
@@ -48,8 +82,14 @@ useFocusContainer({
       </slot>
     </button>
 
-    <div class="vt-flyout-menu">
-      <VTMenu :items="items">
+    <div
+      :id="menuId"
+      class="vt-flyout-menu"
+      :aria-hidden="!open"
+      :inert="!open"
+      @click="onMenuClick"
+    >
+      <VTMenu :items="items" :labelledby="buttonId">
         <slot />
       </VTMenu>
     </div>
@@ -67,7 +107,7 @@ useFocusContainer({
   }
 
   .vt-flyout:hover {
-    color: var(--vt-c-bland);
+    color: var(--vt-c-brand);
     transition: color .25s;
   }
 
@@ -79,8 +119,7 @@ useFocusContainer({
     fill: var(--vt-c-text-2);
   }
 
-  .vt-flyout:hover .vt-flyout-menu,
-  .vt-flyout-button[aria-expanded="true"] + .vt-flyout-menu {
+  .vt-flyout.is-open .vt-flyout-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -93,6 +132,12 @@ useFocusContainer({
     height: var(--vt-nav-height);
     color: var(--vt-c-text-1);
     transition: color .5s;
+  }
+
+  .vt-flyout-button:focus-visible {
+    border-radius: 6px;
+    outline: 2px solid var(--vt-c-brand);
+    outline-offset: -2px;
   }
 
   .vt-flyout-button-text {
@@ -130,5 +175,15 @@ useFocusContainer({
     transform: translateY(-4px);
     transition: opacity .25s, visibility .25s, transform .25s;
     max-height: calc(100vh - var(--vt-nav-height));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vt-flyout,
+    .vt-flyout-button,
+    .vt-flyout-button-text,
+    .vt-flyout-button-icon,
+    .vt-flyout-menu {
+      transition: none;
+    }
   }
 </style>

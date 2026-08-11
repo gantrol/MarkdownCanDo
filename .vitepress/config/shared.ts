@@ -3,6 +3,51 @@ import { search as zhSearch } from './zh'
 import { search as ptSearch } from './pt'
 import markdown_it_footnote from 'markdown-it-footnote'
 import markdown_it_task_list from 'markdown-it-task-checkbox'
+import type MarkdownIt from 'markdown-it'
+
+const analyticsId = 'G-RX6RPWRSWJ'
+
+function useCustomFences(md: MarkdownIt) {
+    const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules)
+
+    md.renderer.rules.fence = (tokens, index, options, env, self) => {
+        const token = tokens[index]
+        const language = token.info.trim().split(/\s+/u)[0]
+
+        if (language === 'abc') {
+            return `<pre><code class="language-abc">${md.utils.escapeHtml(token.content)}</code></pre>`
+        }
+
+        if (language !== 'mermaid') {
+            return defaultFence
+                ? defaultFence(tokens, index, options, env, self)
+                : self.renderToken(tokens, index, options)
+        }
+
+        const code = Buffer.from(token.content, 'utf8').toString('base64')
+        return `<MermaidDiagram code="${code}" />`
+    }
+}
+
+function useOptimizedImages(md: MarkdownIt) {
+    const defaultImage = md.renderer.rules.image?.bind(md.renderer.rules)
+    md.renderer.rules.image = (tokens, index, options, env, self) => {
+        const token = tokens[index]
+        const source = token.attrGet('src') ?? ''
+        token.attrSet('loading', 'lazy')
+        token.attrSet('decoding', 'async')
+        if (source === '/deploy-with-vercel.svg' || source === 'https://vercel.com/button') {
+            token.attrSet('width', '103')
+            token.attrSet('height', '32')
+        } else if (source === '/chatgpt-badge.svg' || source.startsWith('https://img.shields.io/')) {
+            token.attrSet('width', '85')
+            token.attrSet('height', '28')
+        }
+        return defaultImage
+            ? defaultImage(tokens, index, options, env, self)
+            : self.renderToken(tokens, index, options)
+    }
+}
 
 export const shared = defineConfig({
     title: 'MarkdownCanDo',
@@ -17,7 +62,8 @@ export const shared = defineConfig({
         config: (md) => {
             md.use(markdown_it_footnote)
             md.use(markdown_it_task_list)
-            // md.use()
+            useCustomFences(md)
+            useOptimizedImages(md)
         }
     },
 
@@ -31,21 +77,18 @@ export const shared = defineConfig({
     head: [
         // ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-mini.svg' }],
         ['link', { rel: 'icon', type: 'image/png', href: '/logo-mini.png' }],
-        ['meta', { name: 'theme-color', content: '#5f67ee' }],
+        ['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
+        ['meta', { name: 'theme-color', content: '#1b1b1f', media: '(prefers-color-scheme: dark)' }],
         ['meta', { property: 'og:type', content: 'website' }],
         ['meta', { property: 'og:locale', content: 'en' }],
         ['meta', { property: 'og:title', content: 'Markdown Can Do' }],
         ['meta', { property: 'og:site_name', content: 'MarkdownCanDo' }],
         ['meta', { property: 'og:url', content: 'https://markdowncando.com/' }],
-        // ga4
-        [
-            'script',
-            { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-RX6RPWRSWJ' }
-        ],
+        // Load analytics after the page becomes interactive and never during local development.
         [
             'script',
             {},
-            "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-RX6RPWRSWJ');"
+            `(function(){if(!/(^|\\.)markdowncando\\.com$/.test(location.hostname))return;var load=function(){window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${analyticsId}');var script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id=${analyticsId}';document.head.appendChild(script)};'requestIdleCallback'in window?requestIdleCallback(load,{timeout:3000}):setTimeout(load,1500)})()`
         ]
     ],
 
@@ -59,20 +102,21 @@ export const shared = defineConfig({
         search: {
             provider: 'local',
             options: {
+                translations: {
+                    button: {
+                        buttonText: 'Search',
+                        // Let the visible label and shortcut form the accessible name.
+                        buttonAriaLabel: ''
+                    }
+                },
                 locales: { ...zhSearch, ...ptSearch }
             }
         },
 
     },
-    // for dead link
-    srcExclude: ['**/step-6/**/description.md'],
-
-    // quick fix: https://github.com/mermaid-js/mermaid/issues/4320
-    vite: {
-        optimizeDeps: {
-            include: [
-                'mermaid'
-            ]
-        }
-    }
+    // Tutorial and showcase sources are loaded as data; they are not standalone pages.
+    srcExclude: [
+        '**/tutorial/src/**',
+        '**/showcase/src/**'
+    ]
 })

@@ -1,6 +1,7 @@
 ---
-page: true
+layout: page
 title: Examples
+sidebar: false
 aside: false
 footer: false
 outline: false

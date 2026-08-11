@@ -5,6 +5,18 @@
 
 @import './variables.css';
 
+img[src='/chatgpt-badge.svg'],
+img[src^='https://img.shields.io/'] {
+  width: 85px;
+  height: 28px;
+}
+
+img[src='/deploy-with-vercel.svg'],
+img[src='https://vercel.com/button'] {
+  width: 103px;
+  height: 32px;
+}
+
 /**
  * Component: Button
  * -------------------------------------------------------------------------- */
@@ -70,5 +82,21 @@
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
+
+@media (max-width: 767px) {
+  .DocSearch-Button .DocSearch-Button-Placeholder {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
 }
 

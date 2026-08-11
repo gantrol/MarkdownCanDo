@@ -10,4 +10,4 @@ Por favor, note: as traduções para Português e Inglês são feitas puramente 
 
 ## Pilha Tecnológica
 
-É construído primariamente com Vitepress e Vditor.
+É construído com VitePress, Vue e um editor de Markdown leve integrado ao projeto.

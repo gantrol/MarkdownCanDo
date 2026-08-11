@@ -1,17 +1,101 @@
-export const getI18nForVditor = () => {
-    const currentPath = location.pathname;
-    if (currentPath.startsWith('/zh')) {
-        return 'zh_CN';
-    }
-    else if (currentPath.startsWith('pt')) {
-        return 'pt_BR'
+export type UiLocale = 'en' | 'pt' | 'zh'
 
-    }
-        // else if (currentPath.startsWith('zh')) {
-        //
-    // }
-    else {
-        return 'en_US';
-    }
+export const editorMessages = {
+  en: {
+    wysiwyg: 'WYSIWYG',
+    loadingWysiwyg: 'Loading visual editor…',
+    wysiwygError: 'The visual editor could not be loaded. Your Markdown source is unchanged.',
+    inlineCode: 'Inline code',
+    codeBlock: 'Code block',
+    math: 'Math formula',
+    editor: 'Markdown editor',
+    source: 'Markdown source',
+    preview: 'Preview',
+    split: 'Split view',
+    edit: 'Edit only',
+    previewOnly: 'Preview only',
+    heading: 'Heading',
+    bold: 'Bold',
+    italic: 'Italic',
+    strike: 'Strikethrough',
+    link: 'Link',
+    bulletList: 'Bulleted list',
+    orderedList: 'Numbered list',
+    taskList: 'Task list',
+    quote: 'Block quote',
+    code: 'Code',
+    table: 'Table',
+    rule: 'Divider',
+    copy: 'Copy Markdown',
+    copied: 'Copied',
+    fullscreen: 'Toggle fullscreen',
+    stats: (lines: number, words: number, characters: number) => `${lines} lines · ${words} words · ${characters} characters`
+  },
+  pt: {
+    wysiwyg: 'Edição visual',
+    loadingWysiwyg: 'Carregando editor visual…',
+    wysiwygError: 'Não foi possível carregar o editor visual. O código Markdown não foi alterado.',
+    inlineCode: 'Código em linha',
+    codeBlock: 'Bloco de código',
+    math: 'Fórmula matemática',
+    editor: 'Editor de Markdown',
+    source: 'Código Markdown',
+    preview: 'Pré-visualização',
+    split: 'Visualização dividida',
+    edit: 'Somente editar',
+    previewOnly: 'Somente pré-visualização',
+    heading: 'Título',
+    bold: 'Negrito',
+    italic: 'Itálico',
+    strike: 'Tachado',
+    link: 'Link',
+    bulletList: 'Lista com marcadores',
+    orderedList: 'Lista numerada',
+    taskList: 'Lista de tarefas',
+    quote: 'Citação',
+    code: 'Código',
+    table: 'Tabela',
+    rule: 'Divisor',
+    copy: 'Copiar Markdown',
+    copied: 'Copiado',
+    fullscreen: 'Alternar tela cheia',
+    stats: (lines: number, words: number, characters: number) => `${lines} linhas · ${words} palavras · ${characters} caracteres`
+  },
+  zh: {
+    wysiwyg: '所见即所得',
+    loadingWysiwyg: '正在加载可视化编辑器…',
+    wysiwygError: '可视化编辑器加载失败，Markdown 源文未被修改。',
+    inlineCode: '行内代码',
+    codeBlock: '代码块',
+    math: '数学公式',
+    editor: 'Markdown 编辑器',
+    source: 'Markdown 源文',
+    preview: '预览',
+    split: '分栏视图',
+    edit: '仅编辑',
+    previewOnly: '仅预览',
+    heading: '标题',
+    bold: '粗体',
+    italic: '斜体',
+    strike: '删除线',
+    link: '链接',
+    bulletList: '无序列表',
+    orderedList: '有序列表',
+    taskList: '任务列表',
+    quote: '引用',
+    code: '代码',
+    table: '表格',
+    rule: '分隔线',
+    copy: '复制 Markdown',
+    copied: '已复制',
+    fullscreen: '切换全屏',
+    stats: (lines: number, words: number, characters: number) => `${lines} 行 · ${words} 词 · ${characters} 字符`
+  }
+} as const
 
+export function getUiLocale(pathname?: string): UiLocale {
+  const path = pathname ?? (typeof location === 'undefined' ? '/' : location.pathname)
+  if (path === '/zh' || path.startsWith('/zh/')) return 'zh'
+  if (path === '/pt' || path.startsWith('/pt/')) return 'pt'
+  return 'en'
 }

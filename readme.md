@@ -12,7 +12,7 @@ A website dedicated to showcasing the capabilities of Markdown, aimed at creatin
 
 ## Tech Stack
 
-It's built primarily with Vitepress and Vditor.
+It's built with VitePress, Vue, and a lightweight in-house Markdown editor.
 
 ## TODO
 

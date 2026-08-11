@@ -50,11 +50,11 @@ Many references were consulted in the construction of this site, here are some w
 
 ### Badge
 
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![ChatGPT](/chatgpt-badge.svg)
 
 Not only are there static badges, but there are also dynamic ones, such as one-click deployment to Vercel.
 
-[![Deploy this site with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Deploy this site with Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 This website can generate badges, https://shields.io/badges, for example:
 

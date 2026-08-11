@@ -35,39 +35,39 @@ function nav(): DefaultTheme.NavItem[] {
         },
         {
             text: 'Docs',
-            activeMatch: '/[tutorial|guide|showcase|reference]/',
+            activeMatch: '^/(?:tutorial|guide|showcase|reference)(?:/|$)',
             items: [
                 {
                     text: 'Tutorial',
                     link: '/tutorial/',
-                    activeMatch: '/tutorial/',
+                    activeMatch: '^/tutorial(?:/|$)',
                 },
                 {
                     text: 'Guide',
                     link: '/guide/',
-                    activeMatch: '/guide/',
+                    activeMatch: '^/guide(?:/|$)',
                 },
                 {
                     text: 'Reference',
                     link: '/reference/resource',
-                    activeMatch: '/reference/resource',
+                    activeMatch: '^/reference/(?:resource|chatgpt)(?:/|$)',
                 },
                 {
                     text: 'Examples',
                     link: '/showcase/',
-                    activeMatch: '^/showcase',
+                    activeMatch: '^/showcase(?:/|$)',
                 },
             ]
         },
         {
             text: 'CheatSheet',
             link: '/reference/cheatsheet/',
-            activeMatch: '/reference/cheatsheet/'
+            activeMatch: '^/reference/cheatsheet(?:/|$)'
         },
         {
             text: 'Playground',
             link: '/playground/',
-            activeMatch: '/playground/'
+            activeMatch: '^/playground(?:/|$)'
         }
     ]
 }
@@ -93,7 +93,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             text: 'Introduction',
             collapsed: false,
             items: [
-                { text: 'What Markdown can do', link: 'index.html' },
+                { text: 'What Markdown can do', link: '/guide/' },
                 { text: 'Why use Markdown?', link: 'why' },
                 { text: 'What is Markdown?', link: 'what-is-markdown' },
             ]

@@ -1,7 +1,7 @@
 <!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
 import VTLink from './VTLink.vue'
-import { MenuItemWithLink } from './types/menu'
+import type { MenuItemWithLink } from './types/menu'
 
 defineProps<{ item: MenuItemWithLink }>()
 </script>
@@ -26,6 +26,18 @@ defineProps<{ item: MenuItemWithLink }>()
 
 .vt-menu-link:hover {
   color: var(--vt-c-brand);
+}
+
+.vt-menu-link:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--vt-c-brand);
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vt-menu-link {
+    transition: none;
+  }
 }
 
 </style>

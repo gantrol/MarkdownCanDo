@@ -81,7 +81,7 @@ Markdown ultimately renders as HTML, and CSS can modify the layout of HTML eleme
 
 You can deploy this site by clicking this button:
 
-[![Deploy With Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Deploy With Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 There are many ways to build websites based on Markdown. Personal research has mainly identified Vitepress and MDX as two options, both extending Markdown and allowing for code component insertion. Vitepress primarily supports Vue components, while MDX mainly supports React components.
 
@@ -91,6 +91,6 @@ Considering performance and maintenance stability, this site is built with Vitep
 
 You might want to check out the [reference materials](/reference/resource) or ask ChatGPT？
 
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![ChatGPT](/chatgpt-badge.svg)
 
 [^1]: Find it difficult? Actually, there's no need to memorize the syntax for various charts. The site owner used to rely on manuals, but now mainly consults ChatGPT.

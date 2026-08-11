@@ -58,40 +58,40 @@ function nav(): DefaultTheme.NavItem[] {
         },
         {
             text: '文档',
-            activeMatch: '/zh/[tutorial|guide|showcase|reference]/',
+            activeMatch: '^/zh/(?:tutorial|guide|showcase|reference)(?:/|$)',
             items: [
                 {
                     text: '教程',
                     link: '/zh/tutorial/',
-                    activeMatch: '/zh/tutorial/'
+                    activeMatch: '^/zh/tutorial(?:/|$)'
                 },
                 {
                     text: '指南',
                     link: '/zh/guide/',
-                    activeMatch: '/zh/guide/'
+                    activeMatch: '^/zh/guide(?:/|$)'
                 },
                 {
                     text: '参考',
                     link: '/zh/reference/resource',
-                    activeMatch: '/reference/resource',
+                    activeMatch: '^/zh/reference/(?:resource|chatgpt)(?:/|$)',
                 },
                 {
                     text: '样例',
                     link: '/zh/showcase/',
-                    activeMatch: '^/zh/showcase',
+                    activeMatch: '^/zh/showcase(?:/|$)',
                 },
             ]
         },
         {
             text: '备忘',
             link: '/zh/reference/cheatsheet/',
-            activeMatch: '/zh/reference/cheatsheet/'
+            activeMatch: '^/zh/reference/cheatsheet(?:/|$)'
         },
 
         {
             text: '演练场',
             link: '/zh/playground/',
-            activeMatch: '/zh/playground/'
+            activeMatch: '^/zh/playground(?:/|$)'
         }
     ]
 }
@@ -117,7 +117,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             text: '介绍',
             collapsed: false,
             items: [
-                { text: 'Markdown 能做', link: '/' },
+                { text: 'Markdown 能做', link: '/zh/guide/' },
                 { text: '为何用 Markdown？', link: 'why' },
                 { text: '什么是 Markdown？', link: 'what-is-markdown' },
             ]
@@ -150,7 +150,8 @@ export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
         translations: {
             button: {
                 buttonText: '搜索文档',
-                buttonAriaLabel: '搜索文档'
+                // 让可见文字和快捷键共同组成无障碍名称。
+                buttonAriaLabel: ''
             },
             modal: {
                 searchBox: {

@@ -220,10 +220,10 @@ Outras configurações consulte [shield](https://shields.io).
 
 ### Distintivo de Implantação Vercel
 
-[![Implante este site com Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Implante este site com Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 ```
-[![Implante este site com Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Implante este site com Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 ```
 
 ```

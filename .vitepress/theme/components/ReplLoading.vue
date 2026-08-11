@@ -1,12 +1,35 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useData } from 'vitepress'
+
+const props = defineProps<{
+  message?: string
+}>()
+
+const { lang } = useData()
+const loadingMessage = computed(() => {
+  if (props.message) return props.message
+  if (lang.value.startsWith('zh')) return '编辑器加载中…'
+  if (lang.value.startsWith('pt')) return 'Carregando o editor…'
+  return 'Loading editor…'
+})
+</script>
+
 <template>
-  <div class="repl-loading">
-    <div class="lds-ring">
+  <div
+    class="repl-loading"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    aria-busy="true"
+  >
+    <div class="lds-ring" aria-hidden="true">
       <div></div>
       <div></div>
       <div></div>
       <div></div>
     </div>
-    <div>Repl is loading...</div>
+    <div>{{ loadingMessage }}</div>
   </div>
 </template>
 
@@ -54,6 +77,12 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lds-ring {
+    display: none;
   }
 }
 </style>

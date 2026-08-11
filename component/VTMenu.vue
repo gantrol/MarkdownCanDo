@@ -1,25 +1,32 @@
 <!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
-import { MenuItem, MenuItemChild } from './types/menu'
+import type { MenuItem, MenuItemChild } from './types/menu'
 import VTMenuLink from './VTMenuLink.vue'
 import VTMenuGroup from './VTMenuGroup.vue'
 
 defineProps<{
   items?: (MenuItem | MenuItemChild)[]
+  labelledby?: string
 }>()
 </script>
 
 <template>
-  <div class="vt-menu">
-    <div v-if="items" class="vt-menu-items">
-      <template v-for="item in items" :key="item.text">
+  <nav class="vt-menu" :aria-labelledby="labelledby">
+    <ul v-if="items" class="vt-menu-items">
+      <li
+        v-for="(item, index) in items"
+        :key="item.text || index"
+        class="vt-menu-item"
+      >
         <VTMenuLink v-if="'link' in item" :item="item" />
         <VTMenuGroup v-else :text="item.text" :items="item.items" />
-      </template>
-    </div>
+      </li>
+    </ul>
 
-    <slot />
-  </div>
+    <div v-if="$slots.default" class="vt-menu-slot">
+      <slot />
+    </div>
+  </nav>
 </template>
 
 <style>
@@ -41,43 +48,27 @@ defineProps<{
   }
 
   .vt-menu-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     transition: border-color .5s;
   }
 
-  .vt-menu .vt-menu-group {
-    padding: 0 0 12px;
+  .vt-menu-item {
+    margin: 0;
+    padding: 0;
   }
 
-  .vt-menu .vt-menu-group + .vt-menu-group {
+  .vt-menu-item + .vt-menu-item > .vt-menu-group {
     border-top: 1px solid var(--vt-c-divider-light);
-    padding: 11px 0 12px;
+    padding-top: 11px;
   }
 
-  .vt-menu .vt-menu-group:last-child {
-    padding-bottom: 0;
-  }
-
-  .vt-menu .vt-menu-group + .vt-menu-item-item {
-    border-top: 1px solid var(--vt-c-divider-light);
-    padding: 11px 16px 0;
-  }
-
-  .vt-menu .vt-menu-item {
-    padding: 0 16px;
-    white-space: nowrap;
-  }
-
-  .vt-menu-label {
-    flex-grow: 1;
-    line-height: 28px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--vt-c-text-2);
-    transition: color .5s;
-  }
-
-  .vt-menu-action {
-    padding-left: 24px;
+  @media (prefers-reduced-motion: reduce) {
+    .vt-menu,
+    .vt-menu-items {
+      transition: none;
+    }
   }
 
 </style>

@@ -1,229 +1,253 @@
-<!--first version of this file copy from: https://github.com/vuejs/docs/blob/main/src/tutorial-->
-<template>
-  <section class="tutorial">
-    <article class="instruction" ref="instruction">
-      <VTFlyout :button="`${currentStepIndex} / ${totalSteps}`">
-        <VTLink
-            v-for="(step, i) of allSteps"
-            class="vt-menu-link"
-            :class="{ active: i + 1 === currentStepIndex }"
-            :href="step.link"
-        >{{ step.text }}</VTLink
-        >
-      </VTFlyout>
-      <div class="vt-doc" v-html="currentDescription"></div>
-      <div class="hint" v-if="data[currentStep]?.[HINT_DIR]">
-        <button id="show-result" @click="toggleResult">
-          {{ showHintText }}
-        </button>
-      </div>
-      <footer>
-        <a v-if="prevStep" :href="`#${prevStep}`"
-        ><VTIconChevronLeft class="vt-link-icon" style="margin: 0" />
-          {{ props.previousButtonText }}</a
-        >
-        <a class="next-step" v-if="nextStep" :href="`#${nextStep}`"
-        >{{ props.nextButtonText }} <VTIconChevronRight class="vt-link-icon"
-        /></a>
-      </footer>
-    </article>
-    <MarkdownEditorV :id="'markdown-editor'" :text="currentCode" :options="editorOptions" />
-  </section>
-</template>
-
 <script setup lang="ts">
-import {ref, computed, nextTick, watch} from 'vue';
-import MarkdownEditorV from './MarkdownEditorV.vue';
-import {onHashChange} from "../utils/utils";
-import VTIconChevronLeft from "./icons/VTIconChevronLeft.vue";
-import VTIconChevronRight from "./icons/VTIconChevronRight.vue";
-import VTLink from "./VTLink.vue";
-import VTFlyout from "./VTFlyout.vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import MarkdownEditor from './MarkdownEditor.vue'
+import VTIconChevronLeft from './icons/VTIconChevronLeft.vue'
+import VTIconChevronRight from './icons/VTIconChevronRight.vue'
+import VTLink from './VTLink.vue'
+import VTFlyout from './VTFlyout.vue'
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: {}
-  },
-  hintText: {
-    required: true,
-  },
-  resetText: {
-    required: true,
-  },
-  previousButtonText: {
-    required: true,
-  },
-  nextButtonText: {
-    required: true,
-  },
-  EMPTY_CODE_PLACEHOLDER: {
-    default: '// No example code available.'
-  },
-  noDescriptionAvailable: {
-    default: 'No description available.'
+type TutorialData = Record<string, {
+  'description.md'?: string
+  App?: { 'template.md'?: string }
+  _hint?: {
+    'description.md'?: string
+    App?: { 'template.md'?: string }
   }
-})
+}>
 
-const data = props.data;
+const props = withDefaults(defineProps<{
+  data: TutorialData
+  hintText: string
+  resetText: string
+  previousButtonText: string
+  nextButtonText: string
+  EMPTY_CODE_PLACEHOLDER?: string
+  noDescriptionAvailable?: string
+}>(), {
+  data: () => ({}),
+  EMPTY_CODE_PLACEHOLDER: '// No example code available.',
+  noDescriptionAvailable: 'No description available.'
+})
 
 const instruction = ref<HTMLElement>()
-// Mark: Steps
-const currentStep = ref('step-1');
-
-const descriptionFile = 'description.md';
-const TEMPLATE_FILE = 'template.md';
-const APP_DIR = "App";
-const HINT_DIR = "_hint";
+const showingHint = ref(false)
+const keys = Object.keys(props.data).sort((a, b) => stepNumber(a) - stepNumber(b))
+const currentStep = ref(keys[0] ?? 'step-1')
 
 const currentDescription = computed(() => {
-  if (showingHint.value) {
-    const hint = data[currentStep.value][HINT_DIR]
-    const result = hint?.[descriptionFile];
-
-    if (result) {
-      return result
-    }
+  const step = props.data[currentStep.value]
+  if (showingHint.value && step?._hint?.['description.md']) {
+    return step._hint['description.md']
   }
-  return data[currentStep.value]?.[descriptionFile] || props.noDescriptionAvailable;
-});
-
+  return step?.['description.md'] ?? props.noDescriptionAvailable
+})
 
 const currentCode = computed(() => {
-  if (showingHint.value) {
-    const hint = data[currentStep.value][HINT_DIR]
-    const result = hint?.[APP_DIR]?.[TEMPLATE_FILE];
-    if (result) {
-      return result
-    }
+  const step = props.data[currentStep.value]
+  if (showingHint.value && step?._hint?.App?.['template.md']) {
+    return step._hint.App['template.md']
   }
-
-  return data[currentStep.value]?.[APP_DIR]?.[TEMPLATE_FILE] || props.EMPTY_CODE_PLACEHOLDER;
-});
-
-
-const currentStepIndex = computed(() => Number(currentStep.value.match(/\d+/)));
-
-const prevStep = computed(() => {
-  const match = currentStep.value.match(/\d+/)
-  const prev = match && `step-${+match[0] - 1}`
-  if (prev && data.hasOwnProperty(prev)) {
-    return prev
-  }
-});
-
-const nextStep = computed(() => {
-  const match = currentStep.value.match(/\d+/)
-  const next = match && `step-${+match[0] + 1}`
-  if (next && data.hasOwnProperty(next)) {
-    return next
-  }
-});
-
-const keys = Object.keys(data).sort((a, b) => {
-  return Number(a.replace(/^step-/, '')) - Number(b.replace(/^step-/, ''))
-});
-
-const totalSteps = keys.length;
-const titleRE = /<h1.*?>(.+?)<a class="header-anchor/
-const allSteps = keys.map((key, i) => {
-  const desc = data[key][descriptionFile] as string
-  return {
-    text: `${i + 1}. ${desc.match(titleRE)![1]}`,
-    link: `#${key}`
-  }
+  return step?.App?.['template.md'] ?? props.EMPTY_CODE_PLACEHOLDER
 })
 
-// Mark: Hint
-const showingHint = ref(false)
-let showHintText = props.hintText;
-watch(showingHint, (isReset) => {
-  showHintText = isReset ? props.resetText : props.hintText
+const currentStepIndex = computed(() => Math.max(1, keys.indexOf(currentStep.value) + 1))
+const previousStep = computed(() => keys[currentStepIndex.value - 2])
+const nextStep = computed(() => keys[currentStepIndex.value])
+const showHintText = computed(() => showingHint.value ? props.resetText : props.hintText)
+const stepsLabel = computed(() => {
+  if (props.nextButtonText === '下一篇') return '教程步骤'
+  if (props.nextButtonText === 'Próximo') return 'Etapas do tutorial'
+  return 'Tutorial steps'
+})
+const instructionsLabel = computed(() => {
+  if (props.nextButtonText === '下一篇') return '教程说明'
+  if (props.nextButtonText === 'Próximo') return 'Instruções do tutorial'
+  return 'Tutorial instructions'
 })
 
+const allSteps = keys.map((key, index) => ({
+  key,
+  text: `${index + 1}. ${extractHeading(props.data[key]?.['description.md'], key)}`,
+  link: `#${key}`
+}))
 
-function updateExample(scroll = false) {
-  let hash = location.hash.slice(1)
-  // TODO: remove dirty fix for vitepress 1.0.0-rc.45
-  if (!data.hasOwnProperty(hash) && location.pathname.includes('tutorial')) {
-    hash = 'step-1'
-    // TODO: 处理多语言
-    location.replace(`${location}#${hash}`)
+const editorOptions = {
+  preview: { delay: 160 }
+}
+
+function stepNumber(value: string) {
+  return Number(value.match(/\d+/u)?.[0] ?? Number.MAX_SAFE_INTEGER)
+}
+
+function extractHeading(html = '', fallback: string) {
+  const heading = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? fallback
+  return heading
+    .replace(/<a[^>]*class="header-anchor"[^>]*>[\s\S]*?<\/a>/giu, '')
+    .replace(/<[^>]+>/gu, '')
+    .replace(/&amp;/gu, '&')
+    .replace(/&lt;/gu, '<')
+    .replace(/&gt;/gu, '>')
+    .trim()
+}
+
+function updateStep(scroll = false) {
+  const requested = location.hash.slice(1)
+  const next = Object.prototype.hasOwnProperty.call(props.data, requested)
+    ? requested
+    : keys[0]
+
+  if (!next) return
+  if (requested !== next) {
+    history.replaceState(null, '', `${location.pathname}${location.search}#${next}`)
   }
-  currentStep.value = hash
-  debugger;
 
+  currentStep.value = next
   if (scroll) {
-    nextTick(() => {
-      instruction.value!.scrollTop = 0
-    })
+    void nextTick(() => instruction.value?.scrollTo({ top: 0, behavior: 'auto' }))
   }
 }
 
-
-const editorOptions = ref({
-  height: window.innerHeight - document.getElementsByClassName("VPNavBar")?.[0]?.clientHeight,
-  preview: {
-    delay: 100,
-  }
-});
+function handleHashChange() {
+  showingHint.value = false
+  updateStep(true)
+}
 
 function toggleResult() {
   showingHint.value = !showingHint.value
-  updateExample()
 }
 
-onHashChange(() => {
-  showingHint.value = false
-  updateExample(true)
+onMounted(() => {
+  updateStep()
+  window.addEventListener('hashchange', handleHashChange)
 })
 
-updateExample()
-
+onBeforeUnmount(() => {
+  window.removeEventListener('hashchange', handleHashChange)
+})
 </script>
 
+<template>
+  <main class="tutorial">
+    <article ref="instruction" class="instruction" :aria-label="instructionsLabel">
+      <VTFlyout
+        class="tutorial__steps"
+        :button="`${currentStepIndex} / ${keys.length}`"
+        :label="stepsLabel"
+      >
+        <ol class="tutorial__step-list">
+          <li v-for="step in allSteps" :key="step.key">
+            <VTLink
+              class="vt-menu-link"
+              :class="{ active: step.key === currentStep }"
+              :aria-current="step.key === currentStep ? 'step' : undefined"
+              :href="step.link"
+            >
+              {{ step.text }}
+            </VTLink>
+          </li>
+        </ol>
+      </VTFlyout>
+
+      <div
+        id="tutorial-description"
+        class="vt-doc"
+        v-html="currentDescription"
+      />
+
+      <div v-if="props.data[currentStep]?._hint" class="hint">
+        <button
+          id="show-result"
+          type="button"
+          :aria-pressed="showingHint"
+          aria-controls="tutorial-description markdown-tutorial-editor"
+          @click="toggleResult"
+        >
+          {{ showHintText }}
+        </button>
+      </div>
+
+      <footer class="tutorial__footer">
+        <a v-if="previousStep" :href="`#${previousStep}`">
+          <VTIconChevronLeft class="vt-link-icon" />
+          {{ props.previousButtonText }}
+        </a>
+        <a v-if="nextStep" class="next-step" :href="`#${nextStep}`">
+          {{ props.nextButtonText }}
+          <VTIconChevronRight class="vt-link-icon" />
+        </a>
+      </footer>
+    </article>
+
+    <MarkdownEditor
+      id="markdown-tutorial-editor"
+      :text="currentCode"
+      :options="editorOptions"
+    />
+  </main>
+</template>
 
 <style scoped>
 .tutorial {
-  display: flex;
-  max-width: 1440px;
+  display: grid;
+  width: 100%;
+  max-width: 1600px;
+  height: calc(100dvh - var(--vp-nav-height, 64px));
+  min-height: 560px;
   margin: 0 auto;
+  grid-template-columns: minmax(320px, 42%) minmax(0, 58%);
 }
 
 .instruction {
-  width: 45%;
-  height: 92vh;
-  padding: 0 32px 24px;
-  border-right: 1px solid var(--vt-c-divider-light);
-  font-size: 15px;
-  overflow-y: auto;
   position: relative;
-  --vt-nav-height: 40px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 32px 28px;
+  overflow-y: auto;
+  border-right: 1px solid var(--vp-c-divider);
+  font-size: 15px;
+  overscroll-behavior: contain;
 }
 
-.vt-flyout {
+.tutorial__steps {
+  position: sticky;
   z-index: 9;
-  position: absolute;
-  right: 20px;
+  top: 0;
+  float: right;
+  margin-right: -12px;
+  background: color-mix(in srgb, var(--vp-c-bg) 92%, transparent);
+  backdrop-filter: blur(8px);
 }
 
 .vt-menu-link.active {
-  font-weight: 500;
-  color: var(--vt-c-brand);
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
 }
 
-footer {
+.tutorial__step-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tutorial__footer {
   display: flex;
+  padding-top: 16px;
+  margin-top: 24px;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--vt-c-divider);
-  margin-top: 1.5em;
-  padding-top: 1em;
+  border-top: 1px solid var(--vp-c-divider);
 }
 
-footer a {
-  font-weight: 500;
-  color: var(--vt-c-brand);
+.tutorial__footer a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.tutorial__footer .vt-link-icon {
+  margin: 0 4px;
 }
 
 .next-step {
@@ -231,15 +255,15 @@ footer a {
 }
 
 .vt-doc :deep(h1) {
-  font-size: 1.4em;
   margin: 1em 0;
+  font-size: 1.4em;
 }
 
 .vt-doc :deep(h2) {
-  font-size: 1.1em;
-  margin: 1.2em 0 0.5em;
   padding: 0;
-  border-top: none;
+  margin: 1.2em 0 0.5em;
+  border-top: 0;
+  font-size: 1.1em;
 }
 
 .vt-doc :deep(.header-anchor) {
@@ -251,50 +275,50 @@ footer a {
 }
 
 .hint {
-  padding-top: 1em;
+  padding-top: 16px;
 }
 
 #show-result {
-  background-color: var(--vt-c-brand);
-  color: var(--vt-c-bg);
-  padding: 4px 12px 3px;
-  border-radius: 8px;
-  font-weight: 600;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 9px;
+  color: var(--vp-button-brand-text);
+  background: var(--vp-c-brand-3);
   font-size: 14px;
+  font-weight: 700;
 }
 
-@media (min-width: 1377px) {
-  .vue-repl {
-    border-right: 1px solid var(--vt-c-divider-light);
-  }
+#show-result:hover {
+  background: var(--vp-c-brand-2);
 }
 
-@media (min-width: 1441px) {
-  .tutorial {
-    padding-right: 32px;
-  }
+.tutorial :deep(.markdown-editor) {
+  --md-editor-height: 100%;
+  min-height: 0;
+  border-width: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
-:deep(.narrow) {
-  display: none;
-}
-
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .tutorial {
     display: block;
+    height: auto;
+    min-height: 0;
   }
+
   .instruction {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--vt-c-divider-light);
-    height: 30vh;
-    padding: 0 24px 24px;
+    height: auto;
+    padding: 0 20px 24px;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--vp-c-divider);
   }
-  :deep(.wide) {
-    display: none;
-  }
-  :deep(.narrow) {
-    display: inline;
+
+  .tutorial :deep(.markdown-editor) {
+    --md-editor-height: 70dvh;
+    min-height: 500px;
+    border-bottom: 1px solid var(--vp-c-divider);
   }
 }
 </style>

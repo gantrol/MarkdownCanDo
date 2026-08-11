@@ -15,6 +15,6 @@
 
 ## 关于技术栈
 
-主要基于 Vitepress 和 Vditor 构建，同时，更新Readme的这个版本中，使用了[这个仓库](https://github.com/vuejs/docs/tree/main/src/tutorial)的部分代码。
+主要基于 VitePress、Vue 和项目内置的轻量 Markdown 编辑器构建，同时使用了[这个仓库](https://github.com/vuejs/docs/tree/main/src/tutorial)的部分代码。
 
 [vue]: https://vuejs.org
