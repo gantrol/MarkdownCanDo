@@ -2,33 +2,34 @@
 layout: home
 
 hero:
-  name: "Markdown Can Do It!"
-  tagline: Escape the hassle of Word and HTML formatting
+  name: "Markdown can do more."
+  text: "Write clearly. Build anything."
+  tagline: Draft, format, diagram, and publish from one focused plain-text workspace.
   actions:
     - theme: brand
-      text: Experience Now
+      text: Open the playground
       link: /playground/
     - theme: alt
-      text: Why Use It?
+      text: See why Markdown
       link: /guide/why
 
 features:
-  - icon: 📚
-    title: Tutorials
-    details: "Step by step, teach you how to use Markdown"
+  - icon: '01'
+    title: Learn by doing
+    details: Follow concise lessons that move from Markdown basics to practical publishing workflows.
     link: /tutorial/
-    linkText: 'Click to View'
+    linkText: Start the tutorial
     target: '_self'
-  - icon: 🛠️
-    title: Experience Multiple Functions Now
-    details: "Go beyond basic formatting, easily create flowcharts, Gantt charts, presentations (PPT), etc."
+  - icon: '02'
+    title: Preview as you write
+    details: Work with formatted text, Mermaid diagrams, math, tables, and task lists without leaving the editor.
     link: /playground/
-    linkText: 'Explore Now'
+    linkText: Try the editor
     target: '_self'
-  - icon: 🔍
-    title: More
-    details: "Explore more features of Markdown, including useful external links. Please choose as needed."
+  - icon: '03'
+    title: Keep a useful reference
+    details: Find syntax, reusable examples, and carefully selected resources when you need a quick answer.
     link: /reference/resource
-    linkText: 'Discover More'
+    linkText: Browse resources
     target: '_self'
 ---

@@ -9,8 +9,8 @@ export const zh = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/zh/guide/': sidebarGuide(),
-            '/zh/reference/': sidebarReference(),
+            '/zh/guide/': sidebarDocs(),
+            '/zh/reference/': sidebarDocs(),
         },
 
         editLink: {
@@ -78,29 +78,33 @@ function nav(): DefaultTheme.NavItem[] {
     ]
 }
 
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: '介绍',
+            text: '认识 Markdown',
             collapsed: false,
             items: [
-                { text: 'Markdown 能做', link: '/zh/guide/' },
-                { text: '为何用 Markdown？', link: '/zh/guide/why' },
+                { text: 'Markdown 能做什么？', link: '/zh/guide/' },
                 { text: '什么是 Markdown？', link: '/zh/guide/what-is-markdown' },
+                { text: '为什么用 Markdown？', link: '/zh/guide/why' },
             ]
         },
-    ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-    return [
         {
-            text: '参考',
+            text: '动手实践',
             collapsed: false,
             items: [
-                { text: '速查备忘', link: '/zh/reference/cheatsheet/' },
+                { text: 'Markdown 入门教程', link: '/zh/tutorial/' },
+                { text: '在线 Markdown 演练场', link: '/zh/playground/' },
+                { text: 'Markdown 示例', link: '/zh/showcase/' },
+            ]
+        },
+        {
+            text: '语法与资源',
+            collapsed: false,
+            items: [
+                { text: 'Markdown 语法速查', link: '/zh/reference/cheatsheet/' },
                 { text: '用 ChatGPT 写 Markdown', link: '/zh/reference/chatgpt/' },
-                { text: '延伸资料', link: '/zh/reference/resource' },
+                { text: 'Markdown 学习资源', link: '/zh/reference/resource' },
             ]
         }
     ]

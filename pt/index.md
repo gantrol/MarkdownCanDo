@@ -2,34 +2,35 @@
 layout: home
 
 hero:
-  name: "Markdown Pode Fazer Isso!"
-  tagline: Fuja do incômodo da formatação do Word e HTML
+  name: "Markdown pode fazer mais"
+  text: "Escreva com clareza. Crie sem atrito."
+  tagline: Escreva, formate, crie diagramas e publique em um espaço de trabalho de texto puro.
   actions:
     - theme: brand
-      text: Experimente Agora
+      text: Abrir o playground
       link: /pt/playground/
     - theme: alt
-      text: Por Que Usar?
+      text: Por que usar Markdown
       link: /pt/guide/why
 
 features:
-  - icon: 📚
-    title: Tutoriais
-    details: "Passo a passo, ensinamos como usar o Markdown"
+  - icon: '01'
+    title: Aprenda fazendo
+    details: Avance dos fundamentos do Markdown até fluxos práticos de publicação com lições objetivas.
     link: /pt/tutorial/
-    linkText: 'Clique para Visualizar'
+    linkText: Começar o tutorial
     target: '_self'
-  - icon: 🛠️
-    title: Experimente Múltiplas Funções Agora
-    details: "Vá além da formatação básica, crie facilmente fluxogramas, gráficos de Gantt, apresentações (PPT), etc."
+  - icon: '02'
+    title: Escreva e visualize
+    details: Trabalhe com texto, diagramas Mermaid, fórmulas, tabelas e tarefas sem sair do editor.
     link: /pt/playground/
-    linkText: 'Explore Agora'
+    linkText: Experimentar o editor
     target: '_self'
-  - icon: 🔍
-    title: Mais
-    details: "Explore mais recursos do Markdown, incluindo links externos úteis. Por favor, escolha conforme a necessidade."
+  - icon: '03'
+    title: Consulte quando precisar
+    details: Encontre sintaxe, exemplos reutilizáveis e recursos selecionados para resolver dúvidas rapidamente.
     link: /pt/reference/resource
-    linkText: 'Descubra Mais'
+    linkText: Ver referências
     target: '_self'
 
 ---

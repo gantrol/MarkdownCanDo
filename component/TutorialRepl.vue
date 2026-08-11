@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useData } from 'vitepress'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { resolveUiLocaleTag, tutorialMessages } from '../utils/i18n'
 import MarkdownEditor from './MarkdownEditor.vue'
 import VTIconChevronLeft from './icons/VTIconChevronLeft.vue'
 import VTIconChevronRight from './icons/VTIconChevronRight.vue'
@@ -24,11 +26,11 @@ const props = withDefaults(defineProps<{
   EMPTY_CODE_PLACEHOLDER?: string
   noDescriptionAvailable?: string
 }>(), {
-  data: () => ({}),
-  EMPTY_CODE_PLACEHOLDER: '// No example code available.',
-  noDescriptionAvailable: 'No description available.'
+  data: () => ({})
 })
 
+const { lang } = useData()
+const messages = computed(() => tutorialMessages[resolveUiLocaleTag(lang.value)])
 const instruction = ref<HTMLElement>()
 const showingHint = ref(false)
 const keys = Object.keys(props.data).sort((a, b) => stepNumber(a) - stepNumber(b))
@@ -39,7 +41,7 @@ const currentDescription = computed(() => {
   if (showingHint.value && step?._hint?.['description.md']) {
     return step._hint['description.md']
   }
-  return step?.['description.md'] ?? props.noDescriptionAvailable
+  return step?.['description.md'] ?? props.noDescriptionAvailable ?? messages.value.noDescription
 })
 
 const currentCode = computed(() => {
@@ -47,23 +49,15 @@ const currentCode = computed(() => {
   if (showingHint.value && step?._hint?.App?.['template.md']) {
     return step._hint.App['template.md']
   }
-  return step?.App?.['template.md'] ?? props.EMPTY_CODE_PLACEHOLDER
+  return step?.App?.['template.md'] ?? props.EMPTY_CODE_PLACEHOLDER ?? messages.value.emptyCode
 })
 
 const currentStepIndex = computed(() => Math.max(1, keys.indexOf(currentStep.value) + 1))
 const previousStep = computed(() => keys[currentStepIndex.value - 2])
 const nextStep = computed(() => keys[currentStepIndex.value])
 const showHintText = computed(() => showingHint.value ? props.resetText : props.hintText)
-const stepsLabel = computed(() => {
-  if (props.nextButtonText === '下一篇') return '教程步骤'
-  if (props.nextButtonText === 'Próximo') return 'Etapas do tutorial'
-  return 'Tutorial steps'
-})
-const instructionsLabel = computed(() => {
-  if (props.nextButtonText === '下一篇') return '教程说明'
-  if (props.nextButtonText === 'Próximo') return 'Instruções do tutorial'
-  return 'Tutorial instructions'
-})
+const stepsLabel = computed(() => messages.value.steps)
+const instructionsLabel = computed(() => messages.value.instructions)
 
 const allSteps = keys.map((key, index) => ({
   key,

@@ -2,12 +2,20 @@
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Crepe } from '@milkdown/crepe'
 import '@milkdown/crepe/theme/common/style.css'
+import { sanitizeSvg } from '../utils/markdown'
+import { getMermaidConfig } from '../utils/mermaid'
 
 const props = defineProps<{
   modelValue: string
   loadingLabel: string
   errorLabel: string
   toolbarLabels: string[]
+  diagramLabel: string
+  diagramLoadingLabel: string
+  diagramErrorLabel: string
+  diagramPreviewLabel: string
+  editDiagramLabel: string
+  hideDiagramSourceLabel: string
 }>()
 
 const emit = defineEmits<{
@@ -21,6 +29,42 @@ let editor: Crepe | undefined
 let generation = 0
 let disposed = false
 let lastEmitted = ''
+let diagramId = 0
+let themeObserver: MutationObserver | undefined
+
+function renderDiagramPreview(
+  language: string,
+  content: string,
+  applyPreview: (value: null | string | HTMLElement) => void
+) {
+  if (language.trim().toLowerCase() !== 'mermaid') return null
+
+  const currentId = ++diagramId
+  void import('mermaid')
+    .then(async ({ default: mermaid }) => {
+      mermaid.initialize(getMermaidConfig())
+      const { svg } = await mermaid.render(`markdown-wysiwyg-diagram-${currentId}`, content)
+      if (disposed) return
+
+      const wrapper = document.createElement('div')
+      wrapper.className = 'markdown-wysiwyg__diagram'
+      wrapper.setAttribute('role', 'img')
+      wrapper.setAttribute('aria-label', props.diagramLabel)
+      wrapper.innerHTML = sanitizeSvg(svg)
+      applyPreview(wrapper.outerHTML)
+    })
+    .catch((error) => {
+      if (disposed) return
+      const message = document.createElement('p')
+      message.className = 'markdown-wysiwyg__diagram-error'
+      message.setAttribute('role', 'alert')
+      message.textContent = props.diagramErrorLabel
+      applyPreview(message.outerHTML)
+      console.warn('[MarkdownCanDo] Mermaid visual preview failed.', error)
+    })
+
+  return undefined
+}
 
 async function destroyEditor() {
   const current = editor
@@ -48,6 +92,17 @@ async function createEditor(markdown: string) {
         [Crepe.Feature.AI]: false,
         // Object URLs created by the default uploader cannot be persisted as Markdown.
         [Crepe.Feature.ImageBlock]: false
+      },
+      featureConfigs: {
+        [Crepe.Feature.CodeMirror]: {
+          renderPreview: renderDiagramPreview,
+          previewOnlyByDefault: true,
+          previewLabel: props.diagramPreviewLabel,
+          previewLoading: props.diagramLoadingLabel,
+          previewToggleText: previewOnlyMode => previewOnlyMode
+            ? props.editDiagramLabel
+            : props.hideDiagramSourceLabel
+        }
       }
     })
 
@@ -97,11 +152,19 @@ watch(() => props.modelValue, (value) => {
   void createEditor(value)
 })
 
-onMounted(() => void createEditor(props.modelValue))
+onMounted(() => {
+  void createEditor(props.modelValue)
+  themeObserver = new MutationObserver(() => void createEditor(props.modelValue))
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  })
+})
 
 onBeforeUnmount(() => {
   disposed = true
   generation++
+  themeObserver?.disconnect()
   void destroyEditor()
 })
 </script>
@@ -178,6 +241,94 @@ onBeforeUnmount(() => {
 .markdown-wysiwyg .milkdown .ProseMirror:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: -2px;
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar {
+  min-height: 48px;
+  padding: 0 10px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  border-bottom-color: var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  scrollbar-width: none;
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-inner {
+  min-width: max-content;
+  flex-wrap: nowrap;
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-divider {
+  height: 22px;
+  margin: 0 6px;
+  background: var(--vp-c-divider);
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-heading-selector {
+  padding: 5px 4px;
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-heading-button,
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item {
+  border-radius: var(--ui-radius-sm);
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item {
+  width: 34px;
+  height: 34px;
+  margin: 4px 2px;
+  padding: 6px;
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item svg {
+  width: 19px;
+  height: 19px;
+  color: var(--vp-c-text-2);
+  fill: var(--vp-c-text-2);
+}
+
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item:hover svg,
+.markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item.active svg {
+  color: var(--vp-c-brand-1);
+  fill: var(--vp-c-brand-1);
+}
+
+.markdown-wysiwyg .markdown-wysiwyg__diagram {
+  display: grid;
+  min-height: 150px;
+  padding: 18px;
+  place-items: center;
+  overflow: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ui-radius-md);
+  background: var(--vp-c-bg-soft);
+}
+
+@supports (corner-shape: squircle) {
+  .markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-heading-button,
+  .markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item,
+  .markdown-wysiwyg .markdown-wysiwyg__diagram {
+    corner-shape: squircle;
+  }
+}
+
+.markdown-wysiwyg .markdown-wysiwyg__diagram svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.markdown-wysiwyg .markdown-wysiwyg__diagram-error {
+  display: grid;
+  min-height: 120px;
+  padding: 20px;
+  place-items: center;
+  color: var(--vp-c-danger-1);
+  text-align: center;
 }
 
 .markdown-wysiwyg__state {

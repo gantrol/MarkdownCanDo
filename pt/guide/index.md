@@ -36,18 +36,14 @@ timeline
 
 ```mermaid
 flowchart LR
-A(("Pergunta")) --> B(Amigo)
-A --> ChatGPT(ChatGPT)
-B --> sum((Resumo))
-ChatGPT --> sum
-sum --> solucao(Solução)
-solucao --> acumu((Acumulação))
-acumu -->|Em grandes quantidades| Riqueza[(Riqueza)]
-acumu -->|Ao longo de um tempo| Riqueza
+  A([Sair do trabalho]) --> B{Cozinhar hoje?}
+  B -->|Sim| C[Comprar ingredientes]
+  B -->|Não| D[Buscar o jantar]
+  C --> E[Voltar para casa]
+  D --> E
+  E --> F([Jantar juntos])
 ```
 ### Partitura Musical
-
-> Escrito pelo ChatGPT, pode estar errado.
 
 ```abc
 X:1

@@ -39,6 +39,8 @@
  * -------------------------------------------------------------------------- */
 
 :root {
+    color-scheme: light;
+
     --vt-c-white: #ffffff;
     --vt-c-white-soft: #f9f9f9;
     --vt-c-white-mute: #f1f1f1;
@@ -48,30 +50,64 @@
     --vt-c-black-soft: #242424;
     --vt-c-black-mute: #2f2f2f;
 
-    --vp-c-default-1: var(--vp-c-gray-1);
-    --vp-c-default-2: var(--vp-c-gray-2);
-    --vp-c-default-3: var(--vp-c-gray-3);
-    --vp-c-default-soft: var(--vp-c-gray-soft);
+    --vp-c-bg: var(--gray-1);
+    --vp-c-bg-alt: var(--gray-2);
+    --vp-c-bg-elv: var(--gray-2);
+    --vp-c-bg-soft: var(--gray-2);
+    --vp-c-bg-mute: var(--gray-3);
+    --vp-c-divider: var(--gray-6);
+    --vp-c-border: var(--gray-7);
+    --vp-c-gutter: var(--gray-4);
+    --vp-c-text-1: var(--gray-12);
+    --vp-c-text-2: var(--gray-11);
+    --vp-c-text-3: var(--gray-10);
 
-    --vp-c-brand-1: var(--vp-c-indigo-1);
-    --vp-c-brand-2: var(--vp-c-indigo-2);
-    --vp-c-brand-3: var(--vp-c-indigo-3);
-    --vp-c-brand-soft: var(--vp-c-indigo-soft);
+    --vp-c-default-1: var(--gray-8);
+    --vp-c-default-2: var(--gray-7);
+    --vp-c-default-3: var(--gray-3);
+    --vp-c-default-soft: var(--gray-3);
+
+    --vp-c-brand-1: var(--grass-11);
+    --vp-c-brand-2: var(--grass-10);
+    --vp-c-brand-3: var(--grass-9);
+    --vp-c-brand-soft: var(--grass-3);
+    --vp-c-brand-soft-border: var(--grass-6);
 
     --vp-c-tip-1: var(--vp-c-brand-1);
     --vp-c-tip-2: var(--vp-c-brand-2);
     --vp-c-tip-3: var(--vp-c-brand-3);
     --vp-c-tip-soft: var(--vp-c-brand-soft);
 
-    --vp-c-warning-1: var(--vp-c-yellow-1);
-    --vp-c-warning-2: var(--vp-c-yellow-2);
-    --vp-c-warning-3: var(--vp-c-yellow-3);
-    --vp-c-warning-soft: var(--vp-c-yellow-soft);
+    --vp-c-warning-1: var(--amber-11);
+    --vp-c-warning-2: var(--amber-10);
+    --vp-c-warning-3: var(--amber-9);
+    --vp-c-warning-soft: var(--amber-3);
 
-    --vp-c-danger-1: var(--vp-c-red-1);
-    --vp-c-danger-2: var(--vp-c-red-2);
-    --vp-c-danger-3: var(--vp-c-red-3);
-    --vp-c-danger-soft: var(--vp-c-red-soft);
+    --vp-c-danger-1: var(--red-11);
+    --vp-c-danger-2: var(--red-10);
+    --vp-c-danger-3: var(--red-9);
+    --vp-c-danger-soft: var(--red-3);
+
+    --vp-code-block-bg: var(--gray-2);
+    --vp-code-line-highlight-color: var(--grass-3);
+    --vp-code-copy-code-bg: var(--gray-3);
+    --vp-code-copy-code-hover-bg: var(--gray-4);
+    --vp-code-color: var(--grass-11);
+
+    --vp-font-family-base: "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --vp-font-family-mono: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+    /* A small continuous-corner scale: controls stay compact, product surfaces feel softer. */
+    --ui-radius-xs: 8px;
+    --ui-radius-sm: 11px;
+    --ui-radius-md: 14px;
+    --ui-radius-control: 12px;
+    --ui-radius-card: 20px;
+    --ui-radius-window: 26px;
+
+    --md-diagram-node: var(--grass-3);
+    --md-diagram-node-border: var(--grass-8);
+    --md-diagram-line: var(--gray-11);
 
 
     /* Legacy component aliases backed by VitePress' maintained palette. */
@@ -125,6 +161,8 @@
 }
 
 .dark {
+    color-scheme: dark;
+
     --vt-c-text-inverse-1: rgba(60, 60, 67, 1);
     --vt-c-text-inverse-2: rgba(60, 60, 67, 0.78);
     --vt-c-text-inverse-3: rgba(60, 60, 67, 0.56);

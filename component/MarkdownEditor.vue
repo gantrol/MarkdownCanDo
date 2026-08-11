@@ -1,10 +1,33 @@
 <script setup lang="ts">
+import {
+  Bold,
+  Code,
+  Columns2,
+  Eye,
+  FileText,
+  Heading2,
+  Italic,
+  Link2,
+  List,
+  ListChecks,
+  ListOrdered,
+  Minus,
+  PencilLine,
+  Quote,
+  Strikethrough,
+  Table2
+} from '@lucide/vue'
 import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import EditorDocumentActions from './editor/EditorDocumentActions.vue'
+import EditorFormattingToolbar from './editor/EditorFormattingToolbar.vue'
+import EditorViewSwitcher from './editor/EditorViewSwitcher.vue'
+import type { EditorToolbarGroup, EditorViewItem, EditorViewMode } from './editor/types'
 import { editorMessages, getUiLocale, type UiLocale } from '../utils/i18n'
 import { renderMarkdown, sanitizeSvg } from '../utils/markdown'
+import { escapeLinkDestination, escapeLinkLabel, labelForUrl, parseLinkCandidate } from '../utils/markdownLink'
+import { getMermaidConfig } from '../utils/mermaid'
 
-type ViewMode = 'edit' | 'wysiwyg' | 'split' | 'preview'
-type LegacyMode = ViewMode | 'ir' | 'sv' | 'wysiwyg'
+type LegacyMode = EditorViewMode | 'ir' | 'sv' | 'wysiwyg'
 
 interface EditorOptions {
   height?: number | string
@@ -35,9 +58,10 @@ const preview = ref<HTMLElement>()
 const source = ref(props.text)
 const previewHtml = ref('')
 const previewDirty = ref(true)
-const locale = ref<UiLocale>('en')
-const viewMode = ref<ViewMode>('split')
+const locale = ref<UiLocale>('en-US')
+const viewMode = ref<EditorViewMode>('split')
 const copyState = ref<'idle' | 'copied'>('idle')
+const isFullscreen = ref(false)
 
 let renderTimer: ReturnType<typeof setTimeout> | undefined
 let copyTimer: ReturnType<typeof setTimeout> | undefined
@@ -67,26 +91,44 @@ const stats = computed(() => {
   return messages.value.stats(lines, words, characters)
 })
 
-const toolbarItems = computed(() => [
-  { key: 'heading', icon: 'H', label: messages.value.heading, action: () => prefixLines('## ') },
-  { key: 'bold', icon: 'B', label: messages.value.bold, shortcut: 'Control+B', action: () => wrapSelection('**', '**', 'bold text') },
-  { key: 'italic', icon: 'I', label: messages.value.italic, shortcut: 'Control+I', action: () => wrapSelection('*', '*', 'italic text') },
-  { key: 'strike', icon: 'S', label: messages.value.strike, action: () => wrapSelection('~~', '~~', 'strikethrough') },
-  { key: 'link', icon: '↗', label: messages.value.link, shortcut: 'Control+K', action: insertLink },
-  { key: 'bullet-list', icon: '•', label: messages.value.bulletList, action: () => prefixLines('- ') },
-  { key: 'ordered-list', icon: '1.', label: `1. ${messages.value.orderedList}`, action: () => prefixLines((_line, index) => `${index + 1}. `) },
-  { key: 'task-list', icon: '☑', label: messages.value.taskList, action: () => prefixLines('- [ ] ') },
-  { key: 'quote', icon: '❯', label: messages.value.quote, action: () => prefixLines('> ') },
-  { key: 'code', icon: '</>', label: messages.value.code, action: insertCode },
-  { key: 'table', icon: '▦', label: messages.value.table, action: insertTable },
-  { key: 'rule', icon: '—', label: messages.value.rule, action: () => insertBlock('\n---\n') }
+const toolbarGroups = computed<EditorToolbarGroup[]>(() => [
+  {
+    key: 'text',
+    label: messages.value.textFormatting,
+    items: [
+      { key: 'heading', icon: Heading2, label: messages.value.heading, action: () => prefixLines('## ') },
+      { key: 'bold', icon: Bold, label: messages.value.bold, shortcut: 'Control+B', action: () => wrapSelection('**', '**', messages.value.boldPlaceholder) },
+      { key: 'italic', icon: Italic, label: messages.value.italic, shortcut: 'Control+I', action: () => wrapSelection('*', '*', messages.value.italicPlaceholder) },
+      { key: 'strike', icon: Strikethrough, label: messages.value.strike, action: () => wrapSelection('~~', '~~', messages.value.strikePlaceholder) }
+    ]
+  },
+  {
+    key: 'lists',
+    label: messages.value.lists,
+    items: [
+      { key: 'bullet-list', icon: List, label: messages.value.bulletList, action: () => prefixLines('- ') },
+      { key: 'ordered-list', icon: ListOrdered, label: messages.value.orderedList, action: () => prefixLines((_line, index) => `${index + 1}. `) },
+      { key: 'task-list', icon: ListChecks, label: messages.value.taskList, action: () => prefixLines('- [ ] ') }
+    ]
+  },
+  {
+    key: 'insert',
+    label: messages.value.insert,
+    items: [
+      { key: 'link', icon: Link2, label: messages.value.link, shortcut: 'Control+K', action: insertLink },
+      { key: 'quote', icon: Quote, label: messages.value.quote, action: () => prefixLines('> ') },
+      { key: 'code', icon: Code, label: messages.value.code, action: insertCode },
+      { key: 'table', icon: Table2, label: messages.value.table, action: insertTable },
+      { key: 'rule', icon: Minus, label: messages.value.rule, action: () => insertBlock('\n---\n') }
+    ]
+  }
 ])
 
-const viewItems = computed(() => [
-  { mode: 'edit' as const, label: messages.value.edit, icon: '✎' },
-  { mode: 'wysiwyg' as const, label: messages.value.wysiwyg, icon: 'W' },
-  { mode: 'split' as const, label: messages.value.split, icon: '◫' },
-  { mode: 'preview' as const, label: messages.value.previewOnly, icon: '◉' }
+const viewItems = computed<EditorViewItem[]>(() => [
+  { mode: 'edit' as const, label: messages.value.edit, icon: PencilLine },
+  { mode: 'wysiwyg' as const, label: messages.value.wysiwyg, icon: FileText },
+  { mode: 'split' as const, label: messages.value.split, icon: Columns2 },
+  { mode: 'preview' as const, label: messages.value.previewOnly, icon: Eye }
 ])
 
 const wysiwygToolbarLabels = computed(() => [
@@ -123,7 +165,7 @@ function schedulePreview(immediate = false) {
 
 async function updatePreview() {
   const version = ++renderVersion
-  previewHtml.value = renderMarkdown(source.value)
+  previewHtml.value = renderMarkdown(source.value, locale.value)
   previewDirty.value = false
   await nextTick()
   if (version !== renderVersion) return
@@ -188,14 +230,11 @@ async function renderMermaid(element: HTMLElement) {
   const code = element.querySelector('code')?.textContent ?? ''
   if (!canvas || !code) return
 
+  canvas.setAttribute('aria-label', messages.value.mermaidDiagram)
+  if (status) status.textContent = messages.value.diagramLoading
   status?.removeAttribute('hidden')
   const { default: mermaid } = await import('mermaid')
-  mermaid.initialize({
-    startOnLoad: false,
-    securityLevel: 'strict',
-    suppressErrorRendering: true,
-    theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default'
-  })
+  mermaid.initialize(getMermaidConfig())
 
   try {
     const result = await mermaid.render(`markdown-editor-diagram-${++diagramId}`, code)
@@ -203,7 +242,7 @@ async function renderMermaid(element: HTMLElement) {
     status?.setAttribute('hidden', '')
   } catch (error) {
     canvas.replaceChildren()
-    if (status) status.textContent = 'Diagram syntax error. The source is available below.'
+    if (status) status.textContent = messages.value.diagramError
     console.warn('[MarkdownCanDo] Mermaid preview failed.', error)
   }
 }
@@ -214,8 +253,10 @@ async function renderAbc(element: HTMLElement) {
   const code = element.querySelector('code')?.textContent ?? ''
   if (!canvas || !code) return
 
+  canvas.setAttribute('aria-label', messages.value.musicNotation)
+
   try {
-    const abcjs = await import('abcjs')
+    const { default: abcjs } = await import('abcjs')
     abcjs.renderAbc(canvas, code, {
       add_classes: true,
       responsive: 'resize'
@@ -224,12 +265,12 @@ async function renderAbc(element: HTMLElement) {
     status?.setAttribute('hidden', '')
   } catch (error) {
     canvas.replaceChildren()
-    if (status) status.textContent = 'Music syntax error. The source is available below.'
+    if (status) status.textContent = messages.value.musicError
     console.warn('[MarkdownCanDo] ABC preview failed.', error)
   }
 }
 
-function setViewMode(mode: ViewMode) {
+function setViewMode(mode: EditorViewMode) {
   userSelectedMode = true
   viewMode.value = mode
   if (mode === 'split' || mode === 'preview') {
@@ -248,7 +289,7 @@ function syncResponsiveMode(event: MediaQueryList | MediaQueryListEvent) {
   if ((viewMode.value === 'split' || viewMode.value === 'preview') && previewDirty.value) schedulePreview(true)
 }
 
-function preferredDesktopMode(): ViewMode {
+function preferredDesktopMode(): EditorViewMode {
   if (props.options.mode === 'edit') return 'edit'
   if (props.options.mode === 'preview') return 'preview'
   if (props.options.mode === 'wysiwyg' || props.options.mode === 'ir') return 'wysiwyg'
@@ -305,17 +346,47 @@ function prefixLines(prefix: string | ((line: string, index: number) => string))
   })
 }
 
-function insertLink() {
+async function readClipboardLink() {
+  if (!navigator.clipboard?.readText) return undefined
+  try {
+    return parseLinkCandidate(await navigator.clipboard.readText())
+  } catch {
+    return undefined
+  }
+}
+
+async function insertLink() {
   const element = input.value
   if (!element) return
   const start = element.selectionStart
   const end = element.selectionEnd
-  const selected = source.value.slice(start, end) || 'link text'
-  const replacement = `[${selected}](https://)`
+  const sourceSnapshot = source.value
+  const selected = sourceSnapshot.slice(start, end)
+  const selectedLink = parseLinkCandidate(selected)
+  const clipboardLink = selectedLink ? undefined : await readClipboardLink()
+  if (
+    source.value !== sourceSnapshot
+    || input.value !== element
+    || element.selectionStart !== start
+    || element.selectionEnd !== end
+  ) return
+  const link = selectedLink ?? clipboardLink
+  const label = escapeLinkLabel(
+    selected && !selectedLink
+      ? selected
+      : selectedLink?.label ?? clipboardLink?.label ?? (link ? labelForUrl(link.href) : messages.value.linkPlaceholder)
+  )
+  const href = escapeLinkDestination(link?.href ?? 'https://')
+  const replacement = `[${label}](${href})`
   replaceSelection(replacement, start, end)
   void nextTick(() => {
     element.focus()
-    element.setSelectionRange(start + selected.length + 3, start + selected.length + 11)
+    if (link) {
+      element.setSelectionRange(start + replacement.length, start + replacement.length)
+      return
+    }
+    const hrefStart = start + label.length + 3
+    element.setSelectionRange(hrefStart, hrefStart + href.length)
   })
 }
 
@@ -323,11 +394,11 @@ function insertCode() {
   const element = input.value
   const selected = element ? source.value.slice(element.selectionStart, element.selectionEnd) : ''
   if (selected.includes('\n')) wrapSelection('```\n', '\n```', selected)
-  else wrapSelection('`', '`', 'code')
+  else wrapSelection('`', '`', messages.value.codePlaceholder)
 }
 
 function insertTable() {
-  insertBlock('\n| Column 1 | Column 2 |\n| --- | --- |\n| Value 1 | Value 2 |\n')
+  insertBlock(`\n| ${messages.value.tableColumn1} | ${messages.value.tableColumn2} |\n| --- | --- |\n| ${messages.value.tableValue1} | ${messages.value.tableValue2} |\n`)
 }
 
 function insertBlock(block: string) {
@@ -346,9 +417,9 @@ function handleShortcut(event: KeyboardEvent) {
   const key = event.key.toLowerCase()
   if (!['b', 'i', 'k'].includes(key)) return
   event.preventDefault()
-  if (key === 'b') wrapSelection('**', '**', 'bold text')
-  if (key === 'i') wrapSelection('*', '*', 'italic text')
-  if (key === 'k') insertLink()
+  if (key === 'b') wrapSelection('**', '**', messages.value.boldPlaceholder)
+  if (key === 'i') wrapSelection('*', '*', messages.value.italicPlaceholder)
+  if (key === 'k') void insertLink()
 }
 
 async function copyMarkdown() {
@@ -372,11 +443,16 @@ async function toggleFullscreen() {
   }
 }
 
+function syncFullscreenState() {
+  isFullscreen.value = document.fullscreenElement === root.value
+}
+
 onMounted(() => {
   locale.value = getUiLocale()
   mediaQuery = window.matchMedia('(max-width: 767px)')
   syncResponsiveMode(mediaQuery)
   mediaQuery.addEventListener('change', syncResponsiveMode)
+  document.addEventListener('fullscreenchange', syncFullscreenState)
   if (viewMode.value === 'split' || viewMode.value === 'preview') schedulePreview(true)
 
   themeObserver = new MutationObserver(() => {
@@ -397,6 +473,7 @@ onBeforeUnmount(() => {
   enhancementObserver?.disconnect()
   themeObserver?.disconnect()
   mediaQuery?.removeEventListener('change', syncResponsiveMode)
+  document.removeEventListener('fullscreenchange', syncFullscreenState)
 })
 </script>
 
@@ -411,61 +488,33 @@ onBeforeUnmount(() => {
   >
     <h2 :id="editorTitleId" class="sr-only">{{ messages.editor }}</h2>
 
-    <div class="markdown-editor__toolbar" role="toolbar" :aria-label="messages.editor">
-      <div v-show="viewMode !== 'wysiwyg'" class="markdown-editor__formatting-tools">
-        <button
-          v-for="item in toolbarItems"
-          :key="item.key"
-          type="button"
-          class="markdown-editor__tool"
-          :class="`markdown-editor__tool--${item.key}`"
-          :aria-label="item.label"
-          :aria-keyshortcuts="item.shortcut"
-          :title="item.label"
-          @mousedown.prevent
-          @click="item.action"
-        >
-          <span aria-hidden="true">{{ item.icon }}</span>
-        </button>
+    <header class="markdown-editor__toolbar">
+      <div class="markdown-editor__toolbar-primary">
+        <EditorViewSwitcher
+          :items="viewItems"
+          :model-value="viewMode"
+          :label="messages.view"
+          @update:model-value="setViewMode"
+        />
+
+        <EditorDocumentActions
+          :label="messages.documentActions"
+          :copy-label="messages.copy"
+          :copied-label="messages.copied"
+          :fullscreen-label="messages.fullscreen"
+          :copy-state="copyState"
+          :is-fullscreen="isFullscreen"
+          @copy="copyMarkdown"
+          @fullscreen="toggleFullscreen"
+        />
       </div>
 
-      <div class="markdown-editor__toolbar-actions">
-        <div class="markdown-editor__view-switcher" role="group" :aria-label="messages.split">
-          <button
-            v-for="item in viewItems"
-            :key="item.mode"
-            type="button"
-            class="markdown-editor__tool"
-            :class="[`markdown-editor__view--${item.mode}`, { 'is-active': viewMode === item.mode }]"
-            :aria-label="item.label"
-            :aria-pressed="viewMode === item.mode"
-            :title="item.label"
-            @click="setViewMode(item.mode)"
-          >
-            <span aria-hidden="true">{{ item.icon }}</span>
-          </button>
-        </div>
-
-        <button
-          type="button"
-          class="markdown-editor__tool"
-          :aria-label="copyState === 'copied' ? messages.copied : messages.copy"
-          :title="messages.copy"
-          @click="copyMarkdown"
-        >
-          <span aria-hidden="true">{{ copyState === 'copied' ? '✓' : '⧉' }}</span>
-        </button>
-        <button
-          type="button"
-          class="markdown-editor__tool markdown-editor__fullscreen"
-          :aria-label="messages.fullscreen"
-          :title="messages.fullscreen"
-          @click="toggleFullscreen"
-        >
-          <span aria-hidden="true">⛶</span>
-        </button>
-      </div>
-    </div>
+      <EditorFormattingToolbar
+        v-show="viewMode !== 'wysiwyg' && viewMode !== 'preview'"
+        :groups="toolbarGroups"
+        :label="messages.textFormatting"
+      />
+    </header>
 
     <div class="markdown-editor__body">
       <div v-show="viewMode === 'edit' || viewMode === 'split'" class="markdown-editor__source-pane">
@@ -503,6 +552,12 @@ onBeforeUnmount(() => {
             :loading-label="messages.loadingWysiwyg"
             :error-label="messages.wysiwygError"
             :toolbar-labels="wysiwygToolbarLabels"
+            :diagram-label="messages.mermaidDiagram"
+            :diagram-loading-label="messages.diagramLoading"
+            :diagram-error-label="messages.diagramError"
+            :diagram-preview-label="messages.diagramPreview"
+            :edit-diagram-label="messages.editDiagram"
+            :hide-diagram-source-label="messages.hideDiagramSource"
             @update:model-value="handleWysiwygInput"
           />
           <template #fallback>
@@ -533,10 +588,14 @@ onBeforeUnmount(() => {
   min-height: 520px;
   overflow: hidden;
   flex-direction: column;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: var(--ui-radius-card);
   background: var(--vp-c-bg);
-  box-shadow: var(--vp-shadow-2);
+  box-shadow: 0 10px 36px rgb(0 0 0 / 7%), 0 1px 2px rgb(0 0 0 / 4%);
+}
+
+.dark .markdown-editor {
+  box-shadow: 0 18px 46px rgb(0 0 0 / 24%);
 }
 
 .markdown-editor:fullscreen {
@@ -547,27 +606,40 @@ onBeforeUnmount(() => {
 
 .markdown-editor__toolbar {
   display: flex;
-  min-height: 46px;
-  padding: 3px 6px;
+  min-width: 0;
   overflow: hidden;
-  align-items: center;
-  gap: 2px;
+  flex: 0 0 auto;
+  flex-direction: column;
   border-bottom: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
 }
 
+.markdown-editor__toolbar-primary {
+  display: flex;
+  width: 100%;
+  min-height: 52px;
+  padding: 7px 9px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .markdown-editor__formatting-tools,
 .markdown-editor__toolbar-actions,
-.markdown-editor__view-switcher {
+.markdown-editor__view-switcher,
+.markdown-editor__tool-group {
   display: flex;
   align-items: center;
-  gap: 2px;
 }
 
 .markdown-editor__formatting-tools {
+  width: 100%;
   min-width: 0;
+  min-height: 44px;
+  padding: 4px 7px;
   overflow-x: auto;
-  flex: 1;
+  border-top: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
   scrollbar-width: none;
 }
 
@@ -576,46 +648,118 @@ onBeforeUnmount(() => {
 }
 
 .markdown-editor__toolbar-actions {
-  padding-left: 5px;
+  flex: 0 0 auto;
+  padding-left: 8px;
   margin-left: auto;
   border-left: 1px solid var(--vp-c-divider);
+  gap: 2px;
+}
+
+.markdown-editor__view-switcher {
+  min-width: 0;
+  padding: 3px;
+  overflow-x: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ui-radius-md);
+  background: var(--vp-c-bg-mute);
+  scrollbar-width: none;
+}
+
+.markdown-editor__view-switcher::-webkit-scrollbar {
+  display: none;
+}
+
+.markdown-editor__view-button {
+  display: inline-flex;
+  min-width: 0;
+  height: 32px;
+  padding: 0 9px;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border: 0;
+  border-radius: var(--ui-radius-sm);
+  color: var(--vp-c-text-2);
+  background: transparent;
+  font: 650 12px/1 var(--vp-font-family-base);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.markdown-editor__view-button > span {
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: max-width 180ms ease, margin-left 180ms ease, opacity 120ms ease, transform 180ms ease;
+}
+
+.markdown-editor__view-button:hover > span,
+.markdown-editor__view-button:focus-visible > span {
+  max-width: 160px;
+  margin-left: 7px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.markdown-editor__view-button:hover {
+  color: var(--vp-c-text-1);
   background: var(--vp-c-bg-soft);
+}
+
+.markdown-editor__view-button.is-active {
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+}
+
+.dark .markdown-editor__view-button.is-active {
+  box-shadow: 0 1px 4px rgb(0 0 0 / 35%);
+}
+
+.markdown-editor__tool-group {
+  flex: 0 0 auto;
+  padding: 0 7px;
+  gap: 2px;
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+.markdown-editor__tool-group:first-child {
+  padding-left: 0;
+}
+
+.markdown-editor__tool-group:last-child {
+  padding-right: 0;
+  border-right: 0;
 }
 
 .markdown-editor__tool {
   display: inline-grid;
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
   padding: 0;
   place-items: center;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--ui-radius-sm);
   color: var(--vp-c-text-2);
   background: transparent;
-  font: 600 14px/1 var(--vp-font-family-base);
   cursor: pointer;
 }
 
-.markdown-editor__tool:hover,
-.markdown-editor__tool.is-active {
+.markdown-editor__tool:hover {
   color: var(--vp-c-brand-1);
   background: var(--vp-c-brand-soft);
 }
 
 .markdown-editor__tool:focus-visible,
+.markdown-editor__view-button:focus-visible,
 .markdown-editor__input:focus-visible,
 .markdown-editor__preview:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: -2px;
-}
-
-.markdown-editor__tool--italic {
-  font-style: italic;
-}
-
-.markdown-editor__tool--strike {
-  text-decoration: line-through;
 }
 
 .markdown-editor__body {
@@ -711,7 +855,7 @@ onBeforeUnmount(() => {
   padding: 14px;
   overflow: auto;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 10px;
+  border-radius: var(--ui-radius-md);
   background: var(--vp-c-bg-soft);
 }
 
@@ -723,6 +867,10 @@ onBeforeUnmount(() => {
   margin: auto;
 }
 
+.dark .markdown-editor__preview-content .md-preview-abc__canvas svg {
+  filter: invert(0.88);
+}
+
 .markdown-editor__preview-content .md-preview-diagram__status,
 .markdown-editor__preview-content .md-preview-abc__status {
   display: grid;
@@ -730,6 +878,11 @@ onBeforeUnmount(() => {
   margin: 0;
   place-items: center;
   color: var(--vp-c-text-2);
+}
+
+.markdown-editor__preview-content .md-preview-diagram__status[hidden],
+.markdown-editor__preview-content .md-preview-abc__status[hidden] {
+  display: none;
 }
 
 .markdown-editor__preview-content .md-preview-diagram__source,
@@ -745,9 +898,9 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-3);
   background: var(--vp-c-bg-soft);
-  font-size: 12px;
+  font: 500 11px/1 var(--vp-font-family-mono);
 }
 
 .markdown-editor--edit .markdown-editor__body,
@@ -781,13 +934,41 @@ onBeforeUnmount(() => {
   .markdown-editor {
     --md-editor-height: 70dvh;
     min-height: 500px;
-    border-radius: 10px;
+    border-radius: var(--ui-radius-md);
+  }
+
+  .markdown-editor__toolbar-primary {
+    min-height: 54px;
+    padding: 5px 7px;
+    gap: 6px;
+  }
+
+  .markdown-editor__view-button {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    padding: 0;
+  }
+
+  .markdown-editor__view-button > span {
+    display: none;
   }
 
   .markdown-editor__tool {
     width: 44px;
     min-width: 44px;
     height: 44px;
+  }
+
+  .markdown-editor__formatting-tools {
+    min-height: 52px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .markdown-editor__tool-group {
+    padding-right: 4px;
+    padding-left: 4px;
   }
 
   .markdown-editor__view--split,
@@ -809,6 +990,17 @@ onBeforeUnmount(() => {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+@supports (corner-shape: squircle) {
+  .markdown-editor,
+  .markdown-editor__view-switcher,
+  .markdown-editor__view-button,
+  .markdown-editor__tool,
+  .markdown-editor__preview-content .md-preview-diagram,
+  .markdown-editor__preview-content .md-preview-abc {
+    corner-shape: squircle;
   }
 }
 </style>

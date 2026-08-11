@@ -6,6 +6,14 @@ import markdown_it_task_list from 'markdown-it-task-checkbox'
 import type MarkdownIt from 'markdown-it'
 
 const analyticsId = 'G-RX6RPWRSWJ'
+const siteOrigin = 'https://markdowncando.com'
+
+function canonicalUrl(relativePath: string) {
+    const cleanPath = relativePath
+        .replace(/(^|\/)index\.md$/u, '$1')
+        .replace(/\.md$/u, '')
+    return new URL(cleanPath ? `/${cleanPath}` : '/', siteOrigin).href
+}
 
 function useCustomFences(md: MarkdownIt) {
     const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules)
@@ -14,18 +22,16 @@ function useCustomFences(md: MarkdownIt) {
         const token = tokens[index]
         const language = token.info.trim().split(/\s+/u)[0]
 
-        if (language === 'abc') {
-            return `<pre><code class="language-abc">${md.utils.escapeHtml(token.content)}</code></pre>`
-        }
-
-        if (language !== 'mermaid') {
+        if (language !== 'mermaid' && language !== 'abc') {
             return defaultFence
                 ? defaultFence(tokens, index, options, env, self)
                 : self.renderToken(tokens, index, options)
         }
 
         const code = Buffer.from(token.content, 'utf8').toString('base64')
-        return `<MermaidDiagram code="${code}" />`
+        return language === 'abc'
+            ? `<AbcNotation code="${code}" />`
+            : `<MermaidDiagram code="${code}" />`
     }
 }
 
@@ -74,11 +80,26 @@ export const shared = defineConfig({
         }
     },
 
+    transformPageData(pageData) {
+        pageData.frontmatter.head ??= []
+        if (pageData.relativePath === '404.md') {
+            pageData.frontmatter.head.push([
+                'meta',
+                { name: 'robots', content: 'noindex, nofollow' }
+            ])
+            return
+        }
+        pageData.frontmatter.head.push([
+            'link',
+            { rel: 'canonical', href: canonicalUrl(pageData.relativePath) }
+        ])
+    },
+
     head: [
         // ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-mini.svg' }],
         ['link', { rel: 'icon', type: 'image/png', href: '/logo-mini.png' }],
-        ['meta', { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' }],
-        ['meta', { name: 'theme-color', content: '#1b1b1f', media: '(prefers-color-scheme: dark)' }],
+        ['meta', { name: 'theme-color', content: '#fcfcfc', media: '(prefers-color-scheme: light)' }],
+        ['meta', { name: 'theme-color', content: '#111111', media: '(prefers-color-scheme: dark)' }],
         ['meta', { property: 'og:type', content: 'website' }],
         ['meta', { property: 'og:locale', content: 'en' }],
         ['meta', { property: 'og:title', content: 'Markdown Can Do' }],

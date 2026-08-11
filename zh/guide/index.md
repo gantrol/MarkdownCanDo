@@ -37,18 +37,14 @@ timeline
 
 ```mermaid
 flowchart LR
-A(("问题")) --> B(朋友)
-A --> ChatGPT(ChatGPT)
-B --> sum((汇总))
-ChatGPT --> sum
-sum --> solution(方案)
-solution --> accu((积累))
-accu -->|数量多| Wealth[(财富)]
-accu -->|时间久| Wealth
+  A([下班]) --> B{今晚做饭吗？}
+  B -->|做饭| C[买菜]
+  B -->|不做| D[带饭回家]
+  C --> E[回家]
+  D --> E
+  E --> F([一起吃饭])
 ```
 ### 五线谱
-
-> ChatGPT 写的，可能有错
 
 ```abc
 X:1

@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId } from 'vue'
+import { useData } from 'vitepress'
+import { diagramMessages, resolveUiLocaleTag } from '../../../utils/i18n'
+import { sanitizeSvg } from '../../../utils/markdown'
+import { getMermaidConfig } from '../../../utils/mermaid'
 
 const props = defineProps<{
   code: string
 }>()
+
+const { lang } = useData()
 
 const canvas = ref<HTMLElement>()
 const root = ref<HTMLElement>()
@@ -17,12 +22,7 @@ let intersectionObserver: IntersectionObserver | undefined
 let themeObserver: MutationObserver | undefined
 let renderVersion = 0
 
-const message = computed(() => {
-  const lang = typeof document === 'undefined' ? 'en' : document.documentElement.lang
-  if (lang.startsWith('zh')) return '图表暂时无法渲染，请检查下方源码。'
-  if (lang.startsWith('pt')) return 'Não foi possível renderizar o diagrama. Verifique o código-fonte abaixo.'
-  return 'The diagram could not be rendered. Check the source below.'
-})
+const labels = computed(() => diagramMessages[resolveUiLocaleTag(lang.value)])
 
 function decodeBase64(value: string) {
   const bytes = Uint8Array.from(atob(value), character => character.charCodeAt(0))
@@ -39,20 +39,13 @@ async function renderDiagram() {
     const { default: mermaid } = await import('mermaid')
     if (currentVersion !== renderVersion || !canvas.value) return
 
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: 'strict',
-      suppressErrorRendering: true,
-      theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default'
-    })
+    mermaid.initialize(getMermaidConfig())
 
     const id = `markdowncando-diagram-${componentId}-${currentVersion}`
     const { svg, bindFunctions } = await mermaid.render(id, source.value)
     if (currentVersion !== renderVersion || !canvas.value) return
 
-    canvas.value.innerHTML = DOMPurify.sanitize(svg, {
-      USE_PROFILES: { html: true, svg: true, svgFilters: true }
-    })
+    canvas.value.innerHTML = sanitizeSvg(svg)
     bindFunctions?.(canvas.value)
     status.value = 'ready'
   } catch (error) {
@@ -102,16 +95,16 @@ onBeforeUnmount(() => {
       ref="canvas"
       class="mermaid-diagram__canvas"
       role="img"
-      aria-label="Mermaid diagram"
+      :aria-label="labels.mermaid"
     />
     <p v-if="status === 'idle' || status === 'loading'" class="mermaid-diagram__status" role="status">
-      Rendering diagram…
+      {{ labels.mermaidLoading }}
     </p>
     <p v-else-if="status === 'error'" class="mermaid-diagram__error" role="alert">
-      {{ message }}
+      {{ labels.mermaidError }}
     </p>
     <details v-if="source" class="mermaid-diagram__source">
-      <summary>Mermaid source</summary>
+      <summary>{{ labels.mermaidSource }}</summary>
       <pre><code>{{ source }}</code></pre>
     </details>
   </figure>
@@ -125,7 +118,7 @@ onBeforeUnmount(() => {
   padding: 16px;
   overflow: auto;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
+  border-radius: var(--ui-radius-card);
   background: var(--vp-c-bg-soft);
 }
 

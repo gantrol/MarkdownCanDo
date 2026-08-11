@@ -2,34 +2,33 @@
 layout: home
 
 hero:
-  name: "Markdown 能做！"
-  tagline: 摆脱烦人的 Word 和 HTML 排版
+  text: "Markdown 能做"
   actions:
     - theme: brand
-      text: 即刻体验
+      text: 演练场
       link: /zh/playground/
     - theme: alt
-      text: 为何而用？
+      text: 为什么用
       link: /zh/guide/why
 
 features:
-  - icon: 📚
-    title: 教程
-    details: 一步步教会你用 Markdown
+  - icon: '01'
+    title: 边做边学
+    details: 从基础语法到实际发布流程，用简洁教程一步步掌握 Markdown。
     link: '/zh/tutorial/'
-    linkText: '点击查看'
+    linkText: 开始教程
     target: '_self'
-  - icon: 🛠️
-    title: 多项功能即刻体验
-    details: 超越基础排版，轻松创建流程图、甘特图、演示文稿（PPT）等
+  - icon: '02'
+    title: 写作与预览同步
+    details: 在编辑器内完成富文本、Mermaid 图表、公式、表格与任务列表。
     link: '/zh/playground/'
-    linkText: '马上探索'
+    linkText: 体验编辑器
     target: '_self'
-  - icon: 🔍
-    title: 更多
-    details: 探索 Markdown 的更多功能，包括有用的外链资源，请根据需要选择使用
+  - icon: '03'
+    title: 随手可查的参考
+    details: 需要时快速找到语法、可复用示例和经过筛选的延伸资源。
     link: '/zh/reference/resource'
-    linkText: '探索更多'
+    linkText: 浏览参考
     target: '_self'
 ---
 

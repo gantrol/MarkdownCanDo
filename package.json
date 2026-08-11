@@ -14,7 +14,9 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "@lucide/vue": "^1.31.0",
     "@milkdown/crepe": "^7.22.0",
+    "@radix-ui/colors": "^3.0.0",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^20.10.1",
     "abcjs": "^6.7.0",

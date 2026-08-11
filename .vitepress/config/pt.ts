@@ -11,8 +11,8 @@ export const pt = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/pt/guide/': sidebarGuide(),
-            '/pt/reference/': sidebarReference(),
+            '/pt/guide/': sidebarDocs(),
+            '/pt/reference/': sidebarDocs(),
         },
 
         editLink: {
@@ -80,29 +80,33 @@ function nav(): DefaultTheme.NavItem[] {
     ]
 }
 
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: 'Introdução',
+            text: 'Aprender Markdown',
             collapsed: false,
             items: [
                 { text: 'O que o Markdown pode fazer', link: '/pt/guide/' },
-                { text: 'Por que usar Markdown?', link: '/pt/guide/why' },
                 { text: 'O que é Markdown?', link: '/pt/guide/what-is-markdown' },
+                { text: 'Por que usar Markdown?', link: '/pt/guide/why' },
             ]
         },
-    ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-    return [
         {
-            text: 'Referência',
+            text: 'Praticar',
             collapsed: false,
             items: [
-                { text: 'Guia rápido', link: '/pt/reference/cheatsheet/' },
-                { text: 'Usar o ChatGPT', link: '/pt/reference/chatgpt/' },
-                { text: 'Recursos adicionais', link: '/pt/reference/resource' },
+                { text: 'Tutorial de Markdown', link: '/pt/tutorial/' },
+                { text: 'Playground de Markdown', link: '/pt/playground/' },
+                { text: 'Exemplos de Markdown', link: '/pt/showcase/' },
+            ]
+        },
+        {
+            text: 'Sintaxe e recursos',
+            collapsed: false,
+            items: [
+                { text: 'Guia rápido de Markdown', link: '/pt/reference/cheatsheet/' },
+                { text: 'Escrever Markdown com ChatGPT', link: '/pt/reference/chatgpt/' },
+                { text: 'Recursos para aprender Markdown', link: '/pt/reference/resource' },
             ]
         }
     ]

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useData } from 'vitepress'
+import { replLoadingMessages, resolveUiLocaleTag } from '../../../utils/i18n'
 
 const props = defineProps<{
   message?: string
@@ -9,9 +10,7 @@ const props = defineProps<{
 const { lang } = useData()
 const loadingMessage = computed(() => {
   if (props.message) return props.message
-  if (lang.value.startsWith('zh')) return '编辑器加载中…'
-  if (lang.value.startsWith('pt')) return 'Carregando o editor…'
-  return 'Loading editor…'
+  return replLoadingMessages[resolveUiLocaleTag(lang.value)]
 })
 </script>
 

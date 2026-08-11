@@ -2,6 +2,7 @@ import DOMPurify from 'dompurify'
 import MarkdownIt from 'markdown-it'
 import markdownItFootnote from 'markdown-it-footnote'
 import markdownItTaskList from 'markdown-it-task-checkbox'
+import { diagramMessages, type UiLocale } from './i18n'
 
 const markdown = new MarkdownIt({
   breaks: false,
@@ -19,6 +20,10 @@ const defaultImage = markdown.renderer.rules.image?.bind(markdown.renderer.rules
 markdown.renderer.rules.fence = (tokens, index, options, env, self) => {
   const token = tokens[index]
   const language = token.info.trim().split(/\s+/u)[0]
+  const locale = typeof env?.locale === 'string' && env.locale in diagramMessages
+    ? env.locale as UiLocale
+    : 'en-US'
+  const labels = diagramMessages[locale]
 
   if (language !== 'mermaid' && language !== 'abc') {
     return defaultFence
@@ -30,10 +35,10 @@ markdown.renderer.rules.fence = (tokens, index, options, env, self) => {
   if (language === 'abc') {
     return `
       <figure class="md-preview-abc" data-enhancement="abc">
-        <div class="md-preview-abc__canvas" role="img" aria-label="Music notation"></div>
-        <p class="md-preview-abc__status" role="status">Music preview loads when visible.</p>
+        <div class="md-preview-abc__canvas" role="img" aria-label="${labels.music}"></div>
+        <p class="md-preview-abc__status" role="status">${labels.musicLoading}</p>
         <details class="md-preview-abc__source">
-          <summary>ABC source</summary>
+          <summary>${labels.musicSource}</summary>
           <pre><code>${source}</code></pre>
         </details>
       </figure>
@@ -42,10 +47,10 @@ markdown.renderer.rules.fence = (tokens, index, options, env, self) => {
 
   return `
     <figure class="md-preview-diagram" data-enhancement="mermaid">
-      <div class="md-preview-diagram__canvas" role="img" aria-label="Mermaid diagram"></div>
-      <p class="md-preview-diagram__status" role="status">Diagram preview loads when visible.</p>
+      <div class="md-preview-diagram__canvas" role="img" aria-label="${labels.mermaid}"></div>
+      <p class="md-preview-diagram__status" role="status">${labels.mermaidLoading}</p>
       <details class="md-preview-diagram__source">
-        <summary>Mermaid source</summary>
+        <summary>${labels.mermaidSource}</summary>
         <pre><code>${source}</code></pre>
       </details>
     </figure>
@@ -149,8 +154,8 @@ markdown.renderer.rules.math_block = (tokens, index) => {
   return `<div class="md-preview-math md-preview-math--block" data-enhancement="math"><code>${source}</code></div>`
 }
 
-export function renderMarkdown(source: string) {
-  return DOMPurify.sanitize(markdown.render(source), {
+export function renderMarkdown(source: string, locale: UiLocale = 'en-US') {
+  return DOMPurify.sanitize(markdown.render(source, { locale }), {
     ADD_ATTR: ['target'],
     FORBID_ATTR: ['style'],
     FORBID_TAGS: ['button', 'embed', 'form', 'iframe', 'object', 'option', 'select', 'style', 'textarea'],
@@ -160,6 +165,8 @@ export function renderMarkdown(source: string) {
 
 export function sanitizeSvg(source: string) {
   return DOMPurify.sanitize(source, {
+    ADD_ATTR: ['xmlns'],
+    ADD_TAGS: ['foreignObject'],
     USE_PROFILES: { html: true, svg: true, svgFilters: true }
   })
 }

@@ -10,8 +10,8 @@ export const en = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/guide/': sidebarGuide(),
-            '/reference/': sidebarReference(),
+            '/guide/': sidebarDocs(),
+            '/reference/': sidebarDocs(),
         },
 
         editLink: {
@@ -55,29 +55,33 @@ function nav(): DefaultTheme.NavItem[] {
     ]
 }
 
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: 'Introduction',
+            text: 'Learn Markdown',
             collapsed: false,
             items: [
                 { text: 'What Markdown can do', link: '/guide/' },
-                { text: 'Why use Markdown?', link: '/guide/why' },
                 { text: 'What is Markdown?', link: '/guide/what-is-markdown' },
+                { text: 'Why use Markdown?', link: '/guide/why' },
             ]
         },
-    ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-    return [
         {
-            text: 'Reference',
+            text: 'Practice',
             collapsed: false,
             items: [
-                { text: 'Cheat sheet', link: '/reference/cheatsheet/' },
-                { text: 'Use ChatGPT', link: '/reference/chatgpt/' },
-                { text: 'Further resources', link: '/reference/resource' },
+                { text: 'Markdown tutorial', link: '/tutorial/' },
+                { text: 'Online Markdown playground', link: '/playground/' },
+                { text: 'Markdown examples', link: '/showcase/' },
+            ]
+        },
+        {
+            text: 'Syntax & resources',
+            collapsed: false,
+            items: [
+                { text: 'Markdown cheat sheet', link: '/reference/cheatsheet/' },
+                { text: 'Write Markdown with ChatGPT', link: '/reference/chatgpt/' },
+                { text: 'Markdown learning resources', link: '/reference/resource' },
             ]
         }
     ]
