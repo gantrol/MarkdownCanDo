@@ -10,9 +10,8 @@ export const en = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/guide/': { base: '/guide/', items: sidebarGuideAndReference() },
-            '/reference/': { base: '/reference/', items: sidebarGuideAndReference() },
-            '/showcase/': { base: '/showcase/', items: sidebarShowcase() },
+            '/guide/': sidebarGuide(),
+            '/reference/': sidebarReference(),
         },
 
         editLink: {
@@ -29,60 +28,29 @@ export const en = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Home',
-            link: '/',
-            activeMatch: '^/$',
+            text: 'Tutorial',
+            link: '/tutorial/',
+            activeMatch: '^/tutorial(?:/|$)',
         },
         {
-            text: 'Docs',
-            activeMatch: '^/(?:tutorial|guide|showcase|reference)(?:/|$)',
-            items: [
-                {
-                    text: 'Tutorial',
-                    link: '/tutorial/',
-                    activeMatch: '^/tutorial(?:/|$)',
-                },
-                {
-                    text: 'Guide',
-                    link: '/guide/',
-                    activeMatch: '^/guide(?:/|$)',
-                },
-                {
-                    text: 'Reference',
-                    link: '/reference/resource',
-                    activeMatch: '^/reference/(?:resource|chatgpt)(?:/|$)',
-                },
-                {
-                    text: 'Examples',
-                    link: '/showcase/',
-                    activeMatch: '^/showcase(?:/|$)',
-                },
-            ]
-        },
-        {
-            text: 'CheatSheet',
-            link: '/reference/cheatsheet/',
-            activeMatch: '^/reference/cheatsheet(?:/|$)'
+            text: 'Guide',
+            link: '/guide/',
+            activeMatch: '^/guide(?:/|$)',
         },
         {
             text: 'Playground',
             link: '/playground/',
             activeMatch: '^/playground(?:/|$)'
-        }
-    ]
-}
-
-function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
-    return [
-        {
-            text: "Guide",
-            base: '/guide/',
-            items: sidebarGuide(),
         },
         {
-            text: "Reference",
-            base: '/reference/',
-            items: sidebarReference(),
+            text: 'Examples',
+            link: '/showcase/',
+            activeMatch: '^/showcase(?:/|$)',
+        },
+        {
+            text: 'Reference',
+            link: '/reference/cheatsheet/',
+            activeMatch: '^/reference(?:/|$)'
         }
     ]
 }
@@ -94,8 +62,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             collapsed: false,
             items: [
                 { text: 'What Markdown can do', link: '/guide/' },
-                { text: 'Why use Markdown?', link: 'why' },
-                { text: 'What is Markdown?', link: 'what-is-markdown' },
+                { text: 'Why use Markdown?', link: '/guide/why' },
+                { text: 'What is Markdown?', link: '/guide/what-is-markdown' },
             ]
         },
     ]
@@ -103,18 +71,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
-        { text: 'CheatSheet', link: 'cheatsheet/' },
-        { text: 'Reference Materials', link: 'resource' },
-    ]
-}
-function sidebarShowcase(): DefaultTheme.SidebarItem[] {
-    return [
-        // { text: 'Claude Gantt Timeline', link: '#mermaid-timeline-claude' },
-        { text: 'Timeline of ChatGPT ', link: '#mermaid-timeline-chatgpt' },
-        { text: 'Mermaid Mindmap ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
-        { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
-        { text: 'Mermaid Flowchart', link: '#mermaid-flowchart' },
-        { text: 'Markdown Footnote', link: 'footnote' },
-        // { text: '', link: '' },
+        {
+            text: 'Reference',
+            collapsed: false,
+            items: [
+                { text: 'Cheat sheet', link: '/reference/cheatsheet/' },
+                { text: 'Use ChatGPT', link: '/reference/chatgpt/' },
+                { text: 'Further resources', link: '/reference/resource' },
+            ]
+        }
     ]
 }

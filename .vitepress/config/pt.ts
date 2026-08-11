@@ -11,9 +11,8 @@ export const pt = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/pt/guide/': { base: '/pt/guide/', items: sidebarGuideAndReference() },
-            '/pt/reference/': { base: '/pt/reference/', items: sidebarGuideAndReference() },
-            '/pt/showcase/': { base: '/pt/showcase/', items: sidebarShowcase() },
+            '/pt/guide/': sidebarGuide(),
+            '/pt/reference/': sidebarReference(),
         },
 
         editLink: {
@@ -54,45 +53,29 @@ export const pt = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Início',
-            link: '/pt/',
-            activeMatch: '^/pt/$',
+            text: 'Tutorial',
+            link: '/pt/tutorial/',
+            activeMatch: '^/pt/tutorial(?:/|$)',
         },
         {
-            text: 'Documentação',
-            activeMatch: '^/pt/(?:tutorial|guide|showcase|reference)(?:/|$)',
-            items: [
-                {
-                    text: 'Tutorial',
-                    link: '/pt/tutorial/',
-                    activeMatch: '^/pt/tutorial(?:/|$)',
-                },
-                {
-                    text: 'Guia',
-                    link: '/pt/guide/',
-                    activeMatch: '^/pt/guide(?:/|$)',
-                },
-                {
-                    text: 'Referência',
-                    link: '/pt/reference/resource',
-                    activeMatch: '^/pt/reference/(?:resource|chatgpt)(?:/|$)',
-                },
-                {
-                    text: 'Exemplos',
-                    link: '/pt/showcase/',
-                    activeMatch: '^/pt/showcase(?:/|$)',
-                },
-            ]
-        },
-        {
-            text: 'CheatSheet',
-            link: '/pt/reference/cheatsheet/',
-            activeMatch: '^/pt/reference/cheatsheet(?:/|$)'
+            text: 'Guia',
+            link: '/pt/guide/',
+            activeMatch: '^/pt/guide(?:/|$)',
         },
         {
             text: 'Playground',
             link: '/pt/playground/',
             activeMatch: '^/pt/playground(?:/|$)'
+        },
+        {
+            text: 'Exemplos',
+            link: '/pt/showcase/',
+            activeMatch: '^/pt/showcase(?:/|$)',
+        },
+        {
+            text: 'Referência',
+            link: '/pt/reference/cheatsheet/',
+            activeMatch: '^/pt/reference(?:/|$)'
         }
     ]
 }
@@ -104,45 +87,24 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             collapsed: false,
             items: [
                 { text: 'O que o Markdown pode fazer', link: '/pt/guide/' },
-                { text: 'Por que usar Markdown?', link: 'why' },
-                { text: 'O que é Markdown?', link: 'what-is-markdown' },
+                { text: 'Por que usar Markdown?', link: '/pt/guide/why' },
+                { text: 'O que é Markdown?', link: '/pt/guide/what-is-markdown' },
             ]
         },
     ]
 }
 
-function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
-    return [
-        {
-            text: "Guia",
-            base: '/pt/guide/',
-            items: sidebarGuide(),
-        },
-        {
-            text: "Referência",
-            base: '/pt/reference/',
-            items: sidebarReference(),
-        }
-    ]
-}
-
-
-
 function sidebarReference(): DefaultTheme.SidebarItem[] {
     return [
-        { text: 'CheatSheet', link: 'cheatsheet/' },
-        { text: 'Materiais de Referência', link: 'resource' },
-    ]
-}
-function sidebarShowcase(): DefaultTheme.SidebarItem[] {
-    return [
-        // { text: 'Linha do Tempo Claude Gantt', link: '#mermaid-timeline-claude' },
-        { text: 'Linha do Tempo do ChatGPT ', link: '#mermaid-timeline-chatgpt' },
-        { text: 'Mapa Mental Mermaid do ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
-        { text: 'Sintaxe Gantt Mermaid', link: '#mermaid-gantt-syntax' },
-        { text: 'Fluxograma Mermaid', link: '#mermaid-flowchart' },
-        { text: 'Nota de Rodapé Markdown', link: 'footnote' },
-        // { text: '', link: '' },
+        {
+            text: 'Referência',
+            collapsed: false,
+            items: [
+                { text: 'Guia rápido', link: '/pt/reference/cheatsheet/' },
+                { text: 'Usar o ChatGPT', link: '/pt/reference/chatgpt/' },
+                { text: 'Recursos adicionais', link: '/pt/reference/resource' },
+            ]
+        }
     ]
 }
 export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
