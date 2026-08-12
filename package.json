@@ -12,6 +12,8 @@
     "cloudflare:deploy": "pnpm build && wrangler deploy",
     "cloudflare:deploy:dry": "pnpm build && wrangler deploy --dry-run",
     "cloudflare:dev": "pnpm build && wrangler dev",
+    "cloudflare:redirect:deploy": "wrangler deploy --config wrangler.redirect.jsonc",
+    "cloudflare:redirect:dry": "wrangler deploy --config wrangler.redirect.jsonc --dry-run",
     "docs:dev": "node scripts/dev.mjs",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
