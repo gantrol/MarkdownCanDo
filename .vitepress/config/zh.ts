@@ -9,9 +9,11 @@ export const zh = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/zh/guide/': { base: '/zh/guide/', items: sidebarGuideAndReference() },
-            '/zh/reference/': { base: '/zh/reference/', items: sidebarGuideAndReference() },
-            '/zh/showcase/': { base: '/zh/showcase/', items: sidebarShowcase() },
+            '/zh/guide/': sidebarDocs(),
+            '/zh/reference/': sidebarDocs(),
+            '/zh/tutorial/': sidebarDocs(),
+            '/zh/playground/': sidebarDocs(),
+            '/zh/showcase/': sidebarDocs(),
         },
 
         editLink: {
@@ -52,95 +54,62 @@ export const zh = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: '主页',
-            link: '/zh/',
-            activeMatch: '^/zh/$',
-        },
-        {
-            text: '文档',
-            activeMatch: '/zh/[tutorial|guide|showcase|reference]/',
-            items: [
-                {
-                    text: '教程',
-                    link: '/zh/tutorial/',
-                    activeMatch: '/zh/tutorial/'
-                },
-                {
-                    text: '指南',
-                    link: '/zh/guide/',
-                    activeMatch: '/zh/guide/'
-                },
-                {
-                    text: '参考',
-                    link: '/zh/reference/resource',
-                    activeMatch: '/reference/resource',
-                },
-                {
-                    text: '样例',
-                    link: '/zh/showcase/',
-                    activeMatch: '^/zh/showcase',
-                },
-            ]
-        },
-        {
-            text: '备忘',
-            link: '/zh/reference/cheatsheet/',
-            activeMatch: '/zh/reference/cheatsheet/'
-        },
-
-        {
             text: '演练场',
-            link: '/zh/playground/',
-            activeMatch: '/zh/playground/'
-        }
-    ]
-}
-
-function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
-    return [
-        {
-            text: "指南",
-            base: '/zh/guide/',
-            items: sidebarGuide(),
+            link: '/zh/',
+            activeMatch: '^/zh/?$'
         },
         {
-            text: "参考",
-            base: '/zh/reference/',
-            items: sidebarReference(),
+            text: '为什么用',
+            link: '/zh/guide/why',
+            activeMatch: '^/zh/guide/why(?:/|$)'
+        },
+        {
+            text: '交互教程',
+            link: '/zh/tutorial/',
+            activeMatch: '^/zh/tutorial(?:/|$)'
+        },
+        {
+            text: 'Word般体验',
+            link: '/zh/playground/',
+            activeMatch: '^/zh/playground(?:/|$)'
+        },
+        {
+            text: '参考齐全',
+            link: '/zh/reference/cheatsheet/',
+            activeMatch: '^/zh/reference(?:/|$)'
         }
     ]
 }
 
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: '介绍',
+            text: '认识 Markdown',
             collapsed: false,
             items: [
-                { text: 'Markdown 能做', link: '/' },
-                { text: '为何用 Markdown？', link: 'why' },
-                { text: '什么是 Markdown？', link: 'what-is-markdown' },
+                { text: 'Markdown 能做什么？', link: '/zh/guide/' },
+                { text: '什么是 Markdown？', link: '/zh/guide/what-is-markdown' },
+                { text: '为什么用 Markdown？', link: '/zh/guide/why' },
             ]
         },
-    ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-    return [
-        { text: '备忘', link: 'cheatsheet/' },
-        { text: '参考资料', link: 'resource' },
-        // { text: '术语表', link: 'glossary' },
-    ]
-}
-
-function sidebarShowcase(): DefaultTheme.SidebarItem[] {
-    return [
-        { text: 'ChatGPT 时间线', link: '#mermaid-timeline-chatgpt' },
-        { text: 'Mermaid 思维导图 ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
-        { text: 'Mermaid 甘特图', link: '#mermaid-gantt-syntax' },
-        { text: 'Mermaid 流程图', link: '#mermaid-flowchart' },
-        { text: 'Markdown 脚注', link: 'footnote' },
-        // { text: '', link: '' },
+        {
+            text: '动手实践',
+            collapsed: false,
+            items: [
+                { text: 'Markdown 入门教程', link: '/zh/tutorial/' },
+                { text: '在线 Markdown 演练场', link: '/zh/playground/' },
+                { text: 'Markdown 示例', link: '/zh/showcase/' },
+            ]
+        },
+        {
+            text: '语法与资源',
+            collapsed: false,
+            items: [
+                { text: 'Markdown 语法速查', link: '/zh/reference/cheatsheet/' },
+                { text: '用 ChatGPT 写 Markdown', link: '/zh/reference/chatgpt/' },
+                { text: 'Markdown 学习资源', link: '/zh/reference/resource' },
+            ]
+        }
     ]
 }
 
@@ -150,7 +119,8 @@ export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
         translations: {
             button: {
                 buttonText: '搜索文档',
-                buttonAriaLabel: '搜索文档'
+                // 让可见文字和快捷键共同组成无障碍名称。
+                buttonAriaLabel: ''
             },
             modal: {
                 searchBox: {

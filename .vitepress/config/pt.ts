@@ -11,9 +11,11 @@ export const pt = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/pt/guide/': { base: '/pt/guide/', items: sidebarGuideAndReference() },
-            '/pt/reference/': { base: '/pt/reference/', items: sidebarGuideAndReference() },
-            '/pt/showcase/': { base: '/pt/showcase/', items: sidebarShowcase() },
+            '/pt/guide/': sidebarDocs(),
+            '/pt/reference/': sidebarDocs(),
+            '/pt/tutorial/': sidebarDocs(),
+            '/pt/playground/': sidebarDocs(),
+            '/pt/showcase/': sidebarDocs(),
         },
 
         editLink: {
@@ -54,95 +56,62 @@ export const pt = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Início',
+            text: 'Laboratório',
             link: '/pt/',
-            activeMatch: '^/$',
+            activeMatch: '^/pt/?$',
         },
         {
-            text: 'Documentação',
-            activeMatch: '/pt/[tutorial|guide|showcase|reference]/',
-            items: [
-                {
-                    text: 'Tutorial',
-                    link: '/pt/tutorial/',
-                    activeMatch: '/pt/tutorial/',
-                },
-                {
-                    text: 'Guia',
-                    link: '/pt/guide/',
-                    activeMatch: '/pt/guide/',
-                },
-                {
-                    text: 'Referência',
-                    link: '/pt/reference/resource',
-                    activeMatch: '/pt/reference/resource',
-                },
-                {
-                    text: 'Exemplos',
-                    link: '/pt/showcase/',
-                    activeMatch: '^/showcase',
-                },
-            ]
+            text: 'Por que usar',
+            link: '/pt/guide/why',
+            activeMatch: '^/pt/guide/why(?:/|$)',
         },
         {
-            text: 'CheatSheet',
-            link: '/pt/reference/cheatsheet/',
-            activeMatch: '/pt/reference/cheatsheet/'
+            text: 'Tutorial interativo',
+            link: '/pt/tutorial/',
+            activeMatch: '^/pt/tutorial(?:/|$)',
         },
         {
-            text: 'Playground',
+            text: 'Edição como Word',
             link: '/pt/playground/',
-            activeMatch: '/pt/playground/'
+            activeMatch: '^/pt/playground(?:/|$)'
+        },
+        {
+            text: 'Referência completa',
+            link: '/pt/reference/cheatsheet/',
+            activeMatch: '^/pt/reference(?:/|$)'
         }
     ]
 }
 
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: 'Introdução',
+            text: 'Aprender Markdown',
             collapsed: false,
             items: [
-                { text: 'O que o Markdown pode fazer', link: 'index.html' },
-                { text: 'Por que usar Markdown?', link: 'why' },
-                { text: 'O que é Markdown?', link: 'what-is-markdown' },
+                { text: 'O que o Markdown pode fazer', link: '/pt/guide/' },
+                { text: 'O que é Markdown?', link: '/pt/guide/what-is-markdown' },
+                { text: 'Por que usar Markdown?', link: '/pt/guide/why' },
             ]
         },
-    ]
-}
-
-function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
-    return [
         {
-            text: "Guia",
-            base: '/pt/guide/',
-            items: sidebarGuide(),
+            text: 'Praticar',
+            collapsed: false,
+            items: [
+                { text: 'Tutorial de Markdown', link: '/pt/tutorial/' },
+                { text: 'Playground de Markdown', link: '/pt/playground/' },
+                { text: 'Exemplos de Markdown', link: '/pt/showcase/' },
+            ]
         },
         {
-            text: "Referência",
-            base: '/pt/reference/',
-            items: sidebarReference(),
+            text: 'Sintaxe e recursos',
+            collapsed: false,
+            items: [
+                { text: 'Guia rápido de Markdown', link: '/pt/reference/cheatsheet/' },
+                { text: 'Escrever Markdown com ChatGPT', link: '/pt/reference/chatgpt/' },
+                { text: 'Recursos para aprender Markdown', link: '/pt/reference/resource' },
+            ]
         }
-    ]
-}
-
-
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-    return [
-        { text: 'CheatSheet', link: 'cheatsheet/' },
-        { text: 'Materiais de Referência', link: 'resource' },
-    ]
-}
-function sidebarShowcase(): DefaultTheme.SidebarItem[] {
-    return [
-        // { text: 'Linha do Tempo Claude Gantt', link: '#mermaid-timeline-claude' },
-        { text: 'Linha do Tempo do ChatGPT ', link: '#mermaid-timeline-chatgpt' },
-        { text: 'Mapa Mental Mermaid do ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
-        { text: 'Sintaxe Gantt Mermaid', link: '#mermaid-gantt-syntax' },
-        { text: 'Fluxograma Mermaid', link: '#mermaid-flowchart' },
-        { text: 'Nota de Rodapé Markdown', link: 'footnote' },
-        // { text: '', link: '' },
     ]
 }
 export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
@@ -151,7 +120,8 @@ export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
         translations: {
             button: {
                 buttonText: 'Pesquisar',
-                buttonAriaLabel: 'Pesquisar'
+                // Deixe o texto visível e o atalho formarem o nome acessível.
+                buttonAriaLabel: ''
             },
             modal: {
                 searchBox: {

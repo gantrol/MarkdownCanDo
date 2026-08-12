@@ -1,11 +1,9 @@
 ```mermaid
 flowchart LR
-A(("问题")) --> B(朋友)
-A --> ChatGPT(ChatGPT)
-B --> sum((总结))
-ChatGPT --> sum
-sum --> solution(解决方案)
-solution --> accu((积累))
-accu -->|大量的| Wealth[(财富)]
-accu -->|长时间的| Wealth
+  A([下班]) --> B{今晚做饭吗？}
+  B -->|做饭| C[买菜]
+  B -->|不做| D[带饭回家]
+  C --> E[回家]
+  D --> E
+  E --> F([一起吃饭])
 ```

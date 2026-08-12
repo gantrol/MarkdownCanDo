@@ -50,11 +50,11 @@ Muitas referências foram consultadas na construção deste site, aqui estão al
 
 ### Crachá
 
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![ChatGPT](/chatgpt-badge.svg)
 
 Não existem apenas crachás estáticos, mas também dinâmicos, como a implantação com um clique no Vercel.
 
-[![Implantar Com Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Implantar Com Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 Este site pode gerar crachás, https://shields.io/badges, por exemplo:
 

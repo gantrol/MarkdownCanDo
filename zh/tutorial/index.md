@@ -2,7 +2,6 @@
 layout: page
 page: true
 title: 教程
-sidebar: false
 aside: false
 footer: false
 returnToTop: false

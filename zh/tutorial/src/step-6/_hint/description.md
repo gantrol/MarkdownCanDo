@@ -7,14 +7,14 @@
 
 ![说明文本，方便屏读](../图片/的/本地/相对路径.jpg)
 
-![加载远程图片](https://www.markdowncando.com/logo-mini.png "可选标题")
+![加载远程图片](https://markdown.aicando.xyz/logo-mini.png "可选标题")
 ```
 
 ![说明文本也可以在图片加载不出时](/path/to/cat.jpg)
 
 这是本网站图标：
 
-![加载成功图片示例](https://www.markdowncando.com/logo-mini.png "本网站图标")
+![加载成功图片示例](https://markdown.aicando.xyz/logo-mini.png "本网站图标")
 
 ## 链接与图片结合
 

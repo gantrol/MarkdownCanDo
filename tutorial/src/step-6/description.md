@@ -14,7 +14,7 @@ The way to insert images is very similar to [links](#step-3), except you need to
 
 This is the website icon:
 
-![Example of a successfully loaded image](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Icon")
+![Example of a successfully loaded image](https://markdown.aicando.xyz/logo-mini.png "MarkdownCanDo Icon")
 
 ## Combining Links and Images
 

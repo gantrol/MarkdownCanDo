@@ -1,17 +1,18 @@
-// https://vitepress.dev/guide/custom-theme
-import { h } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import ThemeLayout from './ThemeLayout.vue'
 import './style.css'
 
 export default {
   extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-    })
-  },
-  enhanceApp({ app, router, siteData }) {
-    // ...
+  Layout: ThemeLayout,
+  enhanceApp({ app }) {
+    app.component('AbcNotation', defineAsyncComponent(
+      () => import('./components/AbcNotation.vue')
+    ))
+    app.component('MermaidDiagram', defineAsyncComponent(
+      () => import('./components/MermaidDiagram.vue')
+    ))
   }
 } satisfies Theme

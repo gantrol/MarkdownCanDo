@@ -1,11 +1,9 @@
 ```mermaid
 flowchart LR
-A(("Question")) --> B(Friend)
-A --> ChatGPT(ChatGPT)
-B --> sum((Summary))
-ChatGPT --> sum
-sum --> solution(Solution)
-solution --> accu((Accumulation))
-accu -->|In large quantities| Wealth[(Wealth)]
-accu -->|Over a long time| Wealth
+  A([Leave work]) --> B{Cook tonight?}
+  B -->|Yes| C[Buy groceries]
+  B -->|No| D[Pick up dinner]
+  C --> E[Head home]
+  D --> E
+  E --> F([Eat together])
 ```

@@ -7,14 +7,14 @@ The way to insert images is very similar to [links](#step-3), except you need to
 
 ![Alt text for screen readers](../path/to/image/on/local/relative/path.jpg)
 
-![Loading remote images](https://www.markdowncando.com/logo-mini.png "Optional title")
+![Loading remote images](https://markdown.aicando.xyz/logo-mini.png "Optional title")
 ```
 
 ![Alt text can also be displayed when the image does not load](/path/to/cat.jpg)
 
 This is the website icon:
 
-![Example of a successfully loaded image](https://www.markdowncando.com/logo-mini.png "Website Icon")
+![Example of a successfully loaded image](https://markdown.aicando.xyz/logo-mini.png "Website Icon")
 
 ## Combining Links and Images (badge)
 

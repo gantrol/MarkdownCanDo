@@ -10,9 +10,11 @@ export const en = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/guide/': { base: '/guide/', items: sidebarGuideAndReference() },
-            '/reference/': { base: '/reference/', items: sidebarGuideAndReference() },
-            '/showcase/': { base: '/showcase/', items: sidebarShowcase() },
+            '/guide/': sidebarDocs(),
+            '/reference/': sidebarDocs(),
+            '/tutorial/': sidebarDocs(),
+            '/playground/': sidebarDocs(),
+            '/showcase/': sidebarDocs(),
         },
 
         editLink: {
@@ -29,92 +31,61 @@ export const en = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {
-            text: 'Home',
+            text: 'Playground',
             link: '/',
             activeMatch: '^/$',
         },
         {
-            text: 'Docs',
-            activeMatch: '/[tutorial|guide|showcase|reference]/',
-            items: [
-                {
-                    text: 'Tutorial',
-                    link: '/tutorial/',
-                    activeMatch: '/tutorial/',
-                },
-                {
-                    text: 'Guide',
-                    link: '/guide/',
-                    activeMatch: '/guide/',
-                },
-                {
-                    text: 'Reference',
-                    link: '/reference/resource',
-                    activeMatch: '/reference/resource',
-                },
-                {
-                    text: 'Examples',
-                    link: '/showcase/',
-                    activeMatch: '^/showcase',
-                },
-            ]
+            text: 'Why Markdown',
+            link: '/guide/why',
+            activeMatch: '^/guide/why(?:/|$)',
         },
         {
-            text: 'CheatSheet',
-            link: '/reference/cheatsheet/',
-            activeMatch: '/reference/cheatsheet/'
+            text: 'Interactive tutorial',
+            link: '/tutorial/',
+            activeMatch: '^/tutorial(?:/|$)',
         },
         {
-            text: 'Playground',
+            text: 'Word-like editing',
             link: '/playground/',
-            activeMatch: '/playground/'
-        }
-    ]
-}
-
-function sidebarGuideAndReference(): DefaultTheme.SidebarItem[] {
-    return [
-        {
-            text: "Guide",
-            base: '/guide/',
-            items: sidebarGuide(),
+            activeMatch: '^/playground(?:/|$)'
         },
         {
-            text: "Reference",
-            base: '/reference/',
-            items: sidebarReference(),
+            text: 'Complete reference',
+            link: '/reference/cheatsheet/',
+            activeMatch: '^/reference(?:/|$)'
         }
     ]
 }
 
-function sidebarGuide(): DefaultTheme.SidebarItem[] {
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
     return [
         {
-            text: 'Introduction',
+            text: 'Learn Markdown',
             collapsed: false,
             items: [
-                { text: 'What Markdown can do', link: 'index.html' },
-                { text: 'Why use Markdown?', link: 'why' },
-                { text: 'What is Markdown?', link: 'what-is-markdown' },
+                { text: 'What Markdown can do', link: '/guide/' },
+                { text: 'What is Markdown?', link: '/guide/what-is-markdown' },
+                { text: 'Why use Markdown?', link: '/guide/why' },
             ]
         },
-    ]
-}
-
-function sidebarReference(): DefaultTheme.SidebarItem[] {
-    return [
-        { text: 'CheatSheet', link: 'cheatsheet/' },
-        { text: 'Reference Materials', link: 'resource' },
-    ]
-}
-function sidebarShowcase(): DefaultTheme.SidebarItem[] {
-    return [
-        // { text: 'Claude Gantt Timeline', link: '#mermaid-timeline-claude' },
-        { text: 'Timeline of ChatGPT ', link: '#mermaid-timeline-chatgpt' },
-        { text: 'Mermaid Mindmap ChatGPT', link: '#mermaid-mindmap-use-chatgpt' },
-        { text: 'Mermaid Gantt Syntax', link: '#mermaid-gantt-syntax' },
-        { text: 'Mermaid Flowchart', link: '#mermaid-flowchart' },
-        { text: 'Markdown Footnote', link: 'footnote' },
-        // { text: '', link: '' },
+        {
+            text: 'Practice',
+            collapsed: false,
+            items: [
+                { text: 'Markdown tutorial', link: '/tutorial/' },
+                { text: 'Online Markdown playground', link: '/playground/' },
+                { text: 'Markdown examples', link: '/showcase/' },
+            ]
+        },
+        {
+            text: 'Syntax & resources',
+            collapsed: false,
+            items: [
+                { text: 'Markdown cheat sheet', link: '/reference/cheatsheet/' },
+                { text: 'Write Markdown with ChatGPT', link: '/reference/chatgpt/' },
+                { text: 'Markdown learning resources', link: '/reference/resource' },
+            ]
+        }
     ]
 }

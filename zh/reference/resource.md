@@ -60,7 +60,7 @@
 
 ### badge（徽章）
 
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![ChatGPT](/chatgpt-badge.svg)
 
 不仅有静态的，还能动，比如一键部署到vercel
 

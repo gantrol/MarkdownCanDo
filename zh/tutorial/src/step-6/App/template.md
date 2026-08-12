@@ -1,6 +1,6 @@
 # Markdown 图片练习
 
-试试在 Markdown 插入本站图标，远程链接：https://www.markdowncando.com/logo-mini.png
+试试在 Markdown 插入本站图标，远程链接：https://markdown.aicando.xyz/logo-mini.png
 
 > 
 
@@ -10,4 +10,4 @@
 
 [![本网站渲染的读我文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/zh/readme.md)
 
-[![用Vecel部署本站](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![用 Vercel 部署本站](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)

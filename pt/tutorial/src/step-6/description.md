@@ -14,7 +14,7 @@ A maneira de inserir imagens é muito semelhante a [links](#step-3), exceto que 
 
 Esta é o ícone do site:
 
-![Exemplo de imagem carregada com sucesso](https://www.markdowncando.com/logo-mini.png "Ícone do MarkdownCanDo")
+![Exemplo de imagem carregada com sucesso](https://markdown.aicando.xyz/logo-mini.png "Ícone do MarkdownCanDo")
 
 ## Combinando Links e Imagens
 

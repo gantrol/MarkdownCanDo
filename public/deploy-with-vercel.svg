@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="103" height="32" viewBox="0 0 103 32" role="img" aria-label="Deploy with Vercel">
+  <rect width="103" height="32" rx="6" fill="#111"/>
+  <path d="M12 21 17.5 11 23 21Z" fill="#fff"/>
+  <text x="29" y="20.5" fill="#fff" font-family="Arial, sans-serif" font-size="11" font-weight="600">Deploy</text>
+</svg>

@@ -36,18 +36,14 @@ timeline
 
 ```mermaid
 flowchart LR
-A(("Pergunta")) --> B(Amigo)
-A --> ChatGPT(ChatGPT)
-B --> sum((Resumo))
-ChatGPT --> sum
-sum --> solucao(Solução)
-solucao --> acumu((Acumulação))
-acumu -->|Em grandes quantidades| Riqueza[(Riqueza)]
-acumu -->|Ao longo de um tempo| Riqueza
+  A([Sair do trabalho]) --> B{Cozinhar hoje?}
+  B -->|Sim| C[Comprar ingredientes]
+  B -->|Não| D[Buscar o jantar]
+  C --> E[Voltar para casa]
+  D --> E
+  E --> F([Jantar juntos])
 ```
 ### Partitura Musical
-
-> Escrito pelo ChatGPT, pode estar errado.
 
 ```abc
 X:1
@@ -81,7 +77,7 @@ Markdown acaba renderizando como HTML, e CSS pode modificar o layout dos element
 
 Você pode implantar este site clicando neste botão:
 
-[![Implantar Com Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Implantar Com Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 Existem muitas maneiras de construir sites baseados em Markdown. Pesquisas pessoais identificaram principalmente Vitepress e MDX como duas opções, ambas extendendo Markdown e permitindo a inserção de componentes de código. Vitepress suporta principalmente componentes Vue, enquanto MDX suporta principalmente componentes React.
 
@@ -91,6 +87,6 @@ Considerando desempenho e estabilidade de manutenção, este site é construído
 
 Você pode querer conferir os [materiais de referência](/reference/resource) ou perguntar ao ChatGPT？
 
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![ChatGPT](/chatgpt-badge.svg)
 
 [^1]: Acha difícil? Na verdade, não há necessidade de memorizar a sintaxe para vários gráficos. O proprietário do site costumava depender de manuais, mas agora consulta principalmente o ChatGPT.

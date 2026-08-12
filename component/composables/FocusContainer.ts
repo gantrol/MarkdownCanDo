@@ -1,5 +1,6 @@
 // copy from https://github.com/vuejs/theme
-import { Ref, ref, watch, readonly, onUnmounted } from 'vue'
+import { onUnmounted, readonly, ref, watch } from 'vue'
+import type { Ref } from 'vue'
 
 interface FocusContainerOptions {
   elRef: Ref<HTMLElement | undefined>
@@ -18,16 +19,18 @@ export function useFocusContainer(options: FocusContainerOptions) {
     listeners++
 
     const unwatch = watch(focusedElement, (el) => {
-      if (
+      const nextContainsFocus = Boolean(
         el === options.elRef.value ||
         options.elRef.value?.contains(el as Node)
-      ) {
-        containsFocus.value = true
-        options.onFocus?.()
-      } else {
-        containsFocus.value = false
-        options.onBlur?.()
+      )
+
+      if (nextContainsFocus === containsFocus.value) {
+        return
       }
+
+      containsFocus.value = nextContainsFocus
+      if (nextContainsFocus) options.onFocus?.()
+      else options.onBlur?.()
     })
 
     onUnmounted(() => {
@@ -50,6 +53,8 @@ function activateFocusTracking() {
 
 function deactivateFocusTracking() {
   document.removeEventListener('focusin', handleFocusIn)
+  active = false
+  focusedElement.value = undefined
 }
 
 function handleFocusIn() {

@@ -100,21 +100,21 @@ _你 **可以** 组合它们_
 
 ### 链接
 ```
-[Markdown 能做](https://www.markdowncando.com/zh/)
+[Markdown 能做](https://markdown.aicando.xyz/zh/)
 ```
 
 ```
 [Markdown 能做][MDCD]
 
-[MDCD]:https://www.markdowncando.com/zh/
+[MDCD]:https://markdown.aicando.xyz/zh/
 ```
 
 ### 图像
 
-![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+![Markdown 能做的 Logo](https://markdown.aicando.xyz/logo-mini.png "MarkdownCanDo Logo")
 
 ```
-![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+![Markdown 能做的 Logo](https://markdown.aicando.xyz/logo-mini.png "MarkdownCanDo Logo")
 ```
 
 ### 段引用
@@ -220,10 +220,10 @@ _你 **可以** 组合它们_
 
 ### Vercel 部署徽章
 
-[![使用 Vercel 部署此网站](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![使用 Vercel 部署此网站](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 ```
-[![使用 Vercel 部署此网站](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![使用 Vercel 部署此网站](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 ```
 
 ```

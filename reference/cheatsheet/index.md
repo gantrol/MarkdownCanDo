@@ -99,21 +99,21 @@ _You **can** combine them_
 
 ### Links
 ```
-[Markdown Can Do](https://www.markdowncando.com/)
+[Markdown Can Do](https://markdown.aicando.xyz/)
 ```
 
 ```
 [Markdown Can Do][MDCD]
 
-[MDCD]:https://www.markdowncando.com/
+[MDCD]:https://markdown.aicando.xyz/
 ```
 
 ### Images
 
-![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+![Markdown 能做的 Logo](https://markdown.aicando.xyz/logo-mini.png "MarkdownCanDo Logo")
 
 ```
-![Markdown Can Do Logo](https://www.markdowncando.com/ "MarkdownCanDo Logo")
+![Markdown Can Do Logo](https://markdown.aicando.xyz/ "MarkdownCanDo Logo")
 ```
 
 ### Block Quote
@@ -221,10 +221,10 @@ Other configures refer [shield](https://shields.io).
 
 ### Vercel Deploy Badge
 
-[![Deploy this site with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Deploy this site with Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 ```
-[![Deploy this site with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Deploy this site with Vercel](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 ```
 
 ```

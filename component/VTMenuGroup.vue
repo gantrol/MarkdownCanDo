@@ -1,21 +1,26 @@
 <!--copy from https://github.com/vuejs/theme-->
 <script lang="ts" setup>
-import { MenuItemChild } from './types/menu'
+import { getCurrentInstance } from 'vue'
+import type { MenuItemChild } from './types/menu'
 import VTMenuLink from './VTMenuLink.vue'
 
 defineProps<{
   text?: string
   items: MenuItemChild[]
 }>()
+
+const titleId = `vt-menu-group-title-${getCurrentInstance()?.uid ?? 'default'}`
 </script>
 
 <template>
   <div class="vt-menu-group">
-    <p v-if="text" class="vt-menu-group-title">{{ text }}</p>
+    <p v-if="text" :id="titleId" class="vt-menu-group-title">{{ text }}</p>
 
-    <template v-for="item in items">
-      <VTMenuLink v-if="'link' in item" :item="item" />
-    </template>
+    <ul class="vt-menu-group-items" :aria-labelledby="text ? titleId : undefined">
+      <li v-for="(item, index) in items" :key="item.text || index">
+        <VTMenuLink v-if="'link' in item" :item="item" />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -28,6 +33,18 @@ defineProps<{
     color: var(--vt-c-text-3);
     text-transform: uppercase;
     transition: color .25s;
+  }
+
+  .vt-menu-group-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vt-menu-group-title {
+      transition: none;
+    }
   }
 
 </style>

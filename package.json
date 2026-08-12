@@ -1,40 +1,50 @@
 {
   "private": true,
+  "version": "0.9.0",
   "type": "module",
+  "packageManager": "pnpm@10.27.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
-    "docs:dev": "vitepress dev",
+    "dev": "node scripts/dev.mjs",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "cloudflare:deploy": "pnpm build && wrangler deploy",
+    "cloudflare:deploy:dry": "pnpm build && wrangler deploy --dry-run",
+    "cloudflare:dev": "pnpm build && wrangler dev",
+    "cloudflare:redirect:deploy": "wrangler deploy --config wrangler.redirect.jsonc",
+    "cloudflare:redirect:dry": "wrangler deploy --config wrangler.redirect.jsonc --dry-run",
+    "docs:dev": "node scripts/dev.mjs",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview",
-    "preinstall": "npx only-allow pnpm"
+    "docs:preview": "vitepress preview"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
+    "@lucide/vue": "^1.31.0",
+    "@milkdown/crepe": "^7.22.0",
+    "@milkdown/kit": "7.22.0",
+    "@radix-ui/colors": "^3.0.0",
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^20.10.1",
-    "markdown-it-anchor": "^8.6.7",
+    "abcjs": "^6.7.0",
+    "dompurify": "^3.4.13",
+    "katex": "^0.18.3",
+    "markdown-it": "^14.1.0",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-mathjax3": "^4.3.2",
     "markdown-it-task-checkbox": "^1.0.6",
-    "mermaid": "^10.9.0",
-    "terser": "^5.14.2",
-    "vitepress": "1.0.0-rc.45",
-    "vitepress-plugin-mermaid": "^2.0.16",
-    "vue": "^3.4.0"
+    "mermaid": "^11.16.1",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.41",
+    "wrangler": "^4.121.0"
   },
   "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd"
+    ],
     "overrides": {
-      "@vitejs/plugin-vue": "5.0.0-beta.1"
-    },
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search",
-        "react",
-        "react-dom",
-        "@types/react",
-        "search-insights"
-      ]
+      "vite": "6.4.3"
     }
-  },
-  "dependencies": {
-    "vditor": "^3.10.1"
   }
 }

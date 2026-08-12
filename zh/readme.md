@@ -1,20 +1,52 @@
-# Markdown 能做什么
+# MarkdownCanDo
 
-用来展示 Markdown [能做什么的网站](https://www.markdowncando.com/)，有点像 [Vue 官网][vue] 之于 Vue 学习者、爱好者。
+[![交互教程](https://img.shields.io/badge/教程-可交互-2f8f46?style=for-the-badge)](https://markdown.aicando.xyz/tutorial/)[![在线访问](https://img.shields.io/badge/网站-v0.9.0-2f8f46?style=for-the-badge)](https://markdown.aicando.xyz/)
 
-你可以点击下方按钮，在 Vercel 部署这个网站。
+MarkdownCanDo 是一个用于学习、编写和探索 Markdown 能力的交互式网站。![MarkdownCanDo 图标](../public/logo-mini.png)
 
-[![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+![主页展示](assets/v0.9.0-main-page.png)
 
+## 本地开发
 
-![图标](/public/logo-mini.png)
+需要 Node.js 20 或更高版本，以及 pnpm 10。
 
-## 关于翻译
+```bash
+pnpm install
+pnpm dev
+```
 
-葡萄牙语和英语翻译纯机翻。中文版本将首先更新。
+开发命令会自行检测端口冲突，并自动选择下一个可用端口。
 
-## 关于技术栈
+构建并预览生产版本：
 
-主要基于 Vitepress 和 Vditor 构建，同时，更新Readme的这个版本中，使用了[这个仓库](https://github.com/vuejs/docs/tree/main/src/tutorial)的部分代码。
+```bash
+pnpm build
+pnpm preview
+```
 
-[vue]: https://vuejs.org
+## Cloudflare 部署
+
+生产站使用 Cloudflare Worker Static Assets。部署派生项目之前，请先修改 `wrangler.jsonc` 中的自定义域名。
+
+```bash
+pnpm cloudflare:deploy:dry
+pnpm cloudflare:deploy
+```
+
+旧域名重定向由 `wrangler.redirect.jsonc` 单独维护。
+
+## 技术栈
+
+- VitePress 与 Vue
+- Milkdown Crepe 所见即所得编辑器
+- markdown-it 与 DOMPurify 渲染及清理 Markdown
+- Mermaid、KaTeX 与 ABCJS 扩展内容
+- Cloudflare Workers Static Assets
+
+## 翻译说明
+
+中文是主要版本。文案更新后，需要同步检查英语和葡萄牙语内容。
+
+## 版本状态
+
+v0.9 是 1.0 之前的预发布版本。主要体验已经可以部署和使用；在 v1.0 之前仍会继续完善内容覆盖、无障碍、包体积和编辑器兼容性。

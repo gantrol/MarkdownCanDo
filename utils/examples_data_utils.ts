@@ -5,11 +5,11 @@
 import fs from 'fs'
 // @ts-ignore
 import path from 'path'
-import { ExampleData } from './utils'
+import type { ExampleData } from './utils'
 
 export declare const data: Record<string, ExampleData>
 
-export { ExampleData }
+export type { ExampleData }
 
 export default {
   watch: 'src/**',

@@ -3,7 +3,27 @@
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
 
+@import '@radix-ui/colors/gray.css';
+@import '@radix-ui/colors/gray-dark.css';
+@import '@radix-ui/colors/grass.css';
+@import '@radix-ui/colors/grass-dark.css';
+@import '@radix-ui/colors/amber.css';
+@import '@radix-ui/colors/amber-dark.css';
+@import '@radix-ui/colors/red.css';
+@import '@radix-ui/colors/red-dark.css';
 @import './variables.css';
+
+img[src='/chatgpt-badge.svg'],
+img[src^='https://img.shields.io/'] {
+  width: 85px;
+  height: 28px;
+}
+
+img[src='/deploy-with-vercel.svg'],
+img[src='https://vercel.com/button'] {
+  width: 103px;
+  height: 32px;
+}
 
 /**
  * Component: Button
@@ -26,31 +46,10 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
-
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
-  );
-  --vp-home-hero-image-filter: blur(44px);
-}
-
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(56px);
-  }
-}
-
-@media (min-width: 960px) {
-  :root {
-    --vp-home-hero-image-filter: blur(68px);
-  }
+  --vp-home-hero-name-color: var(--vp-c-brand-1);
+  --vp-home-hero-name-background: none;
+  --vp-home-hero-image-background-image: none;
+  --vp-home-hero-image-filter: none;
 }
 
 /**
@@ -70,5 +69,298 @@
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
+}
+
+@media (max-width: 767px) {
+  .DocSearch-Button .DocSearch-Button-Placeholder {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/**
+ * Product surface
+ * -------------------------------------------------------------------------- */
+
+html {
+  scrollbar-color: var(--vp-c-border) transparent;
+}
+
+body {
+  letter-spacing: -0.005em;
+}
+
+::selection {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.VPNavBar {
+  border-bottom: 1px solid var(--vp-c-divider);
+  background: color-mix(in srgb, var(--vp-c-bg) 90%, transparent) !important;
+  backdrop-filter: saturate(130%) blur(14px);
+}
+
+.VPNavBar.has-sidebar .title {
+  border-bottom-color: transparent !important;
+}
+
+.VPNavBarTitle .title {
+  letter-spacing: -0.025em;
+  font-weight: 750;
+}
+
+.VPNavBarMenuLink,
+.VPNavBarMenuGroup .text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.VPSidebarItem.level-0 {
+  padding-bottom: 18px;
+}
+
+.VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
+  padding-top: 18px;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  font-size: 13px;
+  letter-spacing: -0.015em;
+}
+
+.VPSidebarItem.level-0 > .items {
+  margin-top: 6px;
+}
+
+.VPSidebarItem.level-1 > .item > .link {
+  min-height: 36px;
+  padding: 0 10px;
+  margin: 1px -10px;
+  border-radius: var(--ui-radius-sm);
+  transition: color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.VPSidebarItem.level-1 > .item > .link:hover {
+  background: var(--vp-c-bg-mute);
+}
+
+.VPSidebarItem.level-1.is-active > .item > .link {
+  background: var(--vp-c-brand-soft);
+}
+
+.VPButton {
+  border-radius: var(--ui-radius-control) !important;
+  letter-spacing: -0.01em;
+  font-weight: 700 !important;
+}
+
+.VPButton.brand {
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 8%);
+}
+
+.dark .VPButton.brand {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 10%), 0 1px 2px rgb(0 0 0 / 30%);
+}
+
+/**
+ * Home
+ * -------------------------------------------------------------------------- */
+
+.VPHome .VPHero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: clamp(24px, 5svh, 56px) clamp(30px, 4vw, 72px) clamp(8px, 2svh, 24px);
+  align-items: center;
+  border: 0;
+  background:
+    radial-gradient(circle at 18% 79%, color-mix(in srgb, var(--vp-c-brand-soft) 38%, transparent), transparent 26%),
+    color-mix(in srgb, var(--vp-c-bg) 88%, #f3f1e8);
+  box-shadow: none;
+}
+
+.VPHome .VPHero::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.VPHome .VPHero::before {
+  z-index: -2;
+  background: url('/paper-grain.svg') repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.32;
+}
+
+.dark .VPHome .VPHero::before {
+  filter: invert(1);
+  mix-blend-mode: screen;
+  opacity: 0.06;
+}
+
+.VPHome.VPHome {
+  margin-bottom: 0;
+}
+
+.VPHome .VPHero .container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 1540px);
+  max-width: 1540px;
+  margin: 0 auto;
+  align-items: center;
+  grid-template-columns: minmax(420px, 0.78fr) minmax(650px, 1.22fr);
+  gap: clamp(24px, 3.2vw, 58px);
+}
+
+.VPHome .VPHero .main {
+  width: 100%;
+  max-width: 560px;
+  padding-top: 0;
+  transform: translateY(-24px);
+}
+
+.VPHome .VPHero .image {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  flex: none;
+}
+
+.VPHome .VPHero .image-container {
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  transform: none;
+}
+
+.VPHome .VPHero .image-bg {
+  display: none;
+}
+
+@supports (corner-shape: superellipse(2)) {
+  .VPButton,
+  .home-product-visual,
+  .mermaid-diagram,
+  .abc-notation {
+    corner-shape: var(--ui-corner-curve);
+  }
+
+  .VPSidebarItem.level-1 > .item > .link {
+    corner-shape: var(--ui-corner-curve);
+  }
+}
+
+body:has(.VPHome) .VPNavBar {
+  border-bottom-color: transparent;
+  background: transparent !important;
+  backdrop-filter: none;
+}
+
+body:has(.VPHome) .VPNavBar .container {
+  max-width: 1540px;
+}
+
+body:has(.VPHome) .VPNavBarSearch {
+  display: none;
+}
+
+body:has(.VPHome) .VPNavBar .content-body {
+  padding-left: clamp(52px, 5vw, 92px);
+  justify-content: flex-start;
+}
+
+body:has(.VPHome) .VPNavBarTranslations {
+  margin-left: auto;
+}
+
+body:has(.VPHome) .VPNavBarMenuLink {
+  position: relative;
+}
+
+body:has(.VPHome) .VPNavBarMenuLink.active::after {
+  position: absolute;
+  right: 4px;
+  bottom: 8px;
+  left: 4px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--vp-c-brand-3);
+  content: '';
+}
+
+body:has(.VPHome) .VPFooter {
+  display: none;
+}
+
+@media (max-width: 1180px) and (min-width: 960px) {
+  .VPHome .VPHero {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  .VPHome .VPHero .container {
+    grid-template-columns: minmax(360px, 0.72fr) minmax(560px, 1.28fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 959px) {
+  .VPHome .VPHero {
+    min-height: auto;
+    padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 58px) 32px 88px;
+  }
+
+  .VPHome .VPHero .container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 38px;
+  }
+
+  .VPHome .VPHero .main {
+    order: 1;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-top: 0;
+    transform: none;
+  }
+
+  .VPHome .VPHero .image {
+    order: 2;
+    width: min(100%, 800px);
+    margin: 0 auto;
+  }
+
+  body:has(.VPHome) .VPNavBar .content-body {
+    padding-left: 0;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 639px) {
+  .VPHome .VPHero {
+    padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 34px) 18px 62px;
+    background: color-mix(in srgb, var(--vp-c-bg) 88%, #f3f1e8);
+  }
+
+  .VPHome .VPHero .container {
+    gap: 30px;
+  }
 }
 

@@ -1,5 +1,5 @@
 ---
-page: true
+layout: page
 title: Examples
 aside: false
 footer: false

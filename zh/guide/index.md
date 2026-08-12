@@ -37,18 +37,14 @@ timeline
 
 ```mermaid
 flowchart LR
-A(("问题")) --> B(朋友)
-A --> ChatGPT(ChatGPT)
-B --> sum((汇总))
-ChatGPT --> sum
-sum --> solution(方案)
-solution --> accu((积累))
-accu -->|数量多| Wealth[(财富)]
-accu -->|时间久| Wealth
+  A([下班]) --> B{今晚做饭吗？}
+  B -->|做饭| C[买菜]
+  B -->|不做| D[带饭回家]
+  C --> E[回家]
+  D --> E
+  E --> F([一起吃饭])
 ```
 ### 五线谱
-
-> ChatGPT 写的，可能有错
 
 ```abc
 X:1
@@ -82,7 +78,7 @@ Markdown 最终会渲染为 HTML，而 CSS 可以修改 HTML 元素的排布。�
 
 比如点击这个按钮，就在vercel部署这个网站。
 
-[![使用 Vercel 部署](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![使用 Vercel 部署](/deploy-with-vercel.svg)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
 
 有很多基于 Markdown 的建站方式，个人调研后发现主要是 Vitepress 跟 MDX 两种，它们都拓展了 Markdown，都能插入代码组件。Vitepress 主要支持 Vue 组件，MDX 主要支持 React 组件
 
@@ -94,7 +90,7 @@ Markdown 最终会渲染为 HTML，而 CSS 可以修改 HTML 元素的排布。�
 
 或者问问 ChatGPT？
 
-![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![ChatGPT](/chatgpt-badge.svg)
 
 [^1]: 觉得难吗？其实不用记各类图表的语法，站长以前靠查手册，现在主要看 ChatGPT
 

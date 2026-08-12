@@ -1,6 +1,6 @@
 ---
-page: true
-title: Examples
+layout: page
+title: Markdown 示例
 aside: false
 footer: false
 outline: false
