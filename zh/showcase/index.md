@@ -1,7 +1,6 @@
 ---
 layout: page
-title: Examples
-sidebar: false
+title: Markdown 示例
 aside: false
 footer: false
 outline: false

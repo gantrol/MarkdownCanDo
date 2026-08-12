@@ -12,6 +12,9 @@ export const en = defineConfig({
         sidebar: {
             '/guide/': sidebarDocs(),
             '/reference/': sidebarDocs(),
+            '/tutorial/': sidebarDocs(),
+            '/playground/': sidebarDocs(),
+            '/showcase/': sidebarDocs(),
         },
 
         editLink: {

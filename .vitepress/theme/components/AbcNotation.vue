@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import abcjs from 'abcjs'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
 import { diagramMessages, resolveUiLocaleTag } from '../../../utils/i18n'
@@ -10,12 +11,10 @@ const props = defineProps<{
 
 const { lang } = useData()
 const labels = computed(() => diagramMessages[resolveUiLocaleTag(lang.value)])
-const root = ref<HTMLElement>()
 const canvas = ref<HTMLElement>()
 const source = ref('')
 const status = ref<'idle' | 'loading' | 'ready' | 'error'>('idle')
 
-let intersectionObserver: IntersectionObserver | undefined
 let renderVersion = 0
 
 function decodeBase64(value: string) {
@@ -29,7 +28,6 @@ async function renderNotation() {
   status.value = 'loading'
 
   try {
-    const { default: abcjs } = await import('abcjs')
     if (currentVersion !== renderVersion || !canvas.value) return
     abcjs.renderAbc(canvas.value, source.value, {
       add_classes: true,
@@ -46,29 +44,23 @@ async function renderNotation() {
 }
 
 onMounted(async () => {
-  source.value = decodeBase64(props.code)
-  await nextTick()
-
-  if ('IntersectionObserver' in window && root.value) {
-    intersectionObserver = new IntersectionObserver((entries) => {
-      if (!entries.some(entry => entry.isIntersecting)) return
-      intersectionObserver?.disconnect()
-      void renderNotation()
-    }, { rootMargin: '240px 0px' })
-    intersectionObserver.observe(root.value)
-  } else {
+  try {
+    source.value = decodeBase64(props.code)
+    await nextTick()
     void renderNotation()
+  } catch (error) {
+    status.value = 'error'
+    console.warn('[MarkdownCanDo] ABC source decoding failed.', error)
   }
 })
 
 onBeforeUnmount(() => {
   renderVersion++
-  intersectionObserver?.disconnect()
 })
 </script>
 
 <template>
-  <figure ref="root" class="abc-notation" :aria-busy="status === 'loading'">
+  <figure class="abc-notation" :aria-busy="status === 'loading'">
     <div
       ref="canvas"
       class="abc-notation__canvas"

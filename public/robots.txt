@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://markdowncando.com/sitemap.xml
+Sitemap: https://markdown.aicando.xyz/sitemap.xml

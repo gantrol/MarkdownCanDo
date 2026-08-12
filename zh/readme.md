@@ -1,6 +1,6 @@
 # Markdown 能做什么
 
-用来展示 Markdown [能做什么的网站](https://www.markdowncando.com/)，有点像 [Vue 官网][vue] 之于 Vue 学习者、爱好者。
+用来展示 Markdown [能做什么的网站](https://markdown.aicando.xyz/)，有点像 [Vue 官网][vue] 之于 Vue 学习者、爱好者。
 
 你可以点击下方按钮，在 Vercel 部署这个网站。
 

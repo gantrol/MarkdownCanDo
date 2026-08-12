@@ -268,7 +268,7 @@ export const showcaseMessages = {
       'mermaid-timeline-chatgpt': 'Timeline with ChatGPT',
       'mermaid-timeline-claude': 'Timeline with Claude',
       math_symbols: 'Math symbols',
-      'table-ai': 'Smart table'
+      'ai-top': 'AI Top'
     }
   },
   'pt-BR': {
@@ -280,7 +280,7 @@ export const showcaseMessages = {
       'mermaid-timeline-chatgpt': 'Linha do tempo com ChatGPT',
       'mermaid-timeline-claude': 'Linha do tempo com Claude',
       math_symbols: 'Símbolos matemáticos',
-      'table-ai': 'Tabela inteligente'
+      'ai-top': 'AI Top'
     }
   },
   'zh-Hans': {
@@ -292,7 +292,7 @@ export const showcaseMessages = {
       'mermaid-timeline-chatgpt': '用 ChatGPT 生成时间线',
       'mermaid-timeline-claude': '用 Claude 生成时间线',
       math_symbols: '数学符号',
-      'table-ai': '智能表格'
+      'ai-top': 'AI Top'
     }
   }
 } as const

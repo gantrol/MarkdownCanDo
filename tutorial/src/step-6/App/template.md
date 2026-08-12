@@ -1,6 +1,6 @@
 # Inserting Images in Markdown
 
-Try inserting the website icon in Markdown, remote link: https://www.markdowncando.com/logo-mini.png
+Try inserting the website icon in Markdown, remote link: https://markdown.aicando.xyz/logo-mini.png
 
 >
 

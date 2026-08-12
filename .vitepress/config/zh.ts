@@ -11,6 +11,9 @@ export const zh = defineConfig({
         sidebar: {
             '/zh/guide/': sidebarDocs(),
             '/zh/reference/': sidebarDocs(),
+            '/zh/tutorial/': sidebarDocs(),
+            '/zh/playground/': sidebarDocs(),
+            '/zh/showcase/': sidebarDocs(),
         },
 
         editLink: {

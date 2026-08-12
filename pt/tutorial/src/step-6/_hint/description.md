@@ -7,14 +7,14 @@ A inserção de imagens é muito semelhante à de [links](#step-3), com a adiç�
 
 ![Texto alternativo, útil para leitores de tela](../caminho/relativo/da/imagem/local.jpg)
 
-![Carregando imagem remota](https://www.markdowncando.com/logo-mini.png "Título opcional")
+![Carregando imagem remota](https://markdown.aicando.xyz/logo-mini.png "Título opcional")
 ```
 
 ![O texto alternativo também pode ser exibido quando a imagem não carrega](/caminho/para/gato.jpg)
 
 Este é o ícone do site:
 
-![Exemplo de imagem carregada com sucesso](https://www.markdowncando.com/logo-mini.png "Ícone do site")
+![Exemplo de imagem carregada com sucesso](https://markdown.aicando.xyz/logo-mini.png "Ícone do site")
 
 ## Combinando links e imagens
 

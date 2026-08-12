@@ -6,7 +6,7 @@ import markdown_it_task_list from 'markdown-it-task-checkbox'
 import type MarkdownIt from 'markdown-it'
 
 const analyticsId = 'G-RX6RPWRSWJ'
-const siteOrigin = 'https://markdowncando.com'
+const siteOrigin = 'https://markdown.aicando.xyz'
 
 function canonicalUrl(relativePath: string) {
     const cleanPath = relativePath
@@ -74,9 +74,9 @@ export const shared = defineConfig({
     },
 
     sitemap: {
-        hostname: 'https://markdowncando.com',
+        hostname: siteOrigin,
         transformItems(items) {
-            return items.filter((item) => !item.url.includes('migration'))
+            return items.filter((item) => item.url !== '404' && !item.url.includes('migration'))
         }
     },
 
@@ -89,10 +89,11 @@ export const shared = defineConfig({
             ])
             return
         }
-        pageData.frontmatter.head.push([
-            'link',
-            { rel: 'canonical', href: canonicalUrl(pageData.relativePath) }
-        ])
+        const url = canonicalUrl(pageData.relativePath)
+        pageData.frontmatter.head.push(
+            ['link', { rel: 'canonical', href: url }],
+            ['meta', { property: 'og:url', content: url }]
+        )
     },
 
     head: [
@@ -104,13 +105,8 @@ export const shared = defineConfig({
         ['meta', { property: 'og:locale', content: 'en' }],
         ['meta', { property: 'og:title', content: 'Markdown Can Do' }],
         ['meta', { property: 'og:site_name', content: 'MarkdownCanDo' }],
-        ['meta', { property: 'og:url', content: 'https://markdowncando.com/' }],
         // Load analytics after the page becomes interactive and never during local development.
-        [
-            'script',
-            {},
-            `(function(){if(!/(^|\\.)markdowncando\\.com$/.test(location.hostname))return;var load=function(){window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${analyticsId}');var script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id=${analyticsId}';document.head.appendChild(script)};'requestIdleCallback'in window?requestIdleCallback(load,{timeout:3000}):setTimeout(load,1500)})()`
-        ]
+        ['script', { src: `/analytics.js?id=${analyticsId}`, defer: '' }]
     ],
 
     themeConfig: {

@@ -98,21 +98,21 @@ _Você **pode** combiná-los_
 
 ### Links
 ```
-[Markdown Pode Fazer](https://www.markdowncando.com/)
+[Markdown Pode Fazer](https://markdown.aicando.xyz/)
 ```
 
 ```
 [Markdown Pode Fazer][MPCF]
 
-[MPCF]:https://www.markdowncando.com/
+[MPCF]:https://markdown.aicando.xyz/
 ```
 
 ### Imagens
 
-![Logo do Markdown Pode Fazer](https://www.markdowncando.com/logo-mini.png "Logo do MarkdownPodeFazer")
+![Logo do Markdown Pode Fazer](https://markdown.aicando.xyz/logo-mini.png "Logo do MarkdownPodeFazer")
 
 ```
-![Logo do Markdown Pode Fazer](https://www.markdowncando.com/ "Logo do MarkdownPodeFazer")
+![Logo do Markdown Pode Fazer](https://markdown.aicando.xyz/ "Logo do MarkdownPodeFazer")
 ```
 
 ### Citação em Bloco

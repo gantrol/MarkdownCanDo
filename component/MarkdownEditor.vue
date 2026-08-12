@@ -563,6 +563,8 @@ onBeforeUnmount(() => {
             :diagram-preview-label="messages.diagramPreview"
             :edit-diagram-label="messages.editDiagram"
             :hide-diagram-source-label="messages.hideDiagramSource"
+            :music-label="messages.musicNotation"
+            :music-error-label="messages.musicError"
             @update:model-value="handleWysiwygInput"
           />
           <template #fallback>

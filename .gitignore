@@ -87,7 +87,11 @@ pnpm-global
 
 # dotenv environment variables file
 .env
-.env.test
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

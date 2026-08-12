@@ -13,6 +13,9 @@ export const pt = defineConfig({
         sidebar: {
             '/pt/guide/': sidebarDocs(),
             '/pt/reference/': sidebarDocs(),
+            '/pt/tutorial/': sidebarDocs(),
+            '/pt/playground/': sidebarDocs(),
+            '/pt/showcase/': sidebarDocs(),
         },
 
         editLink: {

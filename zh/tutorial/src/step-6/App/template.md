@@ -1,6 +1,6 @@
 # Markdown 图片练习
 
-试试在 Markdown 插入本站图标，远程链接：https://www.markdowncando.com/logo-mini.png
+试试在 Markdown 插入本站图标，远程链接：https://markdown.aicando.xyz/logo-mini.png
 
 > 
 

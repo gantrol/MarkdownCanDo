@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import abcjs from 'abcjs'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Crepe } from '@milkdown/crepe'
 import '@milkdown/crepe/theme/common/style.css'
@@ -16,6 +17,8 @@ const props = defineProps<{
   diagramPreviewLabel: string
   editDiagramLabel: string
   hideDiagramSourceLabel: string
+  musicLabel: string
+  musicErrorLabel: string
 }>()
 
 const emit = defineEmits<{
@@ -32,12 +35,37 @@ let lastEmitted = ''
 let diagramId = 0
 let themeObserver: MutationObserver | undefined
 
-function renderDiagramPreview(
+function renderCodePreview(
   language: string,
   content: string,
   applyPreview: (value: null | string | HTMLElement) => void
 ) {
-  if (language.trim().toLowerCase() !== 'mermaid') return null
+  const normalizedLanguage = language.trim().toLowerCase()
+  if (normalizedLanguage !== 'mermaid' && normalizedLanguage !== 'abc') return null
+
+  if (normalizedLanguage === 'abc') {
+    try {
+      const wrapper = document.createElement('div')
+      wrapper.className = 'markdown-wysiwyg__notation'
+      wrapper.setAttribute('role', 'img')
+      wrapper.setAttribute('aria-label', props.musicLabel)
+      abcjs.renderAbc(wrapper, content, {
+        add_classes: true,
+        responsive: 'resize'
+      })
+      wrapper.innerHTML = sanitizeSvg(wrapper.innerHTML)
+      applyPreview(wrapper.outerHTML)
+    } catch (error) {
+      const message = document.createElement('p')
+      message.className = 'markdown-wysiwyg__diagram-error'
+      message.setAttribute('role', 'alert')
+      message.textContent = props.musicErrorLabel
+      applyPreview(message.outerHTML)
+      console.warn('[MarkdownCanDo] ABC visual preview failed.', error)
+    }
+
+    return undefined
+  }
 
   const currentId = ++diagramId
   void import('mermaid')
@@ -95,7 +123,7 @@ async function createEditor(markdown: string) {
       },
       featureConfigs: {
         [Crepe.Feature.CodeMirror]: {
-          renderPreview: renderDiagramPreview,
+          renderPreview: renderCodePreview,
           previewOnlyByDefault: true,
           previewLabel: props.diagramPreviewLabel,
           previewLoading: props.diagramLoadingLabel,
@@ -297,7 +325,8 @@ onBeforeUnmount(() => {
   fill: var(--vp-c-brand-1);
 }
 
-.markdown-wysiwyg .markdown-wysiwyg__diagram {
+.markdown-wysiwyg .markdown-wysiwyg__diagram,
+.markdown-wysiwyg .markdown-wysiwyg__notation {
   display: grid;
   min-height: 150px;
   padding: 18px;
@@ -311,15 +340,21 @@ onBeforeUnmount(() => {
 @supports (corner-shape: superellipse(2)) {
   .markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-heading-button,
   .markdown-wysiwyg .milkdown .milkdown-top-bar .top-bar-item,
-  .markdown-wysiwyg .markdown-wysiwyg__diagram {
+  .markdown-wysiwyg .markdown-wysiwyg__diagram,
+  .markdown-wysiwyg .markdown-wysiwyg__notation {
     corner-shape: var(--ui-corner-curve);
   }
 }
 
-.markdown-wysiwyg .markdown-wysiwyg__diagram svg {
+.markdown-wysiwyg .markdown-wysiwyg__diagram svg,
+.markdown-wysiwyg .markdown-wysiwyg__notation svg {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+.dark .markdown-wysiwyg .markdown-wysiwyg__notation svg {
+  filter: invert(0.88);
 }
 
 .markdown-wysiwyg .markdown-wysiwyg__diagram-error {

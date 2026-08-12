@@ -100,21 +100,21 @@ _你 **可以** 组合它们_
 
 ### 链接
 ```
-[Markdown 能做](https://www.markdowncando.com/zh/)
+[Markdown 能做](https://markdown.aicando.xyz/zh/)
 ```
 
 ```
 [Markdown 能做][MDCD]
 
-[MDCD]:https://www.markdowncando.com/zh/
+[MDCD]:https://markdown.aicando.xyz/zh/
 ```
 
 ### 图像
 
-![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+![Markdown 能做的 Logo](https://markdown.aicando.xyz/logo-mini.png "MarkdownCanDo Logo")
 
 ```
-![Markdown 能做的 Logo](https://www.markdowncando.com/logo-mini.png "MarkdownCanDo Logo")
+![Markdown 能做的 Logo](https://markdown.aicando.xyz/logo-mini.png "MarkdownCanDo Logo")
 ```
 
 ### 段引用

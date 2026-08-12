@@ -9,6 +9,8 @@ export default async (src_path: string) => {
     const md = await createMarkdownRenderer(process.cwd(), {
         theme: 'github-dark' ,
         math: true,
+        // Tutorial copy is rendered with v-html; raw HTML is not needed here.
+        html: false,
         config: (md) => {
             md.use(markdown_it_footnote)
             md.use(markdown_it_task_list)
