@@ -14,6 +14,14 @@ export interface EditorToolbarItem {
   icon: Component
   shortcut?: string
   action: () => void | Promise<void>
+  options?: EditorToolbarOption[]
+}
+
+export interface EditorToolbarOption {
+  key: string
+  label: string
+  shortcut?: string
+  action: () => void | Promise<void>
 }
 
 export interface EditorToolbarGroup {

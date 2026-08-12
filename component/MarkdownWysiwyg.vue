@@ -2,6 +2,8 @@
 import abcjs from 'abcjs'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Crepe } from '@milkdown/crepe'
+import { commandsCtx, editorViewCtx } from '@milkdown/kit/core'
+import { headingSchema, setBlockTypeCommand } from '@milkdown/kit/preset/commonmark'
 import '@milkdown/crepe/theme/common/style.css'
 import { sanitizeSvg } from '../utils/markdown'
 import { getMermaidConfig } from '../utils/mermaid'
@@ -11,6 +13,9 @@ const props = defineProps<{
   loadingLabel: string
   errorLabel: string
   toolbarLabels: string[]
+  headingLabel: string
+  paragraphLabel: string
+  headingLabels: string[]
   diagramLabel: string
   diagramLoadingLabel: string
   diagramErrorLabel: string
@@ -34,6 +39,43 @@ let disposed = false
 let lastEmitted = ''
 let diagramId = 0
 let themeObserver: MutationObserver | undefined
+let toolbarObserver: MutationObserver | undefined
+
+function labelHeadingToolbar() {
+  const headingButton = host.value?.querySelector<HTMLButtonElement>('.top-bar-heading-button')
+  if (headingButton) {
+    headingButton.setAttribute('aria-label', props.headingLabel)
+    headingButton.setAttribute('aria-haspopup', 'menu')
+    headingButton.title = props.headingLabel
+  }
+  host.value
+    ?.querySelectorAll<HTMLButtonElement>('.top-bar-heading-option')
+    .forEach((button, index) => {
+      if (index === 0) return
+      button.setAttribute('aria-keyshortcuts', `Alt+${index}`)
+      button.title = `${button.textContent ?? ''} (Alt+${index})`
+    })
+}
+
+function setHeadingLevel(level: number) {
+  const instance = editor
+  if (!instance || level < 1 || level > 6) return
+  instance.editor.action((ctx) => {
+    const commands = ctx.get(commandsCtx)
+    commands.call(setBlockTypeCommand.key, {
+      nodeType: headingSchema.type(ctx),
+      attrs: { level }
+    })
+    ctx.get(editorViewCtx).focus()
+  })
+}
+
+function handleShortcut(event: KeyboardEvent) {
+  if (!event.altKey || event.ctrlKey || event.metaKey || !/^[1-6]$/u.test(event.key)) return
+  event.preventDefault()
+  event.stopPropagation()
+  setHeadingLevel(Number(event.key))
+}
 
 function renderCodePreview(
   language: string,
@@ -122,6 +164,12 @@ async function createEditor(markdown: string) {
         [Crepe.Feature.ImageBlock]: false
       },
       featureConfigs: {
+        [Crepe.Feature.TopBar]: {
+          headingOptions: [
+            { label: props.paragraphLabel, level: null },
+            ...props.headingLabels.map((label, index) => ({ label, level: index + 1 }))
+          ]
+        },
         [Crepe.Feature.CodeMirror]: {
           renderPreview: renderCodePreview,
           previewOnlyByDefault: true,
@@ -163,6 +211,10 @@ async function createEditor(markdown: string) {
         button.setAttribute('aria-label', label)
         button.title = label
       })
+    labelHeadingToolbar()
+    toolbarObserver?.disconnect()
+    toolbarObserver = new MutationObserver(labelHeadingToolbar)
+    toolbarObserver.observe(host.value, { childList: true, subtree: true })
     ready = true
     state.value = 'ready'
   } catch (error) {
@@ -193,12 +245,13 @@ onBeforeUnmount(() => {
   disposed = true
   generation++
   themeObserver?.disconnect()
+  toolbarObserver?.disconnect()
   void destroyEditor()
 })
 </script>
 
 <template>
-  <div class="markdown-wysiwyg">
+  <div class="markdown-wysiwyg" @keydown.capture="handleShortcut">
     <div ref="host" class="markdown-wysiwyg__host" />
     <div
       v-if="state === 'loading'"

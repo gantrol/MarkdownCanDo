@@ -1,25 +1,52 @@
-# What Markdown Can Do
+# MarkdownCanDo
 
-[![中文文档](https://img.shields.io/badge/中文-读我-blue?style=for-the-badge)](/zh/readme.md) [![Documentação em Inglês](https://img.shields.io/badge/Inglês-Readme-blue?style=for-the-badge)](/pt/readme.md) [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/gantrol/markdown-can-do)
+[![Interactive tutorial](https://img.shields.io/badge/tutorial-interactive-2f8f46?style=for-the-badge)](https://markdown.aicando.xyz/tutorial/)[![Visit website](https://img.shields.io/badge/website-v0.9.0-2f8f46?style=for-the-badge)](https://markdown.aicando.xyz/)
 
-A website dedicated to showcasing the capabilities of Markdown, aimed at creating a resource similar to https://vuejs.org for Vue Programmers. 
+MarkdownCanDo is an interactive website for learning, writing, and exploring the capabilities of Markdown. ![MarkdownCanDo logo](public/logo-mini.png)
 
-![icon](public/logo-mini.png)
+![Homepage preview](zh/assets/v0.9.0-main-page.png)
 
-## About Translation
+## Local development
 
-> Please note: The translations into Portuguese and English are done purely by machine translation.
+Requirements: Node.js 20 or later and pnpm 10.
 
-## Tech Stack
+```bash
+pnpm install
+pnpm dev
+```
 
-It's built with VitePress, Vue, and a lightweight in-house Markdown editor.
+The development command detects port conflicts and automatically selects the next available port.
 
-## TODO
+Build and preview the production site:
 
-- [ ] Markdown 2 website && website 2 markdown
-- [ ] store playground data in local storage?
-- [ ] image upload (maybe locally?)
-- [ ] Introduce on Obsidian and Typora
-- [ ] Add information about pandoc
-- [ ] a more lightweight Markdown Editor
-- [ ] What about https://markmap.js.org/repl ?
+```bash
+pnpm build
+pnpm preview
+```
+
+## Cloudflare deployment
+
+The production site is deployed as Cloudflare Worker Static Assets. Review the custom domain in `wrangler.jsonc` before deploying a fork.
+
+```bash
+pnpm cloudflare:deploy:dry
+pnpm cloudflare:deploy
+```
+
+The legacy-domain redirect is maintained separately through `wrangler.redirect.jsonc`.
+
+## Tech stack
+
+- VitePress and Vue
+- Milkdown Crepe for WYSIWYG editing
+- markdown-it and DOMPurify for Markdown rendering and sanitization
+- Mermaid, KaTeX, and ABCJS for extended content
+- Cloudflare Workers Static Assets
+
+## Translation
+
+Chinese is the primary version. English and Portuguese content may lag behind and should be checked when copy changes.
+
+## Version status
+
+v0.9 is a pre-1.0 release. The main experience is deployable and usable, while content coverage, accessibility, bundle size, and editor compatibility will continue to improve before v1.0.

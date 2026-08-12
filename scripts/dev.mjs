@@ -27,23 +27,23 @@ function withoutOption(args, name) {
   ))
 }
 
-export function isPortAvailable(port) {
+export function isPortAvailable(port, host = 'localhost') {
   return new Promise((resolve) => {
     const server = net.createServer()
     server.unref()
 
     server.once('error', () => resolve(false))
-    server.listen({ port, exclusive: true }, () => {
+    server.listen({ port, host, exclusive: true }, () => {
       server.close(() => resolve(true))
     })
   })
 }
 
-export async function findAvailablePort(startPort, attempts = MAX_PORT_ATTEMPTS) {
+export async function findAvailablePort(startPort, attempts = MAX_PORT_ATTEMPTS, host = 'localhost') {
   for (let offset = 0; offset < attempts; offset += 1) {
     const candidate = startPort + offset
     if (candidate > 65535) break
-    if (await isPortAvailable(candidate)) return candidate
+    if (await isPortAvailable(candidate, host)) return candidate
   }
 
   throw new Error(`No available port found between ${startPort} and ${Math.min(65535, startPort + attempts - 1)}.`)
@@ -58,7 +58,7 @@ async function run() {
     throw new Error(`Invalid development port: ${requestedPort}`)
   }
 
-  const availablePort = await findAvailablePort(requestedPort)
+  const availablePort = await findAvailablePort(requestedPort, MAX_PORT_ATTEMPTS, host)
   const forwardedArgs = withoutOption(withoutOption(rawArgs, '--port'), '--host')
   const vitepressCli = fileURLToPath(new URL('../node_modules/vitepress/bin/vitepress.js', import.meta.url))
 
@@ -70,7 +70,10 @@ async function run() {
 
   const child = spawn(
     process.execPath,
-    [vitepressCli, 'dev', '--host', host, '--port', String(availablePort), '--strictPort', ...forwardedArgs],
+    // Keep Vite's built-in port fallback enabled. The preflight check improves the
+    // message, while Vite handles the small race where a port becomes occupied
+    // between this check and the actual server bind.
+    [vitepressCli, 'dev', '--host', host, '--port', String(availablePort), ...forwardedArgs],
     { stdio: 'inherit' }
   )
 

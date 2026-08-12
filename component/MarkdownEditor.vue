@@ -91,12 +91,28 @@ const stats = computed(() => {
   return messages.value.stats(lines, words, characters)
 })
 
+const headingOptions = computed(() => Array.from({ length: 6 }, (_, index) => {
+  const level = index + 1
+  return {
+    key: `heading-${level}`,
+    label: messages.value.headingLevel(level),
+    shortcut: `Alt+${level}`,
+    action: () => setHeadingLevel(level)
+  }
+}))
+
 const toolbarGroups = computed<EditorToolbarGroup[]>(() => [
   {
     key: 'text',
     label: messages.value.textFormatting,
     items: [
-      { key: 'heading', icon: Heading2, label: messages.value.heading, action: () => prefixLines('## ') },
+      {
+        key: 'heading',
+        icon: Heading2,
+        label: messages.value.heading,
+        action: () => setHeadingLevel(2),
+        options: headingOptions.value
+      },
       { key: 'bold', icon: Bold, label: messages.value.bold, shortcut: 'Control+B', action: () => wrapSelection('**', '**', messages.value.boldPlaceholder) },
       { key: 'italic', icon: Italic, label: messages.value.italic, shortcut: 'Control+I', action: () => wrapSelection('*', '*', messages.value.italicPlaceholder) },
       { key: 'strike', icon: Strikethrough, label: messages.value.strike, action: () => wrapSelection('~~', '~~', messages.value.strikePlaceholder) }
@@ -146,6 +162,11 @@ const wysiwygToolbarLabels = computed(() => [
   messages.value.orderedList,
   messages.value.taskList
 ])
+
+const wysiwygHeadingLabels = computed(() => Array.from(
+  { length: 6 },
+  (_, index) => messages.value.headingLevel(index + 1)
+))
 
 watch(() => props.text, (value) => {
   if (value !== source.value) source.value = value ?? ''
@@ -351,6 +372,26 @@ function prefixLines(prefix: string | ((line: string, index: number) => string))
   })
 }
 
+function setHeadingLevel(level: number) {
+  const element = input.value
+  if (!element || level < 1 || level > 6) return
+  const selectionStart = source.value.lastIndexOf('\n', element.selectionStart - 1) + 1
+  const nextBreak = source.value.indexOf('\n', element.selectionEnd)
+  const selectionEnd = nextBreak === -1 ? source.value.length : nextBreak
+  const marker = `${'#'.repeat(level)} `
+  const replacement = source.value
+    .slice(selectionStart, selectionEnd)
+    .split('\n')
+    .map(line => `${marker}${line.replace(/^#{1,6}(?:[ \t]+|$)/u, '')}`)
+    .join('\n')
+
+  replaceSelection(replacement, selectionStart, selectionEnd)
+  void nextTick(() => {
+    element.focus()
+    element.setSelectionRange(selectionStart, selectionStart + replacement.length)
+  })
+}
+
 async function readClipboardLink() {
   if (!navigator.clipboard?.readText) return undefined
   try {
@@ -418,6 +459,11 @@ function insertBlock(block: string) {
 }
 
 function handleShortcut(event: KeyboardEvent) {
+  if (event.altKey && !event.ctrlKey && !event.metaKey && /^[1-6]$/u.test(event.key)) {
+    event.preventDefault()
+    setHeadingLevel(Number(event.key))
+    return
+  }
   if (!(event.ctrlKey || event.metaKey)) return
   const key = event.key.toLowerCase()
   if (!['b', 'i', 'k'].includes(key)) return
@@ -557,6 +603,9 @@ onBeforeUnmount(() => {
             :loading-label="messages.loadingWysiwyg"
             :error-label="messages.wysiwygError"
             :toolbar-labels="wysiwygToolbarLabels"
+            :heading-label="messages.heading"
+            :paragraph-label="messages.paragraph"
+            :heading-labels="wysiwygHeadingLabels"
             :diagram-label="messages.mermaidDiagram"
             :diagram-loading-label="messages.diagramLoading"
             :diagram-error-label="messages.diagramError"
@@ -759,6 +808,62 @@ onBeforeUnmount(() => {
 .markdown-editor__tool:hover {
   color: var(--vp-c-brand-1);
   background: var(--vp-c-brand-soft);
+}
+
+.markdown-editor__tool-menu {
+  position: relative;
+}
+
+.markdown-editor__tool--menu {
+  width: 48px;
+  grid-template-columns: 1fr auto;
+  padding: 0 7px 0 9px;
+}
+
+.markdown-editor__tool-chevron {
+  margin-top: -3px;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.markdown-editor__tool-dropdown {
+  position: fixed;
+  z-index: 30;
+  min-width: 170px;
+  padding: 5px;
+  margin-top: 4px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--ui-radius-md);
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+  box-shadow: var(--vp-shadow-3);
+}
+
+.markdown-editor__tool-dropdown button {
+  display: flex;
+  width: 100%;
+  min-height: 34px;
+  padding: 6px 9px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 0;
+  border-radius: var(--ui-radius-sm);
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.markdown-editor__tool-dropdown button:hover,
+.markdown-editor__tool-dropdown button:focus-visible {
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  outline: none;
+}
+
+.markdown-editor__tool-dropdown kbd {
+  color: var(--vp-c-text-3);
+  font: 11px/1 var(--vp-font-family-mono);
 }
 
 .markdown-editor__tool:focus-visible,
