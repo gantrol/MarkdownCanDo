@@ -340,30 +340,27 @@ export const tutorialMessages = {
   'en-US': {
     steps: 'Tutorial steps',
     instructions: 'Tutorial instructions',
+    mobilePanels: 'Tutorial views',
     editorPanel: 'Hands-on editor',
-    windowInstructions: 'Expand tutorial instructions to the window',
-    windowEditor: 'Expand hands-on editor to the window',
-    restoreSplitView: 'Restore split view',
+    resizeInstructions: 'Resize tutorial instructions',
     emptyCode: '<!-- No example available. -->',
     noDescription: 'No description available.'
   },
   'pt-BR': {
     steps: 'Etapas do tutorial',
     instructions: 'Instruções do tutorial',
+    mobilePanels: 'Visualizações do tutorial',
     editorPanel: 'Editor prático',
-    windowInstructions: 'Expandir instruções para a janela',
-    windowEditor: 'Expandir editor para a janela',
-    restoreSplitView: 'Restaurar visualização dividida',
+    resizeInstructions: 'Redimensionar instruções do tutorial',
     emptyCode: '<!-- Nenhum exemplo disponível. -->',
     noDescription: 'Nenhuma descrição disponível.'
   },
   'zh-Hans': {
     steps: '教程步骤',
     instructions: '教程说明',
+    mobilePanels: '教程视图',
     editorPanel: '动手编辑',
-    windowInstructions: '全窗查看教程说明',
-    windowEditor: '全窗查看动手编辑',
-    restoreSplitView: '恢复分栏视图',
+    resizeInstructions: '调整教程说明宽度',
     emptyCode: '<!-- 暂无示例内容。 -->',
     noDescription: '暂无说明。'
   }

@@ -2,11 +2,11 @@
 
 You can access external links, such as [my blog](https://www.gantrol.com)
 
-You can use "relative" links to access content within this site, such as [this site's guide](/guide/)
+You can use "relative" links to access content within this site, such as [this site's tutorial](/zh/guide/)
 
-Create a link here to visit [this site's playground](/playground/)
+Create a link here to visit [this site's playground](/zh/playground/)
 
-You can also use it to jump to a specific heading on a web page [this site's guide#building-a-website](/guide/#building-a-website)
+You can also use it to jump to a specific heading on a web page [this site's tutorial#building a site](/zh/guide/#building a site)
 
 You can also add attributes, such as [my blog](https://www.gantrol.com "title") `[my blog](https://www.gantrol.com "title")`
 
@@ -14,7 +14,7 @@ You can also add attributes, such as [my blog](https://www.gantrol.com "title") 
 
 You can first define a link alias, in the format `[alias]: link`, such as:
 
-[why]: /guide/why "Why Markdown?"
+[why]: /zh/guide/why "Why Markdown?"
 
 Then use the `[text][alias]` format to create a link, [Why use Markdown][why].
 

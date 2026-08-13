@@ -41,20 +41,13 @@ const props = withDefaults(defineProps<{
   id: string
   text?: string
   options?: EditorOptions
-  windowControl?: boolean
-  windowed?: boolean
-  windowLabel?: string
-  restoreWindowLabel?: string
 }>(), {
   text: '',
-  options: () => ({}),
-  windowControl: false,
-  windowed: false
+  options: () => ({})
 })
 
 const emit = defineEmits<{
   'update:modelValue': [value: string]
-  'toggle-window': []
 }>()
 
 const MarkdownWysiwyg = defineAsyncComponent(() => import('./MarkdownWysiwyg.vue'))
@@ -80,14 +73,6 @@ let diagramId = 0
 let userSelectedMode = false
 
 const messages = computed(() => editorMessages[locale.value])
-const hasWindowControl = computed(() => props.windowControl)
-const fullscreenControlActive = computed(() => hasWindowControl.value ? props.windowed : isFullscreen.value)
-const fullscreenControlLabel = computed(() => {
-  if (!hasWindowControl.value) return messages.value.fullscreen
-  return props.windowed
-    ? (props.restoreWindowLabel ?? messages.value.fullscreen)
-    : (props.windowLabel ?? messages.value.fullscreen)
-})
 const editorTitleId = computed(() => `${props.id}-title`)
 const inputId = computed(() => `${props.id}-input`)
 const previewId = computed(() => `${props.id}-preview`)
@@ -500,10 +485,6 @@ async function copyMarkdown() {
 }
 
 async function toggleFullscreen() {
-  if (hasWindowControl.value) {
-    emit('toggle-window')
-    return
-  }
   if (!root.value) return
   try {
     if (document.fullscreenElement) await document.exitFullscreen()
@@ -552,10 +533,7 @@ onBeforeUnmount(() => {
     :id="id"
     ref="root"
     class="markdown-editor"
-    :class="[
-      `markdown-editor--${viewMode}`,
-      { 'markdown-editor--window-control': hasWindowControl }
-    ]"
+    :class="`markdown-editor--${viewMode}`"
     :style="rootStyle"
     :aria-labelledby="editorTitleId"
   >
@@ -574,9 +552,9 @@ onBeforeUnmount(() => {
           :label="messages.documentActions"
           :copy-label="messages.copy"
           :copied-label="messages.copied"
-          :fullscreen-label="fullscreenControlLabel"
+          :fullscreen-label="messages.fullscreen"
           :copy-state="copyState"
-          :is-fullscreen="fullscreenControlActive"
+          :is-fullscreen="isFullscreen"
           @copy="copyMarkdown"
           @fullscreen="toggleFullscreen"
         />
@@ -1108,10 +1086,6 @@ onBeforeUnmount(() => {
   .markdown-editor__view--split,
   .markdown-editor__fullscreen {
     display: none;
-  }
-
-  .markdown-editor--window-control .markdown-editor__fullscreen {
-    display: inline-grid;
   }
 
   .markdown-editor__input,
