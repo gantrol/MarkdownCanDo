@@ -24,6 +24,7 @@ export const pt = defineConfig({
         },
 
         footer: {
+            message: '<a href="/pt/about">Sobre</a> · <a href="/pt/privacy">Privacidade</a> · <a href="/pt/terms">Termos</a> · <a href="/pt/contact">Contato</a>',
             copyright: `Direitos reservados © 2024-${new Date().getFullYear()} Gantrol Hwang`
         },
 
@@ -79,6 +80,11 @@ function nav(): DefaultTheme.NavItem[] {
             text: 'Referência completa',
             link: '/pt/reference/cheatsheet/',
             activeMatch: '^/pt/reference(?:/|$)'
+        },
+        {
+            text: 'Sobre',
+            link: '/pt/about',
+            activeMatch: '^/pt/(?:about|privacy|terms|contact)(?:/|$)'
         }
     ]
 }

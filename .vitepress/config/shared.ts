@@ -8,11 +8,35 @@ import type MarkdownIt from 'markdown-it'
 const analyticsId = 'G-RX6RPWRSWJ'
 const siteOrigin = 'https://markdown.aicando.xyz'
 
+const noindexPages = new Set([
+    'readme.md',
+    'pt/readme.md',
+    'zh/readme.md',
+    'zh/reference/index.md'
+])
+
+const noindexSitemapUrls = new Set([
+    'readme',
+    'pt/readme',
+    'zh/readme',
+    'zh/reference/'
+])
+
 function canonicalUrl(relativePath: string) {
     const cleanPath = relativePath
         .replace(/(^|\/)index\.md$/u, '$1')
         .replace(/\.md$/u, '')
     return new URL(cleanPath ? `/${cleanPath}` : '/', siteOrigin).href
+}
+
+function socialLocale(relativePath: string) {
+    if (relativePath.startsWith('zh/')) return 'zh_CN'
+    if (relativePath.startsWith('pt/')) return 'pt_BR'
+    return 'en_US'
+}
+
+function socialType(relativePath: string) {
+    return /(^|\/)(guide|reference)\//u.test(relativePath) ? 'article' : 'website'
 }
 
 function useCustomFences(md: MarkdownIt) {
@@ -76,7 +100,11 @@ export const shared = defineConfig({
     sitemap: {
         hostname: siteOrigin,
         transformItems(items) {
-            return items.filter((item) => item.url !== '404' && !item.url.includes('migration'))
+            return items.filter((item) => (
+                item.url !== '404'
+                && !item.url.includes('migration')
+                && !noindexSitemapUrls.has(item.url)
+            ))
         }
     },
 
@@ -89,6 +117,13 @@ export const shared = defineConfig({
             ])
             return
         }
+        if (noindexPages.has(pageData.relativePath)) {
+            pageData.frontmatter.search = false
+            pageData.frontmatter.head.push([
+                'meta',
+                { name: 'robots', content: 'noindex, follow' }
+            ])
+        }
         const url = canonicalUrl(pageData.relativePath)
         pageData.frontmatter.head.push(
             ['link', { rel: 'canonical', href: url }],
@@ -96,14 +131,24 @@ export const shared = defineConfig({
         )
     },
 
+    transformHead({ pageData, title, description }) {
+        if (pageData.relativePath === '404.md') return
+        return [
+            ['meta', { property: 'og:type', content: socialType(pageData.relativePath) }],
+            ['meta', { property: 'og:locale', content: socialLocale(pageData.relativePath) }],
+            ['meta', { property: 'og:title', content: title }],
+            ['meta', { property: 'og:description', content: description }],
+            ['meta', { name: 'twitter:card', content: 'summary' }],
+            ['meta', { name: 'twitter:title', content: title }],
+            ['meta', { name: 'twitter:description', content: description }]
+        ]
+    },
+
     head: [
         // ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo-mini.svg' }],
         ['link', { rel: 'icon', type: 'image/png', href: '/logo-mini.png' }],
         ['meta', { name: 'theme-color', content: '#fcfcfc', media: '(prefers-color-scheme: light)' }],
         ['meta', { name: 'theme-color', content: '#111111', media: '(prefers-color-scheme: dark)' }],
-        ['meta', { property: 'og:type', content: 'website' }],
-        ['meta', { property: 'og:locale', content: 'en' }],
-        ['meta', { property: 'og:title', content: 'Markdown Can Do' }],
         ['meta', { property: 'og:site_name', content: 'MarkdownCanDo' }],
         // Load analytics after the page becomes interactive and never during local development.
         ['script', { src: `/analytics.js?id=${analyticsId}`, defer: '' }]

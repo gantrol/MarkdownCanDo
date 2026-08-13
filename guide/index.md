@@ -8,7 +8,7 @@ Markdown makes formatting easier. [Playground link](/playground/), [Webpage link
 
 - [x] Implement a simple to-do list
 - [x] Common paragraph formats: normal paragraphs, six levels of headings, block quotes, lists, to-dos, code, tables, formulas, footnotes, dividers, images, etc.
-- [x] Common inline formats: **bold**, *italic*, ~~strikethrough~~, [link🔗](), 🤣emoji, inline formula $e^\pi$, inline code `a = 3`...
+- [x] Common inline formats: **bold**, *italic*, ~~strikethrough~~, [links🔗](/reference/cheatsheet/), 🤣emoji, inline formula $e^\pi$, inline code `a = 3`...
 - [ ] ~~Get some fries at the dock~~
 
 ## Markdown Can Do More

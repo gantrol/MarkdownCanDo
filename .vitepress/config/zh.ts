@@ -22,6 +22,7 @@ export const zh = defineConfig({
         },
 
         footer: {
+            message: '<a href="/zh/about">关于</a> · <a href="/zh/privacy">隐私</a> · <a href="/zh/terms">条款</a> · <a href="/zh/contact">联系</a>',
             copyright: `版权所有 © 2024-${new Date().getFullYear()} 黄健楸`
         },
 
@@ -77,6 +78,11 @@ function nav(): DefaultTheme.NavItem[] {
             text: '参考齐全',
             link: '/zh/reference/cheatsheet/',
             activeMatch: '^/zh/reference(?:/|$)'
+        },
+        {
+            text: '关于',
+            link: '/zh/about',
+            activeMatch: '^/zh/(?:about|privacy|terms|contact)(?:/|$)'
         }
     ]
 }

@@ -23,6 +23,7 @@ export const en = defineConfig({
         },
 
         footer: {
+            message: '<a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a>',
             copyright: 'Copyright © 2024-present Gantrol Hwang'
         }
     }
@@ -54,6 +55,11 @@ function nav(): DefaultTheme.NavItem[] {
             text: 'Complete reference',
             link: '/reference/cheatsheet/',
             activeMatch: '^/reference(?:/|$)'
+        },
+        {
+            text: 'About',
+            link: '/about',
+            activeMatch: '^/(?:about|privacy|terms|contact)(?:/|$)'
         }
     ]
 }

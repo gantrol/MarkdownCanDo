@@ -8,12 +8,12 @@ Markdown torna a formatação mais fácil. [Link do Playground](/pt/playground/)
 
 - [x] Implementar uma lista de tarefas simples
 - [x] Formatos comuns de parágrafo: parágrafos normais, seis níveis de títulos, citações em bloco, listas, tarefas, código, tabelas, fórmulas, notas de rodapé, divisores, imagens, etc.
-- [x] Formatos inline comuns: **negrito**, *itálico*, ~~tachado~~, [link🔗](), 🤣emoji, fórmula inline $e^\pi$, código inline `a = 3`...
+- [x] Formatos inline comuns: **negrito**, *itálico*, ~~tachado~~, [links🔗](/pt/reference/cheatsheet/), 🤣emoji, fórmula inline $e^\pi$, código inline `a = 3`...
 - [ ] ~~Pegar algumas batatas fritas no cais~~
 
 ## Markdown Pode Fazer Mais
 
-- [x] Vários gráficos, como fluxogramas, mapas mentais, gráficos de Gantt, linhas do tempo, etc. Acha isso problemático? Tente [deixar o ChatGPT fazer isso](/reference/chatgpt/).[^1]
+- [x] Vários gráficos, como fluxogramas, mapas mentais, gráficos de Gantt, linhas do tempo, etc. Acha isso problemático? Tente [deixar o ChatGPT fazer isso](/pt/reference/chatgpt/).[^1]
 - [x] PPT, [slidev](https://br.sli.dev/) 
 - [x] Partituras musicais (geralmente não suportadas por aplicativos Markdown)
 - [x] Este site, veja a seção [Construindo um Site](#construindo-um-site)
@@ -85,7 +85,7 @@ Considerando desempenho e estabilidade de manutenção, este site é construído
 
 ## Quer Mais?
 
-Você pode querer conferir os [materiais de referência](/reference/resource) ou perguntar ao ChatGPT？
+Você pode querer conferir os [materiais de referência](/pt/reference/resource) ou perguntar ao ChatGPT？
 
 ![ChatGPT](/chatgpt-badge.svg)
 

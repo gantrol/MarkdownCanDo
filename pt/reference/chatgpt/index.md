@@ -1,48 +1,64 @@
-# Have ChatGPT Write Markdown
+---
+title: Como Usar o ChatGPT para Escrever Markdown
+description: Aprenda a pedir Markdown ao ChatGPT, definir o formato esperado, gerar tabelas e diagramas e revisar o resultado antes de publicar.
+---
 
-## Let It Write Everything
+# Como Usar o ChatGPT para Escrever Markdown
 
-For instance, a TimeLine on this site was written by ChatGPT as follows:
+O ChatGPT pode ajudar a estruturar um rascunho, converter texto simples em Markdown e gerar sintaxes mais trabalhosas, como tabelas ou diagramas Mermaid. O resultado melhora quando o pedido descreve claramente o conteúdo, a estrutura e os limites.
 
-```markdown
-Refer to https://en.wikipedia.org/wiki/ChatGPT
-Use mermaid timeline
-to draw the development history of ChatGPT
+## Especifique o formato de saída
+
+Informe que você quer somente Markdown e liste os elementos necessários. Por exemplo:
+
+```text
+Transforme as notas abaixo em um guia curto em Markdown.
+Use um título H1, seções H2, uma lista de tarefas e uma tabela.
+Entregue o resultado dentro de um único bloco de código Markdown.
+Não invente informações que não estejam nas notas.
 ```
 
-GPT's output:
+Pedir um único bloco de código evita que a interface renderize parte do Markdown antes de você copiá-lo.
 
-````markdown
-```mermaid
-timeline
-    title ChatGPT Development Timeline
-    section Early Development
-        2022-11-30 : ChatGPT release, OpenAI
-    section Rapid Growth
-        2023-01 : Over 100 million users
-    section Version Update
-        2023-03-14 : GPT-4 released, available to ChatGPT Plus users
+## Gere uma estrutura antes do texto final
+
+Para documentos maiores, trabalhe em duas etapas:
+
+1. peça um sumário com os títulos e a ordem das seções;
+2. revise a estrutura e só depois peça o conteúdo completo.
+
+Esse processo facilita detectar repetições, lacunas e seções fora de ordem antes de gerar um texto longo.
+
+## Crie tabelas e diagramas
+
+Também é possível pedir uma tabela Markdown ou o código de um diagrama Mermaid. Um pedido para diagrama pode ser:
+
+```text
+Crie um fluxograma Mermaid para este processo:
+receber o rascunho, revisar a sintaxe, visualizar o resultado e publicar.
+Use rótulos curtos em português e devolva apenas o bloco Mermaid.
 ```
-````
 
-The MermaidChart even launched an [official Plugin](https://www.mermaidchart.com/blog/posts/mermaid-chart-chatgpt-plugin-combines-generative-ai-and-smart-diagramming)
+Depois, cole o resultado no <a href="/pt/playground/">editor Markdown online</a> para verificar a renderização. Nem toda plataforma oferece suporte a Mermaid, fórmulas ou notas de rodapé; confirme a compatibilidade do destino.
 
-[//]: # (TODO: GPTs)
+## Revise antes de publicar
 
-## Optimize Formatting
+Texto gerado por IA ainda precisa de revisão humana. Verifique especialmente:
 
-Feed GPTs with well-written standards, such as [Ruan Yifeng's "Chinese Technical Documentation Writing Standards"](https://github.com/ruanyf/document-style-guide).
+- fatos, datas, nomes e links;
+- hierarquia correta de títulos;
+- tabelas com o mesmo número de colunas em cada linha;
+- cercas de código abertas e fechadas;
+- sintaxe compatível com a plataforma onde o documento será publicado.
 
-[//]: # (TODO: GPTs)
+Consulte a <a href="/pt/reference/cheatsheet/">folha de dicas do Markdown</a> para revisar a sintaxe básica e veja os <a href="/pt/showcase/">exemplos editáveis</a> para formatos mais avançados.
 
-If you like using social platforms, you might find that users like using emojis, which can be added to articles appropriately by this GPTs: 
+## Perguntas frequentes
 
-[ParrotGPT🦜  🦜🦜🦜: repeat your input, but add some emoji🦜🦜🦜](https://chat.openai.com/g/g-yqvA1CiDz-parrotgpt)
+### Preciso conhecer Markdown para usar IA?
 
-[//]: # (TODO: GPTs to add suitable emojis to articles)
+Não para começar, mas entender títulos, listas, links e blocos de código ajuda a identificar erros rapidamente. O <a href="/pt/tutorial/">tutorial interativo</a> cobre esses fundamentos.
 
-### Prompt Replacement
+### Posso publicar a resposta sem revisar?
 
-Of course, if you don't have a ChatGPT membership, **you can substitute it with prompts**. For recommended AIs, refer to [this link](https://www.gantrol.com/AI/TOP1.html).
-
-[//]: # (TODO: Corresponding prompts, directly imported from a file, folded)
+Não é recomendado. Trate a resposta como um rascunho: confirme as informações, teste os links e visualize o Markdown na plataforma de destino.
