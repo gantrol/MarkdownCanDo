@@ -17,7 +17,8 @@
     "cloudflare:redirect:dry": "wrangler deploy --config wrangler.redirect.jsonc --dry-run",
     "docs:dev": "node scripts/dev.mjs",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "test:security": "node --test tests/security/xmldom.test.mjs tests/security/math-rendering.test.mjs"
   },
   "devDependencies": {
     "@lucide/vue": "^1.31.0",
@@ -44,6 +45,7 @@
       "workerd"
     ],
     "overrides": {
+      "@xmldom/xmldom": "0.9.12",
       "vite": "6.4.3"
     }
   }
