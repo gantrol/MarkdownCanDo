@@ -5,11 +5,13 @@ import {
   Columns2,
   Eye,
   Heading2,
+  ImagePlus,
   Italic,
   Link2,
   List,
   ListChecks,
   ListOrdered,
+  LoaderCircle,
   Minus,
   PencilLine,
   Quote,
@@ -26,6 +28,11 @@ import { editorMessages, getUiLocale, type UiLocale } from '../utils/i18n'
 import { renderMarkdown, sanitizeSvg } from '../utils/markdown'
 import { escapeLinkDestination, escapeLinkLabel, labelForUrl, parseLinkCandidate } from '../utils/markdownLink'
 import { getMermaidConfig } from '../utils/mermaid'
+import {
+  IMAGE_UPLOAD_ACCEPT,
+  ImageUploadError,
+  uploadImageFile
+} from '../utils/imageUpload'
 
 type LegacyMode = EditorViewMode | 'ir' | 'sv' | 'wysiwyg'
 
@@ -55,6 +62,7 @@ const MarkdownWysiwyg = defineAsyncComponent(() => import('./MarkdownWysiwyg.vue
 const root = ref<HTMLElement>()
 const input = ref<HTMLTextAreaElement>()
 const preview = ref<HTMLElement>()
+const imageInput = ref<HTMLInputElement>()
 const source = ref(props.text)
 const previewHtml = ref('')
 const previewDirty = ref(true)
@@ -62,9 +70,12 @@ const locale = ref<UiLocale>('en-US')
 const viewMode = ref<EditorViewMode>('split')
 const copyState = ref<'idle' | 'copied'>('idle')
 const isFullscreen = ref(false)
+const uploadState = ref<'idle' | 'uploading' | 'success' | 'error'>('idle')
+const uploadMessage = ref('')
 
 let renderTimer: ReturnType<typeof setTimeout> | undefined
 let copyTimer: ReturnType<typeof setTimeout> | undefined
+let uploadTimer: ReturnType<typeof setTimeout> | undefined
 let enhancementObserver: IntersectionObserver | undefined
 let themeObserver: MutationObserver | undefined
 let mediaQuery: MediaQueryList | undefined
@@ -132,6 +143,13 @@ const toolbarGroups = computed<EditorToolbarGroup[]>(() => [
     label: messages.value.insert,
     items: [
       { key: 'link', icon: Link2, label: messages.value.link, shortcut: 'Control+K', action: insertLink },
+      {
+        key: 'image',
+        icon: uploadState.value === 'uploading' ? LoaderCircle : ImagePlus,
+        label: messages.value.uploadImage,
+        disabled: uploadState.value === 'uploading',
+        action: chooseImage
+      },
       { key: 'quote', icon: Quote, label: messages.value.quote, action: () => prefixLines('> ') },
       { key: 'code', icon: Code, label: messages.value.code, action: insertCode },
       { key: 'table', icon: Table2, label: messages.value.table, action: insertTable },
@@ -152,15 +170,16 @@ const wysiwygToolbarLabels = computed(() => [
   messages.value.italic,
   messages.value.strike,
   messages.value.inlineCode,
+  messages.value.bulletList,
+  messages.value.orderedList,
+  messages.value.taskList,
   messages.value.link,
+  messages.value.uploadImage,
   messages.value.table,
   messages.value.codeBlock,
   messages.value.math,
   messages.value.quote,
-  messages.value.rule,
-  messages.value.bulletList,
-  messages.value.orderedList,
-  messages.value.taskList
+  messages.value.rule
 ])
 
 const wysiwygHeadingLabels = computed(() => Array.from(
@@ -436,6 +455,112 @@ async function insertLink() {
   })
 }
 
+function chooseImage() {
+  if (uploadState.value === 'uploading') return
+  if (imageInput.value) imageInput.value.value = ''
+  imageInput.value?.click()
+}
+
+function imageErrorMessage(error: unknown) {
+  if (!(error instanceof ImageUploadError)) return messages.value.imageUploadFailed
+  if (error.code === 'empty_file') return messages.value.imageEmpty
+  if (error.code === 'file_too_large') return messages.value.imageTooLarge
+  if (error.code === 'unsupported_image') return messages.value.imageUnsupported
+  if (error.code === 'client_daily_limit') return messages.value.imageClientLimit
+  if (error.code === 'site_daily_limit') return messages.value.imageSiteLimit
+  if (error.code === 'storage_limit') return messages.value.imageStorageLimit
+  if (error.code === 'origin_forbidden') return messages.value.imageOriginForbidden
+  if (error.code === 'network_error') return messages.value.imageNetworkError
+  return messages.value.imageUploadFailed
+}
+
+function setUploadStatus(state: typeof uploadState.value, message: string, clearAfter?: number) {
+  uploadState.value = state
+  uploadMessage.value = message
+  if (uploadTimer) clearTimeout(uploadTimer)
+  if (clearAfter) {
+    uploadTimer = setTimeout(() => {
+      uploadState.value = 'idle'
+      uploadMessage.value = ''
+    }, clearAfter)
+  }
+}
+
+async function uploadImage(file: File) {
+  setUploadStatus('uploading', messages.value.uploadingImage(file.name))
+  try {
+    const result = await uploadImageFile(file)
+    setUploadStatus('success', messages.value.imageUploaded, 6000)
+    return result.url
+  } catch (error) {
+    setUploadStatus('error', imageErrorMessage(error), 8000)
+    throw error
+  }
+}
+
+function imageAltText(file: File) {
+  const name = file.name.replace(/\.[^.]+$/u, '').replace(/[_-]+/gu, ' ').trim()
+  return escapeLinkLabel(name || messages.value.imageAltPlaceholder)
+}
+
+function insertUploadedImage(file: File, url: string) {
+  const markdown = `![${imageAltText(file)}](${escapeLinkDestination(url)})`
+  const element = input.value
+  if (!element) {
+    source.value = `${source.value.trimEnd()}\n\n${markdown}\n`
+    return
+  }
+
+  const start = element.selectionStart
+  const end = element.selectionEnd
+  const before = start > 0 && source.value[start - 1] !== '\n' ? '\n' : ''
+  const after = end < source.value.length && source.value[end] !== '\n' ? '\n' : ''
+  const replacement = `${before}${markdown}${after}`
+  replaceSelection(replacement, start, end)
+  void nextTick(() => {
+    element.focus()
+    const position = start + replacement.length
+    element.setSelectionRange(position, position)
+  })
+}
+
+async function uploadAndInsertImage(file: File) {
+  try {
+    insertUploadedImage(file, await uploadImage(file))
+  } catch {
+    // uploadImage already reports a localized error through the live region.
+  }
+}
+
+function handleImageSelection(event: Event) {
+  const element = event.target as HTMLInputElement
+  const file = element.files?.[0]
+  if (file) void uploadAndInsertImage(file)
+  element.value = ''
+}
+
+function imageFileFromTransfer(transfer: DataTransfer | null) {
+  return transfer ? Array.from(transfer.files).find(file => file.type.startsWith('image/')) : undefined
+}
+
+function handleSourceDragOver(event: DragEvent) {
+  if (event.dataTransfer?.types.includes('Files')) event.preventDefault()
+}
+
+function handleSourceDrop(event: DragEvent) {
+  const file = imageFileFromTransfer(event.dataTransfer)
+  if (!file) return
+  event.preventDefault()
+  void uploadAndInsertImage(file)
+}
+
+function handleSourcePaste(event: ClipboardEvent) {
+  const file = imageFileFromTransfer(event.clipboardData)
+  if (!file) return
+  event.preventDefault()
+  void uploadAndInsertImage(file)
+}
+
 function insertCode() {
   const element = input.value
   const selected = element ? source.value.slice(element.selectionStart, element.selectionEnd) : ''
@@ -521,6 +646,7 @@ onBeforeUnmount(() => {
   renderVersion++
   if (renderTimer) clearTimeout(renderTimer)
   if (copyTimer) clearTimeout(copyTimer)
+  if (uploadTimer) clearTimeout(uploadTimer)
   enhancementObserver?.disconnect()
   themeObserver?.disconnect()
   mediaQuery?.removeEventListener('change', syncResponsiveMode)
@@ -533,11 +659,20 @@ onBeforeUnmount(() => {
     :id="id"
     ref="root"
     class="markdown-editor"
-    :class="`markdown-editor--${viewMode}`"
+    :class="[`markdown-editor--${viewMode}`, { 'is-uploading': uploadState === 'uploading' }]"
     :style="rootStyle"
     :aria-labelledby="editorTitleId"
+    :aria-busy="uploadState === 'uploading'"
   >
     <h2 :id="editorTitleId" class="sr-only">{{ messages.editor }}</h2>
+    <input
+      ref="imageInput"
+      class="sr-only"
+      type="file"
+      :accept="IMAGE_UPLOAD_ACCEPT"
+      :aria-label="messages.chooseImage"
+      @change="handleImageSelection"
+    >
 
     <header class="markdown-editor__toolbar">
       <div class="markdown-editor__toolbar-primary">
@@ -582,6 +717,9 @@ onBeforeUnmount(() => {
           spellcheck="true"
           @input="handleInput"
           @keydown="handleShortcut"
+          @dragover="handleSourceDragOver"
+          @drop="handleSourceDrop"
+          @paste="handleSourcePaste"
         />
       </div>
 
@@ -614,6 +752,11 @@ onBeforeUnmount(() => {
             :hide-diagram-source-label="messages.hideDiagramSource"
             :music-label="messages.musicNotation"
             :music-error-label="messages.musicError"
+            :upload-image="uploadImage"
+            :upload-button-label="messages.uploadImage"
+            :image-link-placeholder="messages.imageLinkPlaceholder"
+            :image-caption-placeholder="messages.imageCaptionPlaceholder"
+            :confirm-image-label="messages.confirmImage"
             @update:model-value="handleWysiwygInput"
           />
           <template #fallback>
@@ -628,7 +771,7 @@ onBeforeUnmount(() => {
     <footer class="markdown-editor__statusbar">
       <span :id="`${id}-stats`">{{ stats }}</span>
       <span class="markdown-editor__copy-status" role="status" aria-live="polite">
-        {{ copyState === 'copied' ? messages.copied : '' }}
+        {{ uploadMessage || (copyState === 'copied' ? messages.copied : '') }}
       </span>
     </footer>
   </section>
@@ -808,6 +951,19 @@ onBeforeUnmount(() => {
 .markdown-editor__tool:hover {
   color: var(--vp-c-brand-1);
   background: var(--vp-c-brand-soft);
+}
+
+.markdown-editor__tool:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.markdown-editor.is-uploading .markdown-editor__tool--image svg {
+  animation: markdown-editor-spin 900ms linear infinite;
+}
+
+@keyframes markdown-editor-spin {
+  to { transform: rotate(360deg); }
 }
 
 .markdown-editor__tool-menu {

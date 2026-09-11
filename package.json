@@ -9,6 +9,12 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "vitepress build",
+    "test": "vitest run",
+    "typecheck": "pnpm typecheck:client && pnpm typecheck:worker",
+    "typecheck:client": "vue-tsc -p tsconfig.client.json --noEmit",
+    "typecheck:worker": "tsc -p tsconfig.worker.json",
+    "types:worker": "wrangler types worker-configuration.d.ts",
+    "types:worker:check": "wrangler types worker-configuration.d.ts --check",
     "preview": "vitepress preview",
     "cloudflare:deploy": "pnpm build && wrangler deploy",
     "cloudflare:deploy:dry": "pnpm build && wrangler deploy --dry-run",
@@ -20,6 +26,8 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.1.2",
+    "@cloudflare/workers-types": "^5.20260829.1",
     "@lucide/vue": "^1.31.0",
     "@milkdown/crepe": "^7.22.0",
     "@milkdown/kit": "7.22.0",
@@ -34,8 +42,11 @@
     "markdown-it-mathjax3": "^4.3.2",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^11.16.1",
+    "typescript": "5.9.3",
     "vitepress": "^1.6.4",
+    "vitest": "4.1.0",
     "vue": "^3.5.41",
+    "vue-tsc": "3.3.11",
     "wrangler": "^4.121.0"
   },
   "pnpm": {

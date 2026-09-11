@@ -26,9 +26,13 @@ pnpm preview
 
 ## Cloudflare 部署
 
-生产站使用 Cloudflare Worker Static Assets。部署派生项目之前，请先修改 `wrangler.jsonc` 中的自定义域名。
+生产站使用 Cloudflare Worker Static Assets，并通过私有 R2 桶与 SQLite Durable Object 提供临时图片上传。部署派生项目之前，请先检查 `wrangler.jsonc` 中的自定义域名和 `IMAGE_*` 限额。
+
+首次部署需要创建私有的 Standard 桶 `markdown-can-do-uploads`，保持 `r2.dev` 与公开自定义域名关闭，并为 `uploads/` 配置 1 天生命周期。完整命令、限额依据、防盗链验证和监控方法见 [Cloudflare 图片上传部署教程](../docs/cloudflare-image-upload.md)。
 
 ```bash
+pnpm test
+pnpm typecheck
 pnpm cloudflare:deploy:dry
 pnpm cloudflare:deploy
 ```
@@ -42,6 +46,7 @@ pnpm cloudflare:deploy
 - markdown-it 与 DOMPurify 渲染及清理 Markdown
 - Mermaid、KaTeX 与 ABCJS 扩展内容
 - Cloudflare Workers Static Assets
+- Cloudflare R2 私有图片存储与 Durable Object 配额
 
 ## 翻译说明
 

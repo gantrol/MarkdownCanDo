@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Markdown 练习场
-description: 在 Markdown 源文、所见即所得编辑和安全实时预览之间自由切换。修改只保留在当前浏览器中。
+description: 在 Markdown 源文、所见即所得编辑和安全实时预览之间自由切换。正文只留在浏览器中；仅主动上传的图片会临时存储。
 footer: false
 ---
 

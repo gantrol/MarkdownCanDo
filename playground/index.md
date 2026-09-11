@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Markdown Playground
-description: Switch between Markdown source, WYSIWYG editing, and a safe live preview. Changes stay in your browser.
+description: Switch between Markdown source, WYSIWYG editing, and a safe live preview. Text stays in your browser; only images you choose to upload are stored temporarily.
 footer: false
 ---
 

@@ -32,4 +32,18 @@ Link:
 [Imagem](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
 ```
 
-[//]: # (TODO: Após o upload da implementação, você poderá usar arrastar e soltar para inserir imagens de arquivos de imagem ou navegadores da web. Tente inserir a seguinte imagem:)
+## Enviar uma imagem
+
+No editor, selecione **Enviar imagem**, cole uma imagem da área de transferência ou arraste um arquivo para a área editável. O MarkdownCanDo envia o arquivo e insere automaticamente o endereço em Markdown. Troque o texto alternativo baseado no nome do arquivo por uma descrição breve do conteúdo da imagem.
+
+Os envios são temporários e destinados a este playground:
+
+- São aceitos JPEG, PNG, WebP, GIF e AVIF; SVG não é aceito.
+- Cada imagem pode ter no máximo 5 MiB.
+- Cada visitante pode enviar até 10 imagens ou 20 MiB por dia UTC.
+- O site inteiro aceita até 300 imagens ou 1 GiB por dia UTC.
+- As imagens deixam de funcionar 24 horas após o envio e então são removidas automaticamente.
+
+Somente a imagem é enviada; o texto Markdown continua no navegador. Não envie conteúdo confidencial ou arquivos que você não tem direito de usar.
+
+Os endereços têm proteção contra hotlink e funcionam apenas nas páginas do MarkdownCanDo. Antes de publicar o Markdown no GitHub, em um blog ou em outro site, baixe a imagem e envie-a para a plataforma de destino.

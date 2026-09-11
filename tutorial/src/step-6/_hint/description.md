@@ -32,7 +32,13 @@ Link:
 [Image](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
 ```
 
-[//]: # (TODO: After uploading implementation, you can use drag and drop to insert images from image files or web browsers. Try inserting the following image:)
+## Uploading in the playground
+
+Use **Upload image**, paste an image, or drag a file into the editor. A successful upload inserts `![alt text](image address)` automatically. Edit the alt text so that it describes the image instead of merely repeating its filename.
+
+The service accepts JPEG, PNG, WebP, GIF, and AVIF files up to 5 MiB. A visitor may upload 10 images or 20 MiB per UTC day; the site-wide limit is 300 images or 1 GiB per UTC day. Images stop working after 24 hours and are then cleaned up.
+
+Your Markdown text is not uploaded. Images are temporary, must not contain sensitive material, and can only be displayed on MarkdownCanDo. Upload the file again on the destination platform before using the Markdown elsewhere.
 ---
 
 It must be said, in the past, inserting images in Markdown was a bit of a hassle, with some websites that use Markdown syntax not even using this method of image insertion. Fortunately, some local editors have made optimizations, such as [Obsidian](https://obsidian.md/).

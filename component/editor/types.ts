@@ -12,6 +12,7 @@ export interface EditorToolbarItem {
   key: string
   label: string
   icon: Component
+  disabled?: boolean
   shortcut?: string
   action: () => void | Promise<void>
   options?: EditorToolbarOption[]

@@ -1,0 +1,2 @@
+# Copy this file to .dev.vars for local development. Never reuse this value in production.
+IMAGE_QUOTA_SECRET=replace-with-a-random-secret-of-at-least-32-characters

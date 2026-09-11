@@ -24,6 +24,11 @@ const props = defineProps<{
   hideDiagramSourceLabel: string
   musicLabel: string
   musicErrorLabel: string
+  uploadImage: (file: File) => Promise<string>
+  uploadButtonLabel: string
+  imageLinkPlaceholder: string
+  imageCaptionPlaceholder: string
+  confirmImageLabel: string
 }>()
 
 const emit = defineEmits<{
@@ -160,8 +165,7 @@ async function createEditor(markdown: string) {
       features: {
         [Crepe.Feature.TopBar]: true,
         [Crepe.Feature.AI]: false,
-        // Object URLs created by the default uploader cannot be persisted as Markdown.
-        [Crepe.Feature.ImageBlock]: false
+        [Crepe.Feature.ImageBlock]: true
       },
       featureConfigs: {
         [Crepe.Feature.TopBar]: {
@@ -178,6 +182,16 @@ async function createEditor(markdown: string) {
           previewToggleText: previewOnlyMode => previewOnlyMode
             ? props.editDiagramLabel
             : props.hideDiagramSourceLabel
+        },
+        [Crepe.Feature.ImageBlock]: {
+          onUpload: props.uploadImage,
+          inlineUploadButton: props.uploadButtonLabel,
+          blockUploadButton: props.uploadButtonLabel,
+          inlineUploadPlaceholderText: props.imageLinkPlaceholder,
+          blockUploadPlaceholderText: props.imageLinkPlaceholder,
+          blockCaptionPlaceholderText: props.imageCaptionPlaceholder,
+          inlineConfirmButton: props.confirmImageLabel,
+          blockConfirmButton: props.confirmImageLabel
         }
       }
     })

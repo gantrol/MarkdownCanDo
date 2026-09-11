@@ -1,28 +1,17 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "markdown-can-do",
+  "name": "markdown-can-do-test",
   "main": "./worker/index.ts",
   "compatibility_date": "2026-08-11",
   "compatibility_flags": ["nodejs_compat"],
-  "workers_dev": false,
-  "preview_urls": false,
-  "routes": [
-    {
-      "pattern": "markdown.aicando.xyz",
-      "custom_domain": true
-    }
-  ],
   "assets": {
-    "directory": "./.vitepress/dist",
-    "binding": "ASSETS",
-    "run_worker_first": ["/api/images", "/uploads/*"],
-    "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
+    "directory": "./public",
+    "binding": "ASSETS"
   },
   "r2_buckets": [
     {
       "binding": "IMAGE_UPLOADS",
-      "bucket_name": "markdown-can-do-uploads"
+      "bucket_name": "markdown-can-do-uploads-test"
     }
   ],
   "durable_objects": {
@@ -40,6 +29,7 @@
     }
   },
   "vars": {
+    "IMAGE_QUOTA_SECRET": "test-only-quota-secret-with-at-least-32-characters",
     "IMAGE_MAX_BYTES": 5242880,
     "IMAGE_DAILY_CLIENT_BYTES": 20971520,
     "IMAGE_DAILY_CLIENT_FILES": 10,
@@ -48,16 +38,5 @@
     "IMAGE_QUOTA_WINDOW_DAYS": 3,
     "IMAGE_ROLLING_STORAGE_BYTES": 4294967296,
     "IMAGE_RETENTION_DAYS": 1
-  },
-  "observability": {
-    "enabled": true,
-    "logs": {
-      "enabled": true,
-      "head_sampling_rate": 1
-    },
-    "traces": {
-      "enabled": true,
-      "head_sampling_rate": 0.05
-    }
   }
 }

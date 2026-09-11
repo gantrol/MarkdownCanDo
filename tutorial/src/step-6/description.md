@@ -32,4 +32,18 @@ Link:
 [Image](https://github.com/gantrol/MarkdownCanDo/blob/main/readme.md)
 ```
 
-[//]: # (TODO: After uploading implementation, you can use drag and drop to insert images from image files or web browsers. Try inserting the following image:)
+## Upload an image
+
+In the editor, choose **Upload image**, paste an image from the clipboard, or drag an image file into the editable area. MarkdownCanDo uploads it and inserts the resulting Markdown image address for you. Replace the filename-style alt text with a short description of what the image shows.
+
+Uploads are temporary and intended for this playground:
+
+- JPEG, PNG, WebP, GIF, and AVIF are supported; SVG is not accepted.
+- Each image can be at most 5 MiB.
+- Each visitor can upload up to 10 images or 20 MiB per UTC day.
+- The whole site can accept up to 300 images or 1 GiB per UTC day.
+- Uploaded images stop working after 24 hours and are then automatically cleaned up.
+
+Only the image is uploaded. Your Markdown text still stays in your browser. Do not upload confidential images or files you do not have the right to use.
+
+Uploaded image addresses are protected against hotlinking. They display on MarkdownCanDo, but normally will not display after you copy the Markdown to GitHub, a blog, or another website. Before publishing elsewhere, download the image and upload it to that platform.

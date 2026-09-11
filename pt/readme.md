@@ -26,9 +26,13 @@ pnpm preview
 
 ## Implantação no Cloudflare
 
-O site usa Cloudflare Worker Static Assets. Antes de implantar uma cópia, revise o domínio personalizado em `wrangler.jsonc`.
+O site usa Cloudflare Worker Static Assets, um bucket R2 privado e um Durable Object SQLite para imagens temporárias. Antes de implantar uma cópia, revise o domínio e os limites `IMAGE_*` em `wrangler.jsonc`.
+
+Na primeira implantação, crie o bucket Standard privado `markdown-can-do-uploads`, mantenha `r2.dev` e domínios públicos desativados e adicione a regra de ciclo de vida de 1 dia para `uploads/`. Os comandos, o cálculo das cotas, a verificação contra hotlink e o monitoramento estão no [guia de imagens no Cloudflare](../docs/cloudflare-image-upload.md).
 
 ```bash
+pnpm test
+pnpm typecheck
 pnpm cloudflare:deploy:dry
 pnpm cloudflare:deploy
 ```
@@ -42,6 +46,7 @@ O redirecionamento do domínio antigo é mantido separadamente em `wrangler.redi
 - markdown-it e DOMPurify para renderização e sanitização
 - Mermaid, KaTeX e ABCJS para conteúdo estendido
 - Cloudflare Workers Static Assets
+- Armazenamento privado de imagens no Cloudflare R2 e cotas com Durable Object
 
 ## Tradução
 

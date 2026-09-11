@@ -5,7 +5,7 @@ description: Review the terms for using MarkdownCanDo tutorials, examples, brows
 
 # Terms of Use
 
-Last updated: August 12, 2026.
+Last updated: August 29, 2026.
 
 By using MarkdownCanDo, you agree to use the site lawfully and accept the terms below.
 
@@ -15,7 +15,13 @@ MarkdownCanDo provides educational content, examples, and browser-based editing 
 
 ## Your content and backups
 
-You are responsible for the text you enter and for keeping your own backups. The editor does not provide cloud storage. Do not use the site to create or distribute unlawful, harmful, or rights-infringing material.
+You are responsible for the text you enter and for keeping your own backups. The editor does not store Markdown documents in the cloud. Do not use the site to create or distribute unlawful, harmful, or rights-infringing material.
+
+## Temporary image service
+
+You may upload supported images for use in the playground. You confirm that you have the right to use each uploaded image and that it does not contain unlawful, harmful, confidential, or sensitive material. Images are temporary, stop working 24 hours after upload, and are not a backup service. Physical deletion timing is not guaranteed.
+
+Upload size, per-visitor, site-wide, and storage limits may be enforced or changed to protect the service. Uploaded addresses are intended to display only on MarkdownCanDo; cross-site embedding is blocked. MarkdownCanDo may reject or remove files that violate these terms, create risk, or threaten service availability.
 
 ## Accuracy and compatibility
 

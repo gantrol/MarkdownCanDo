@@ -50,6 +50,7 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', closeOnOutside
             aria-haspopup="menu"
             :aria-expanded="openMenu === item.key"
             :title="item.label"
+            :disabled="item.disabled"
             @mousedown.prevent
             @click="toggleMenu(item.key)"
           >
@@ -79,6 +80,7 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', closeOnOutside
           :aria-label="item.label"
           :aria-keyshortcuts="item.shortcut"
           :title="item.label"
+          :disabled="item.disabled"
           @mousedown.prevent
           @click="item.action"
         >

@@ -5,7 +5,7 @@ description: Consulte os termos para usar os tutoriais, exemplos, ferramentas de
 
 # Termos de Uso
 
-Última atualização: 12 de agosto de 2026.
+Última atualização: 29 de agosto de 2026.
 
 Ao usar o MarkdownCanDo, você concorda em utilizar o site legalmente e aceita os termos abaixo.
 
@@ -15,7 +15,13 @@ O MarkdownCanDo oferece conteúdo educacional, exemplos e ferramentas de ediçã
 
 ## Seu conteúdo e backups
 
-Você é responsável pelo texto inserido e por manter seus próprios backups. O editor não oferece armazenamento em nuvem. Não use o site para criar ou distribuir material ilegal, prejudicial ou que viole direitos de terceiros.
+Você é responsável pelo texto inserido e por manter seus próprios backups. O editor não armazena documentos Markdown na nuvem. Não use o site para criar ou distribuir material ilegal, prejudicial ou que viole direitos de terceiros.
+
+## Serviço temporário de imagens
+
+Você pode enviar imagens compatíveis para uso no playground. Ao enviar, você confirma que tem o direito de usar a imagem e que ela não contém material ilegal, prejudicial, confidencial ou sensível. As imagens são temporárias, deixam de funcionar 24 horas após o envio e não constituem um serviço de backup. O momento exato da exclusão física não é garantido.
+
+Limites de tamanho, por visitante, do site e de capacidade podem ser aplicados ou alterados para proteger o serviço. Os endereços enviados destinam-se apenas ao MarkdownCanDo; a incorporação em outros sites é bloqueada. O MarkdownCanDo pode rejeitar ou remover arquivos que violem estes termos, criem riscos ou ameacem a disponibilidade do serviço.
 
 ## Precisão e compatibilidade
 

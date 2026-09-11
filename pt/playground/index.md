@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Playground de Markdown
-description: Alterne entre o código Markdown, a edição visual e a pré-visualização segura. As alterações ficam no seu navegador.
+description: Alterne entre o código Markdown, a edição visual e a pré-visualização segura. O texto fica no navegador; apenas as imagens enviadas são armazenadas temporariamente.
 footer: false
 ---
 

@@ -26,9 +26,13 @@ pnpm preview
 
 ## Cloudflare deployment
 
-The production site is deployed as Cloudflare Worker Static Assets. Review the custom domain in `wrangler.jsonc` before deploying a fork.
+The production site is deployed as Cloudflare Worker Static Assets, with a private R2 bucket and a SQLite Durable Object for temporary image uploads. Review the custom domain and `IMAGE_*` limits in `wrangler.jsonc` before deploying a fork.
+
+For first-time setup, create the private `markdown-can-do-uploads` Standard bucket, keep both `r2.dev` and public custom-domain access disabled, and add the 1-day `uploads/` lifecycle rule. The full commands, quota rationale, hotlink checks, and monitoring procedure are in the [Cloudflare image upload guide](docs/cloudflare-image-upload.md).
 
 ```bash
+pnpm test
+pnpm typecheck
 pnpm cloudflare:deploy:dry
 pnpm cloudflare:deploy
 ```
@@ -42,6 +46,7 @@ The legacy-domain redirect is maintained separately through `wrangler.redirect.j
 - markdown-it and DOMPurify for Markdown rendering and sanitization
 - Mermaid, KaTeX, and ABCJS for extended content
 - Cloudflare Workers Static Assets
+- Private Cloudflare R2 image storage and Durable Object quotas
 
 ## Translation
 
